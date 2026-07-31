@@ -1,0 +1,22 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# SSH Keys
+*.pem
+*.ppk
+venkatAug2026
+venkatAug2026.pub
+
+# Environment
+.env
