@@ -80,11 +80,31 @@ npm install
 ```
 
 ---
-
+## We have to install mysql DB client software to connect our mySQL DB for executing Schema ##
+```bash
+dnf install mysql -y
+```
+> **Replace `<MYSQL-SERVER-IPADDRESS>` with the private IP of the MySQL EC2 instance.**
+###### Once DB clint install we have to connect DB from Application server using below command 
+```bash
+    mysql -h 172.31.19.66 -uroot -pExpenseApp@1
+    mysql -h <if it is sam vnet use same Privae IP>
+ Once mySQL created we have to exit from mysql DB and execute below command to load schema
+```
+---
+## Load Database Schema
+```bash
+mysql -h <MYSQL-SERVER-IPADDRESS> -u root -pExpenseApp@1 < /app/schema/backend.sql
+ mysql -h 172.31.19.66 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+ ###To view the schema we have to execute below 
+     mysql -h 172.31.19.66 -uroot -pExpenseApp@1
+     show databases; # it will show all the default and created Databases 
+         show tables;  # it will show all the list of tables 
+         select * from transactions; #so will not have any transactions to see here 
+```
+---
 ## Configure SystemD Service
-
 Create the service file:
-
 ```bash
 vim /etc/systemd/system/backend.service
 ````
@@ -108,20 +128,9 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target
 ```
-
-> **Replace `<MYSQL-SERVER-IPADDRESS>` with the private IP of the MySQL EC2 instance.**
-
+## when our Linux VM Started, by default it will see the folder /etc/systemd/system/*.service it will start all the files by end with .services 
+## we execute below commands it will goto below path 
 ---
-
-## Load Database Schema
-
-```bash
-dnf install mysql -y
-mysql -h <MYSQL-SERVER-IPADDRESS> -u root -pExpenseApp@1 < /app/schema/backend.sql
-```
-
----
-
 ## Start the Service
 
 ```bash
@@ -151,9 +160,6 @@ Test the health endpoint (from the same server):
 ```bash
 curl http://localhost:8080/health
 ```
-
 ---
-
 ## Security Group
-
 Ensure the backend EC2 security group allows **inbound TCP on port 8080** from the frontend EC2's security group only (not from the internet).
