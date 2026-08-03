@@ -28,7 +28,11 @@ mysql_secure_installation --set-root-pass ExpenseApp@1
 ```
 
 ---
+## Backend Server Setup
 
+In this step, log in to the **Application Server** and install all the required software dependencies for the Node.js application.
+
+> **Reference:** Follow the instructions in the **02-backend.md** section for the complete installation and configuration steps.
 ## Load Schema
 
 Install the MySQL client on the **backend server** to load the schema remotely:
