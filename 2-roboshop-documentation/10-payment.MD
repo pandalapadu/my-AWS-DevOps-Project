@@ -92,7 +92,7 @@ systemctl daemon-reload
 ```
 
 This above command is because we added a new service, We are telling systemd to reload so it will detect new service.
-
+We have to comment UID & GID in payment.ini file using ; (semi colon for comment) 
 Start the service.
 
 ```shell 
