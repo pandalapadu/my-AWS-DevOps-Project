@@ -1,15 +1,18 @@
 #!/bin/bash
 
 ##### Special Vars #####
-echo "Script Name: $0"
-echo "All command line variables: $@"
-echo "Total number of command line variables: $#"
-echo "First command line variable: $1"
-echo "Current User: $USER"
-echo "Current Working Directory: $PWD"
-echo "Home Directory: $HOME"
-echo "Process ID of the current shell: $$"
-echo "Current Line Number: $LINENO"
-echo "Seconds since shell invocation: $SECONDS"
-echo "Random Number: $RANDOM"
-echo "Exit status of last command: $?"
+echo "All variables passed to script: $@"
+echo "Number of variables passed: $#"
+echo "First variable: $1"
+echo "Script name: $0"
+echo "Current user: $USER"
+echo "Current working directory: $PWD"
+echo "Home directory: $HOME"
+echo "PID of the current script: $$"
+sleep 5 &
+echo "PID of the background command running just now: $!"
+wait $!
+echo "Line number: $LINENO"
+echo "Script executed in $SECONDS seconds"
+echo "Random number: $RANDOM"
+echo "Exit code of previous command: $?"
