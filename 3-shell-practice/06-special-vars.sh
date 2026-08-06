@@ -1,4 +1,6 @@
 #!/bin/bash
 
 ##### Special Vars #####
-echo "Script Name is: $@"
+echo "Script Name: $0"
+echo "All command line variables: $@"
+echo "Total number of command line variables: $#"
