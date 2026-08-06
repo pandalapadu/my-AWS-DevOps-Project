@@ -12,7 +12,7 @@ echo "PID of the current script: $$"
 sleep 5 &
 echo "PID of the background command running just now: $!"
 wait $!
-echo "Line number: $LINENO"
+echo "Current line number: $LINENO"
 echo "Script executed in $SECONDS seconds"
 echo "Random number: $RANDOM"
 echo "Exit code of previous command: $?"
