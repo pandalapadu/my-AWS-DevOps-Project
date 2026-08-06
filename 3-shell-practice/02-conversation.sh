@@ -1,16 +1,16 @@
 #!/bin/bash
-echo"####################With out Variable ###############"
+####################With out Variable ###############
 echo "Trump: Hey Iron, We are going to blast you if you don't listen to us."
 echo "Iron: Yes please. you are welcome !"
 echo "Trump: Hey Iron, I am Serious this time "
 echo "Iron: Hey Trump, we are also serious"
-echo"#####################################################"
+#####################################################
 
-persion1 = "Trump"
-persion2 = "Iron"
-echo"####################With Variable ###############"
-echo ""$persion1": Hey "$persion2", We are going to blast you if you don't listen to us."
-echo ""$persion2": Yes please. you are welcome !"
-echo ""$persion1": Hey "$persion2", I am Serious this time "
-echo ""$persion2" : Hey "$persion1", we are also serious"
-echo"#####################################################"
+persion1="Trump"
+persion2="Iron"
+####################With Variable ###############
+echo "$persion1: Hey $persion2, We are going to blast you if you don't listen to us."
+echo "$persion2: Yes please. you are welcome !"
+echo "$persion1: Hey $persion2, I am Serious this time "
+echo "$persion2 : Hey $persion1, we are also serious"
+#####################################################
