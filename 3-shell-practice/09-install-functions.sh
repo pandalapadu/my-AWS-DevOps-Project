@@ -8,7 +8,7 @@ if [ $USERID -ne 0 ]; then
 fi
 echo "I am continuing the script as root user"
 echo "I am installing mySQL server  on this machine"
-dnf install mysqlwww -y
+dnf install mysql -y
 if [ $? -eq 0 ]; then
     echo "mySQL server installed successfully"
 else
