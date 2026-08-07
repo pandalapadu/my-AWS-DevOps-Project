@@ -19,8 +19,6 @@ VALIDATE() {
         echo "[$TIME_STAMP] [SUCCESS] $1 installation Successfully" | tee -a $LOG_FILE
     fi
 }
-
-
 for package in $@
 do 
    dnf list installed $package &>> $LOG_FILE
