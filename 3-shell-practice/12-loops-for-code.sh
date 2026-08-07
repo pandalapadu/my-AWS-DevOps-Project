@@ -2,7 +2,7 @@
 ##Check root user access or not
 USERID=$(id -u)
 LOG_DIR="/var/log/shell-script"
-LOG_FILE="$LOG_DIR/$0.log"
+LOG_FILE="$LOG_DIR/$(date '+%Y-%m-%d %H:%M:%S').log"
 
 if [ $USERID -ne 0 ]; then
     echo "You must be root user to run this script" | tee -a $LOG_FILE
