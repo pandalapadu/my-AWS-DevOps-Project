@@ -1,7 +1,7 @@
 #!/bin/bash
 ##Check root user access or not
 USERID=$(id -u)
-LOG_DIR="/root/my-AWS-DevOps-Project/Shell-logs"
+LOG_DIR="/var/log/shell-script"
 LOG_FILE="$LOG_DIR/$0.log"
 ##Check root user access or not
 if [ $USERID -ne 0 ]; then
