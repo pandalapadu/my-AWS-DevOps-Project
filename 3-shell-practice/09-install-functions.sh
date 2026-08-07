@@ -8,7 +8,7 @@ if [ $USERID -ne 0 ]; then
 fi
 echo "You are root user, you can run this script"
 echo "Installing mysql-server"
-dnf install mysqlertry -y 
+dnf install mysql -y 
 if [ $? -ne 0 ]; then
     echo "mysql-server installation failed"
     exit 1
