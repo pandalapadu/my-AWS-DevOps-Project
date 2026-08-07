@@ -7,6 +7,18 @@ if [ $USERID -ne 0 ]; then
     exit 1
 fi
 echo "You are root user, you can run this script"
+
+#first argument what we are going to install 
+#second argument what are the exit codes
+VALIDATE() {
+    if [ $2 -ne 0 ]; then
+        echo "Installing $1 installation failed"
+        exit 1
+    else
+        echo "$1 installation Successfully"
+    fi
+}
+
 ##Checking mysql-server is installed or not
 dnf list installed mysql
 if [ $? -eq 0 ]; then
@@ -14,11 +26,14 @@ if [ $? -eq 0 ]; then
 else 
     echo "mysql-server is not installed So Installing mysql-server"
     dnf install mysql -y 
-    if [ $? -ne 0 ]; then
-        echo "mysql-server installation failed"
-        exit 1
-    else
-        echo "mysql-server installation Successfully"
-    fi
+    VALIDATE mysql $?
 fi
-
+## Installing nginx server
+dnf list installed nginx
+if [ $? -eq 0 ]; then
+    echo "nginx is already installed So Skiiping nginx installation"
+else 
+    echo "nginx is not installed So Installing nginx"
+    dnf install nginx -y
+    VALIDATE nginx $?
+fi
