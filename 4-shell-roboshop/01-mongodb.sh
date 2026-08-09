@@ -3,6 +3,7 @@ sudo mkdir -p $LOGS_FOLDER
 LOG_FILE="$LOGS_FOLDER/$0.log"
 sudo chown ec2-user:ec2-user $LOGS_FOLDER
 sudo chmod 755 $LOGS_FOLDER
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 USERID=$(id -u)
 R="\e[31m"
@@ -10,7 +11,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 if [ $USERID -ne 0 ]; then
-    echo -e "${R}You must be root user to run this script${N}" | tee -a $LOG_FILE
+    echo -e "$TIMESTAMP [ERROR] ${R}You must be root user to run this script${N}" | tee -a $LOG_FILE
     exit 1
 fi
 VALAIDATE() {
