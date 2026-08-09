@@ -11,6 +11,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+trap 'echo -e "[$TIME_STAMP] [ERROR] An error occurred at line $LINENUM", Command: $BASH_COMMAND' ERR
+
 if [ $USERID -ne 0 ]; then
     echo -e "[$TIME_STAMP] [ERROR] You must be root user to run this script" | tee -a $LOG_FILE
     exit 1
