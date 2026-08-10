@@ -1,8 +1,8 @@
 #!/bin/bash
 
 AMI_ID="ami-0220d79f3f480ecf5"
-ZONE_ID="Z0580926234LLG39XOC6H"
-DOMAIN_NAME="azdevopsvenkat.site"
+ZONE_ID="Z0580926234LLG39XOC6H" # replace with your hosted zone ID
+DOMAIN_NAME="azdevopsvenkat.site" # replace with your domain name
 ## we have to pass like sh roboshop.sh frontend backend database ... etc 
 for instance in "$@"
 do
