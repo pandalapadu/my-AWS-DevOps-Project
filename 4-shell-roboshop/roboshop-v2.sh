@@ -30,3 +30,30 @@ if [ "$ACTION" != "create" ] && [ "$ACTION" != "destroy" ]; then
     echo -e "$TIMESTAMP [INFO] $G Usage: sh roboshop-v2.sh <create/destroy> [instance1] [instance2] ... $N" | tee -a $LOGS_FILE
     exit 1
 fi
+
+get_instance_id() {
+    name=$1
+    aws ec2 describe-instances --filters "Name=tag:Name,Values=Shell-Scripting" --query "Reservations[*].Instances[*].InstanceId" --output text
+}
+
+for instance in "$@"; do
+  INSTANCE_ID=$(get_instance_id "$instance")
+  if ["$ACTION" == "create"]; then
+       if [$INSTANCE_ID" != "None"]; then
+       echo -e "$TIMESTAMP [INFO]  Instance is launching " | tee -a $LOGS_FILE
+       INSTANCE_ID=$(aws ec2 run-instances \
+        --image-id "$AMI_ID" \
+        --instance-type t3.micro \
+        --security-groups "roboshop-common" "roboshop-$instance" \
+        --count 1 \
+        --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=roboshop-$instance}]" \
+        --query 'Instances[0].InstanceId' \
+        --output text
+        )
+        echo -e "$TIMESTAMP [INFO]  Launched for $instance is $INSTANCE_ID" | tee -a $LOGS_FILE
+        else
+        echo -e "$TIMESTAMP [INFO]  roboshop-$instance alredy running with ID $INSTANCE_ID" | tee -a $LOGS_FILE
+        fi
+    fi
+
+done
