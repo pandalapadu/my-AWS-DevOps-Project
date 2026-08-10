@@ -6,7 +6,6 @@ DOMAIN_NAME="azdevopsvenkat.site"
 ## we have to pass like sh roboshop.sh frontend backend database ... etc 
 for instance in "$@"
 do
-
     echo "Creating EC2 instance for $instance"
 
     INSTANCE_ID=$(aws ec2 run-instances \
