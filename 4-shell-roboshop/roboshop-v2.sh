@@ -18,8 +18,15 @@ N="\e[0m"
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
 #####VALIDATE Input Arguments 
 if [ $# -lt 2 ]; then
-    echo -e "$TIMESTAMP [ERROR] $R Provide at least two arguments (1 is Create/Destroy and 2nd is frontend/backend/database, etc.) $N" | tee -a $LOGS_FILE
-    echo -e "$TIMESTAMP [INFO] $G Usage: sh roboshop-v2.sh <Create/Destroy> [instance1] [instance2] ... $N" | tee -a $LOGS_FILE
+    echo -e "$TIMESTAMP [ERROR] $R Provide at least two arguments (1 is create/destroy and 2nd is frontend/backend/database, etc.) $N" | tee -a $LOGS_FILE
+    echo -e "$TIMESTAMP [INFO] $G Usage: sh roboshop-v2.sh <create/destroy> [instance1] [instance2] ... $N" | tee -a $LOGS_FILE
     exit 1
 fi  
 
+ACTION=$1
+shift  # Shift the arguments to the left, so that $@ now contains only the instance names
+if [ "$ACTION" -ne "create" ] && [ "$ACTION" -ne "destroy" ]; then
+    echo -e "$TIMESTAMP [ERROR] $R Invalid action. Use 'create' or 'destroy'. $N" | tee -a $LOGS_FILE
+    echo -e "$TIMESTAMP [INFO] $G Usage: sh roboshop-v2.sh <create/destroy> [instance1] [instance2] ... $N" | tee -a $LOGS_FILE
+    exit 1
+fi
