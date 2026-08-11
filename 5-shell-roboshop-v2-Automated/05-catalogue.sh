@@ -1,7 +1,7 @@
 #!/bin/bash
 app_name="catalogue"
 source ./common.sh
-check_root_user
+CHECK_ROOT_USER
 
 application_setup
 nodejs_setup
