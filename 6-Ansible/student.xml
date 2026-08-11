@@ -1,0 +1,39 @@
+<!-- This is Student object -->
+<Students>
+    <Student>
+            <FirstName>Venkat</FirstName>
+            <LastName>Kunam</LastName>
+            <dob>17-06-1992</dob>
+            <mobile>1234567890</mobile>
+            <Addresses>
+                <PerminetAddresses>
+                    <Street>101</Street>
+                    <addressessline1>gandi nager</addressessline1>
+                    <addressessline2>Hyderabad</addressessline2>
+                </PerminetAddresses>
+                <CurrentAddressess>
+                    <Street>106</Street>
+                    <addressessline1>viveka nager</addressessline1>
+                    <addressessline2>Bengaluru</addressessline2>
+                </CurrentAddressess>
+            </Addresses>
+    </Student>
+    <Student>
+        <FirstName>Venkat</FirstName>
+        <LastName>Kunam</LastName>
+        <dob>17-06-1992</dob>
+        <mobile>1234567890</mobile>
+        <Addresses>
+            <PerminetAddresses>
+                <Street>101</Street>
+                <addressessline1>gandi nager</addressessline1>
+                <addressessline2>Hyderabad</addressessline2>
+            </PerminetAddresses>
+            <CurrentAddressess>
+                <Street>106</Street>
+                <addressessline1>viveka nager</addressessline1>
+                <addressessline2>Bengaluru</addressessline2>
+            </CurrentAddressess>
+        </Addresses>
+</Student>
+</Students>

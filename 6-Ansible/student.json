@@ -1,0 +1,41 @@
+{
+    "students": [
+        {
+            "firstName": "Venkat Kunam",
+            "Lastname": "Reddy",
+            "addresses": [
+                {
+                    "type": "perm",
+                    "street": "102",
+                    "apartment": "balaji apartments",
+                    "city": "hyd"
+                },
+                {
+                    "type": "current",
+                    "street": "102",
+                    "apartment": "balaji apartments",
+                    "city": "hyd"
+                }
+            ]
+        },
+        {
+            "firstName": "Jagan",
+            "Lastname": "M",
+            "addresses": [
+                {
+                    "type": "perm",
+                    "street": "102",
+                    "apartment": "balaji apartments",
+                    "city": "hyd"
+                },
+                {
+                    "type": "current",
+                    "street": "102",
+                    "apartment": "balaji apartments",
+                    "city": "hyd"
+                }
+            ]
+        }
+    ]
+    
+}
