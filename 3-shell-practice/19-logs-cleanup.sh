@@ -20,7 +20,8 @@ if [ -z "$Files" ]; then
     echo "No log files older than $DAYS days found in $SOURCE_DIR."
     exit 0
 fi
-while IFS= read -r file; do
-    echo "files are Deleting $file"
-    rm -f "$file"
+while IFS= read -r FILE; do
+    echo "files are Deleting: $FILE"
+    rm -f "$FILE"
+    echo "Deleted: $FILE"
 done <<< "$Files"
