@@ -1,14 +1,27 @@
-- name: "Venkat Kunam"
-  dob: "17-06-1992"
-  email: "vrreddy@gmail.com"
-  mobile: 123654789
-  address:
-    - type: "Perminet"
-      street: 101
-      apartmentname: "balaji"
-      city: "Hyd"
+- name: "Venkat reddy Kunam"
+  dob: "1990-01-01"
+  mobile: "1234567890"
+  addresses:
+  - type: perm
+    street: 101
+    apartmentName: "Balaji Apartments"
+    city: "HYD"
 
-    - type: "Temperry"
-      street: "105"
-      apartment: "Nisarga"
-      city: "Bengaluru"
+  - type: current
+    street: 101
+    apartmentName: "Balaji Apartments"
+    city: "HYD"
+
+- name: "Venkat reddy Kunam"
+  dob: "1990-01-01"
+  mobile: "1234567890"
+  addresses:
+  - type: perm
+    street: 101
+    apartmentName: "Balaji Apartments"
+    city: "HYD"
+
+  - type: current
+    street: 101
+    apartmentName: "Balaji Apartments"
+    city: "HYD"
