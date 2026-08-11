@@ -5,5 +5,5 @@ CHECK_ROOT_USER
 application_setup
 python_setup
 systemd_setup
-application_start
+application_restart
 print_total_time
