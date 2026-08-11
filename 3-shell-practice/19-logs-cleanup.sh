@@ -1,6 +1,5 @@
 #!/bin/bash
 
-logs_dir="/var/log/roboshop"
 SOURCE_DIR=$1
 DAYS=${2:-14} #default 14 days if not provided
 
@@ -13,3 +12,15 @@ if [ ! -d $SOURCE_DIR ]; then
     echo "Error: Source directory $SOURCE_DIR does not exist."
     exit 1
 fi
+
+echo "Scanning $SOURCE_DIR for log files older than $DAYS days..."
+Files=(find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS)
+
+if [-z "$Files" ]; then
+    echo "No log files older than $DAYS days found in $SOURCE_DIR."
+    exit 0
+fi
+while IFS= read -r file; do
+    echo "files are Deleting $file"
+    rm -f "$file"
+done <<< "$Files"
