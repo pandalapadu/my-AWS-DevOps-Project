@@ -35,3 +35,49 @@ print_total_time(){
     TOTAL_TIME=$((END_TIME - START_TIME))
     echo -e "$TIMESTAMP [INFO] Total time taken: $TOTAL_TIME seconds" | tee -a $LOGS_FILE
 }
+
+application_setup(){
+    id roboshop &>>$LOGS_FILE
+        if [ $? -ne 0 ]; then
+            useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
+            VALIDATE $? "Creating roboshop system user"
+        else
+            echo -e "System user roboshop already created ... $Y SKIPPING $N"
+        fi
+
+        rm -rf /app
+        VALIDATE $? "Removing existing code"
+
+        rm -rf /tmp/$app_name.zip
+        VALIDATE $? "Removed $app_name zip"
+
+        mkdir -p /app  &>>$LOGS_FILE
+        VALIDATE $? "Creating app directory"
+
+        curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip  &>>$LOGS_FILE
+        cd /app 
+        unzip /tmp/$app_name.zip &>>$LOGS_FILE
+        VALIDATE $? "Downloaded and extracted $app_name code"
+}
+
+nodejs_setup(){
+    dnf module disable nodejs -y &>>$LOGS_FILE
+    dnf module enable nodejs:20 -y  &>>$LOGS_FILE
+    dnf install nodejs -y &>>$LOGS_FILE
+    VALIDATE $? "Installing NodeJS:20"
+    npm install  &>>$LOGS_FILE
+    VALIDATE $? "Installing dependencies"
+}
+
+systemd_setup(){
+    cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
+    VALIDATE $? "Created systemctl service"
+    systemctl daemon-reload &>>$LOGS_FILE
+    systemctl enable $app_name &>>$LOGS_FILE
+    systemctl validate $? "Enabling $app_name service"
+}
+
+application_restart(){
+    systemctl restart $app_name &>>$LOGS_FILE
+    VALIDATE $? "Restarting $app_name service"
+}
