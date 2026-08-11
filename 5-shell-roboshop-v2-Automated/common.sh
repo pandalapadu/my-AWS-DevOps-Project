@@ -74,9 +74,10 @@ nodejs_setup(){
 systemd_setup(){
     cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
     VALIDATE $? "Created systemctl service"
+    
     systemctl daemon-reload &>>$LOGS_FILE
     systemctl enable $app_name &>>$LOGS_FILE
-    systemctl validate $? "Enabling $app_name service"
+    VALIDATE $? "Enabling $app_name service"
 }
 
 application_restart(){
