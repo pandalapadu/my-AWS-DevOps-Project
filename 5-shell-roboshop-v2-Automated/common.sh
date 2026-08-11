@@ -5,6 +5,8 @@ sudo mkdir -p $LOGS_FOLDER
 sudo chown -R ec2-user:ec2-user $LOGS_FOLDER
 sudo chmod -R 755 $LOGS_FOLDER
 LOGS_FILE="$LOGS_FOLDER/$0.log"
+SCRIPT_DIR=$(pwd)
+START_TIME=$(date +%s)
 
 USERID=$(id -u)
 R="\e[31m"
@@ -32,8 +34,8 @@ VALIDATE(){
 
 print_total_time(){
     END_TIME=$(date +%s)
-    TOTAL_TIME=$((END_TIME - START_TIME))
-    echo -e "$TIMESTAMP [INFO] Total time taken: $TOTAL_TIME seconds" | tee -a $LOGS_FILE
+    TOTAL_TIME=$(( (END_TIME - START_TIME) / 60 ))
+    echo -e "$TIMESTAMP [INFO] Total time taken: $TOTAL_TIME minutes" | tee -a $LOGS_FILE
 }
 
 application_setup(){
