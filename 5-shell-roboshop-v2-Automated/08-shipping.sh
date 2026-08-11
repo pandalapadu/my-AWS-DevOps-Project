@@ -1,5 +1,6 @@
 #!/bin/bash
 app_name="shipping"
+MYSQL_HOST="mysql.azdevopsvenkat.site"
 source ./common.sh
 CHECK_ROOT_USER
 
