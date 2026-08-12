@@ -1,0 +1,9 @@
+- name: demo on variable files
+  hosts: local
+  connection: local
+  vars_file:
+  - course.yml
+  tasks:
+    - name: print variable information from another file
+      debug:
+        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
