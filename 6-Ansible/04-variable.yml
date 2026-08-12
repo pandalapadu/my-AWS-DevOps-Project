@@ -1,4 +1,4 @@
-- name: Variable discussions 
+- name: Demo on Play level Variable discussions ##top we can called as play level variables 
   hosts: localhost
   become: yes
   connection: local # it will not ask any username or passsword 
