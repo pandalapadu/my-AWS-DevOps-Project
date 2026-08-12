@@ -3,4 +3,4 @@
   tasks:
     - name: print variable 
       debug:
-        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} and key used is {{ common_key }} "
+        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} and key used is {{ common_key }} from all.yml file"
