@@ -1,0 +1,7 @@
+- name: Demo on group Inventery variables
+  hosts: local
+  connection: local
+  tasks:
+  - name: print information 
+    debug:
+      msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
