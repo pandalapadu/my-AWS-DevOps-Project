@@ -1,0 +1,11 @@
+- name: Variable discussions 
+  hosts: localhost
+  become: yes
+  connection: local # it will not ask any username or passsword 
+  vars:
+    COURSE: "Ansible"
+    TRAINER: "venkat"
+    DURATION: "150HRs"
+  tasks:
+    - debug:
+        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
