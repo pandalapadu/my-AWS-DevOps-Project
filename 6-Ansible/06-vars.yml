@@ -1,7 +1,7 @@
 - name: demo on variable files
   hosts: local
   connection: local
-  vars_file:
+  vars_files:
   - course.yml
   tasks:
     - name: print variable information from another file
