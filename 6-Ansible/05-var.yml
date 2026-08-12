@@ -1,0 +1,16 @@
+- name: Demo on task level Variable discussions ##
+  hosts: frontend
+  become: yes
+  connection: local # it will not ask any username or passsword if we deploying in localhost
+  vars:
+    COURSE: "Ansible"
+    TRAINER: "venkat"
+    DURATION: "150HRs"
+  tasks:
+    - name: Print Information ###this is called task level variables 
+      vars:
+        COURSE: "DevSecops with Ai"
+        TRAINER: "Rami Reddy "
+        DURATION: "200HRS"
+    - debug:
+        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
