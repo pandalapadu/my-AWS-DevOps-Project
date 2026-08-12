@@ -1,7 +1,6 @@
-- name: Demo on group Inventery variables
+- name: Demo on Inventery variables
   hosts: frontend
-  #connection: local
   tasks:
-    - name: print information 
-      debug:
-        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
+  - names: print information
+    debug:
+      msg: "Hi, I am learning {{ COURSE }}, Trainer is {{ TRAINER }}, Duration is {{ DURATION }}, common_key: {{ common_key }}"
