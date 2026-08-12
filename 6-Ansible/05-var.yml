@@ -7,10 +7,10 @@
     TRAINER: "venkat"
     DURATION: "150HRs"
   tasks:
-    - name: Print Information 
-      vars:
-        COURSE: "DevSecops with Ai"
-        TRAINER: "Rami Reddy "
-        DURATION: "200HRS"
-    - debug:
+  - name: Print Information 
+    vars:
+      COURSE: "DevSecops with Ai"
+      TRAINER: "Rami Reddy "
+      DURATION: "200HRS"
+    debug:
         msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
