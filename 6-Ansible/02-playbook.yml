@@ -3,3 +3,4 @@
   tasks:
     - name: Hello world
       debug:
+        msg: "Hello from Ansible" #default "'Hello World' will be Printed" if we will not pass any values
