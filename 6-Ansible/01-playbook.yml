@@ -1,5 +1,5 @@
 - name: ping the server
-  hosts: roboshop
+  hosts: frontend
   tasks: ##tasks == Modules == Collections 
    - name: ping the server
      ping: 
