@@ -1,6 +1,6 @@
-- name: Demo on Inventery variables
+- name: demo on inventery variable files
   hosts: frontend
   tasks:
-    - names: print information
+    - name: print variable 
       debug:
-        msg: "Hi, I am learning {{ COURSE }}, Trainer is {{ TRAINER }}, Duration is {{ DURATION }}, common_key: {{ common_key }}"
+        msg: "Hi I am learing {{ COURSE }}, from {{ TRAINER }}, class hours  is {{ DURATION }} "
