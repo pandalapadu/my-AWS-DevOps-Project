@@ -1,4 +1,4 @@
-- name: Demo on task level Variable discussions ##
+- name: Demo on task level Variable discussions #####this is called task level variables 
   hosts: frontend
   become: yes
   connection: local # it will not ask any username or passsword if we deploying in localhost
@@ -7,7 +7,7 @@
     TRAINER: "venkat"
     DURATION: "150HRs"
   tasks:
-    - name: Print Information ###this is called task level variables 
+    - name: Print Information 
       vars:
         COURSE: "DevSecops with Ai"
         TRAINER: "Rami Reddy "
