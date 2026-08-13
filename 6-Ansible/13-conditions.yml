@@ -1,10 +1,10 @@
 - name: learning conditions in Ansible
-  hosts: local
-  connection: local
+  hosts: frontend
+  #connection: local
   vars:
     is_live_sessions: 6
   tasks:
     - name: is ansible seesion have more than 5 class
       debug:
         msg: "Yes, Ansible have more than 5 class to discuss"
-      when: is_live_sessions > 7
+      when: is_live_sessions > 5
