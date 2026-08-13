@@ -1,0 +1,13 @@
+- name: checking even or odd number 
+  hosts: frontend
+  vars:
+    given_number: 7
+  tasks:
+    - name: is given number is even
+      debug:
+        msg: "given number is: {{ given_number }} is even"
+      when: given_number % 2 == 0
+    - name: is given number is odd
+      debug:
+        msg: "given number is: {{ given_number }} is odd"
+      when: given_number % 2 != 0
