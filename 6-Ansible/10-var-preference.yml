@@ -4,14 +4,14 @@
     full_name: "venkat from playlevel"
   vars_files:
   - course.yml
-  vars_prompt:
-  - name: fullname
-    #prompt: "please enter {{ full_name }}"
-    private: false
+  # vars_prompt:
+  # - name: fullname
+  #   #prompt: "please enter {{ full_name }}"
+  #   private: false
   tasks:
     - name: print vars preference
-      vars:
-      #  full_name: "venkat from tasklevel"
+      # vars:
+      # #  full_name: "venkat from tasklevel"
       debug:
         msg: "Hello {{ full_name }}"
 
