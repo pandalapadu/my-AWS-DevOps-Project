@@ -4,4 +4,4 @@
   tasks:
     - name: print variable
       debug:
-        msg: "passing CMD {{ name }}"
+        msg: "passing from CMD {{ name }}"
