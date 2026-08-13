@@ -1,0 +1,10 @@
+- name: Discussion on Loop topic in Ansible
+  hosts: frontend
+  tasks:
+    - name: printing names 
+      debug:
+        msg: "printing valus from loop, Hello: {{ item }}"
+      loop:
+        - ramesh
+        - venkat
+        - tanishka
