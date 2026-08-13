@@ -3,7 +3,7 @@
   tasks:
     - name: print the value if it is REDHAT OS
       debug:
-        msg: "OS Family is REDHAT"
+        msg: "OS Family is {{ ansible_facts.os_family }}"
       when: ansible_facts.os_family == "RedHat"
 
     - name: print the value if it is Ubuntu OS
