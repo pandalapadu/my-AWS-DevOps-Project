@@ -2,6 +2,6 @@
   hosts: local
   connections: local
   tasks:
-  - name: print name
-    debug:
-      msg: "Hello {{ name }}"
+    - name: print name
+      debug:
+        msg: "Hello {{ name }}"
