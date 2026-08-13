@@ -1,0 +1,13 @@
+- name: installing multipple packages 
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: installing multiple packages
+      package:
+        name: "{{ iteam }}"
+        state: present
+      loop:
+        - nginx
+        - git 
+        - htop
+        - mysql
