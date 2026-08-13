@@ -5,7 +5,7 @@
   vars_files:
   - course.yml
   vars_prompt:
-  - name: full_name
+  - name: fullname
     prompt: "please enter {{ full_name }}"
     private: false
   tasks:
