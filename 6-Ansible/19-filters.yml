@@ -1,0 +1,9 @@
+- name: Ansible filters discussions
+  hosts: frontend
+  become: yes
+  vars:
+    topics: Linux, shell, Ansible, Terraofrm
+  tasks:
+    - name: Convert String to list
+      debug:
+        msg: "Topics are: {{ topics | split(',') }} "
