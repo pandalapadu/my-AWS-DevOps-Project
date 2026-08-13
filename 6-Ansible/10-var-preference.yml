@@ -2,8 +2,8 @@
   hosts: frontend
   vars:
     full_name: "venkat from playlevel"
-  vars_files:
-  - course.yml
+  # vars_files:
+  # - course.yml
   # vars_prompt:
   # - name: fullname
   #   #prompt: "please enter {{ full_name }}"
