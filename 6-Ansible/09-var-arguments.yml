@@ -1,6 +1,6 @@
 - name: variable from command line
   hosts: local
-  connections: local
+  connection: local
   tasks:
     - name: print variable
       debug:
