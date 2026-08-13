@@ -1,0 +1,14 @@
+- name: Need to be install only required packages
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: installing packages
+      package:
+        name: "{{ item.name }}"
+        state: "{{ item.state }}"
+      loop:
+        - { name: "nginx", state: "present" }
+        - { name: "git", state: "absent" }
+        - { name: "htop", state: "present" }
+        - { name: "mysql", state: "absent" }
+        - { name: "zip", state: "present" }
