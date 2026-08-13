@@ -1,0 +1,7 @@
+- name: variable from command line
+  hosts: local
+  connections: local
+  tasks:
+  - name: print name
+    debug:
+      msg: "Hello {{ name }}"
