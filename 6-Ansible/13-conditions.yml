@@ -7,4 +7,4 @@
     - name: is ansible seesion have more than 5 class
       debug:
         msg: "Yes, Ansible have more than 5 class to discuss"
-      when: is_live_sessions > 5
+      when: is_live_sessions > 7
