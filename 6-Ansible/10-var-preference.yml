@@ -11,8 +11,9 @@
   tasks:
     - name: print vars preference
       vars:
-        full_name: "venkat from tasklevel"
+      #  full_name: "venkat from tasklevel"
       debug:
         msg: "Hello {{ full_name }}"
 
 #1st Preferences is "CMD arguments" 
+#2nd Preferences is "task level"
