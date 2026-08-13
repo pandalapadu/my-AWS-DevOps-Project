@@ -1,7 +1,7 @@
 - name: Checking all passing input variable preferrences 
   hosts: frontend
-  vars:
-    full_name: "venkat from playlevel"
+  # vars:
+  #   full_name: "venkat from playlevel"
   # vars_files:
   # - course.yml
   # vars_prompt:
@@ -18,4 +18,6 @@
 #1st Preferences is "CMD arguments" 
 #2nd Preferences is "task level"
 #3rd Preferences is "vars_files"
-#4th Preferences is
+#4th Preferences is "vars_prompt"
+#5th Preferences is "play level"
+#6th Preferences is "Inventery level"
