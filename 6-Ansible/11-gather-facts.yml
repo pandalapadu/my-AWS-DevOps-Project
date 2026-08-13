@@ -3,4 +3,4 @@
   tasks:
     - name: print gatherd facts 
       debug:
-        msg: "Here is the ansible facts {{ ansible_facts }}"
+        msg: "{{ ansible_facts }}"
