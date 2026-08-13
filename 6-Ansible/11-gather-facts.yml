@@ -1,5 +1,5 @@
 - name: print gather facts
-  host: frontend
+  hosts: frontend
   tasks:
     - name: print gatherd facts 
       debug:
