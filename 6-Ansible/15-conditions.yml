@@ -8,5 +8,5 @@
 
     - name: print the value if it is Ubuntu OS
       debug:
-        msg: "OS Family is Ubunty/Debian"
+        msg: "OS Family is {{ ansible_facts.os_family }}"
       when: ansible_facts.os_family == "Debian"
