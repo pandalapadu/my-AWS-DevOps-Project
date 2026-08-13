@@ -1,0 +1,16 @@
+- name: Checking all passing input variable preferrences 
+  hosts: frontend
+  vars:
+    full_name: "venkat from playlevel"
+  vars_files:
+  - cource.yml
+  vars_prompt:
+  - name: fullname
+    prompt: "please enter {{ full_name }}"
+    private: false
+  tasks:
+    - name: print vars preference
+      vars:
+        full_name: "venkat from tasklevel"
+      debug:
+        msg:"Hello {{ full_name }}"
