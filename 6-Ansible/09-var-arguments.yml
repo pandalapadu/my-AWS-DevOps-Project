@@ -2,6 +2,6 @@
   hosts: local
   connections: local
   tasks:
-    - name: print name
+    - name: print variable
       debug:
-        msg: "Hello {{ name }}"
+        msg: "passing CMD {{ name }}"
