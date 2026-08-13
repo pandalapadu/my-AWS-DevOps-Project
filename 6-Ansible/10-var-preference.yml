@@ -3,7 +3,7 @@
   vars:
     full_name: "venkat from playlevel"
   vars_files:
-  - cource.yml
+  - course.yml
   vars_prompt:
   - name: fullname
     prompt: "please enter {{ full_name }}"
