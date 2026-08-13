@@ -1,0 +1,24 @@
+- name: Cource information
+  hosts: local
+  connection: local
+  vars:
+    course: "DevOps with AIOps" ##String
+    duration_in_hours: 150 ##number
+    is_live_session: yes ##boolean
+    topics_covered:  ## list
+      - linux
+      - shell
+      - git 
+      - ansible
+    more_details: ##Map
+      months: "5"
+      trainer: "Venkat"
+  tasks:
+    - name: print the information
+      debug:
+        msg: |
+          name_of_the_Course: {{ course }} 
+          duration_of_course_in_hrs: {{ duration_in_hours }}
+          is_it_live: {{ is_live_session }}
+          total_topics: {{ topics_covered }}
+          required_more_details: {{ more_details }}
