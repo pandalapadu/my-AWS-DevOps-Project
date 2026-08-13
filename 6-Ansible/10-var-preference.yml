@@ -5,7 +5,7 @@
   vars_files:
   - course.yml
   vars_prompt:
-  - name: fullname
+  - name: full_name
     prompt: "please enter {{ full_name }}"
     private: false
   tasks:
@@ -13,4 +13,4 @@
       vars:
         full_name: "venkat from tasklevel"
       debug:
-        msg:"Hello {{ full_name }}"
+        msg: "Hello {{ full_name }}"
