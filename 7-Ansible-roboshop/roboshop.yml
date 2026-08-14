@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-    instances: ["mongodb", "redis", "mysql", "rabbitmq", "frontend"]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
     ami_id: ami-0220d79f3f480ecf5
     domain_name: azdevopsvenkat.site
   tasks:
