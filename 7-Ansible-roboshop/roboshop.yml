@@ -17,5 +17,5 @@
       register: ec2_output
     - name: create Route53 record for ec2 instances
       debug:
-        msg: "Instance name: {{ item.item }} PrivateIP: {{ item.item.instances[0].private_ip_address }}"  ## pick only item object in that EC2 list files
+        msg: "Instance name: {{ item.item }} PrivateIP: {{ item.instances[0].private_ip_address }}"  ## pick only item object in that EC2 list files
       loop: "{{ ec2_output.results }}"
