@@ -2,8 +2,8 @@
   hosts: frontend
   become: yes
   vars:
-    topics: Linux, shell, Ansible, Terraofrm
+    topics: Linux and shell and Ansible and Terraofrm
   tasks:
     - name: Convert String to list
       debug:
-        msg: "Topics are: {{ topics | split(',') }} "
+        msg: "Topics are: {{ topics | split('and') }} "
