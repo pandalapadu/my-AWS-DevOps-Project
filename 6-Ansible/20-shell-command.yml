@@ -6,3 +6,6 @@
     - name: command module testing
       shell: cat /etc/passwd | grep root
       register: user_output
+    - name: printing user output values
+      debug:
+        msg: "users output is: {{ user_output }}"
