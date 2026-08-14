@@ -9,6 +9,7 @@
       environment: Dev
     tagslist:
       [{'key': 'name', 'value': 'Ansible'}, {'key': 'project', 'value': 'Roboshop'}, {'key': 'environment', 'value': 'Dev'}]
+    first_name: venkatreddy
   tasks:
     - name: Convert String to list
       debug:
@@ -22,3 +23,6 @@
     - name: Convert list to Map
       debug:
         msg: "Converting list to Map {{ tagslist | items2dict }}"
+    - name: Name conver to UPPERcase
+      debug:
+        msg: "Conver name to upper: {{ first_name | upper }}"
