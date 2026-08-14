@@ -3,6 +3,10 @@
   become: yes
   vars:
     topics: Linux , shell , Ansible , Terraofrm
+    tagsMap:
+      name: Ansible
+      project: Roboshop
+      environment: Dev
   tasks:
     - name: Convert String to list
       debug:
@@ -10,3 +14,6 @@
     - name: set default values
       debug:
         msg: "Hi {{ GREETINGS | default('Good Morning') }}"
+    - name: Convert Map to list
+      debugger:
+        msg: "Converting Map to list {{ tagsMap | dict2item }}"
