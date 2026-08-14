@@ -16,6 +16,7 @@
           - "roboshop-common"
       loop: "{{ instances }}"
       register: ec2_output
+      when: action == "create"
     # - name: print ec2-out values
     #   debug: 
     #     msg: "{{ ec2_output }}"
@@ -34,6 +35,7 @@
         value: "{{ item.instances[0].private_ip_address }}"
         overwrite: true
       loop: "{{ ec2_output.results }}"
+      when: action == "create"
 
     - name: create Route53 record for frontend instances
       amazon.aws.route53:
@@ -45,4 +47,28 @@
         value: "{{ item.instances[0].public_ip_address }}"
         overwrite: true
       loop: "{{ ec2_output.results }}"
-      when: item.item == "frontend"
+      when: 
+        - item.item == "frontend"
+        - action == "create"
+   
+    - name: delete Route53 record for ec2 instances
+      amazon.aws.route53:
+        state: absent
+        zone: "{{ domain_name }}"
+        record: "{{ item }}.{{ domain_name }}"
+        type: A
+        ttl: 1 
+      loop: "{{ instances }}"   
+      when: action == "delete"
+
+    - name: delete Route53 record for frontend
+      amazon.aws.route53:
+        state: absent
+        zone: "{{ domain_name }}"
+        record: "{{ item }}.{{ domain_name }}"
+        type: A
+        ttl: 1 
+      loop: "{{ instances }}"   
+      when: 
+      - action == "delete"
+      - item == "frontend"
