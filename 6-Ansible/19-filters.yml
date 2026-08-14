@@ -10,7 +10,7 @@
     tagslist:
       [{'key': 'name', 'value': 'Ansible'}, {'key': 'project', 'value': 'Roboshop'}, {'key': 'environment', 'value': 'Dev'}]
     first_name: venkatreddy
-    ipaddress: 1000.235.2563.5835
+    ipaddress: 172.31.18.197
   tasks:
     - name: Convert String to list
       debug:
