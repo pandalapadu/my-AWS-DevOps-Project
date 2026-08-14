@@ -5,3 +5,4 @@
   tasks:
     - name: command module testing
       shell: cat /etc/passwd | grep root
+      register: user_output
