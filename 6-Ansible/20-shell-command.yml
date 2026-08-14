@@ -4,4 +4,4 @@
   become: yes
   tasks:
     - name: command module testing
-      command: cat /etc/passwd | grep root
+      shell: cat /etc/passwd | grep root
