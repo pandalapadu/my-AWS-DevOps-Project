@@ -21,4 +21,4 @@
         msg: "Converting Map to list {{ tagsMap | dict2items }}"
     - name: Convert list to Map
       debug:
-        msg: "Converting list to Map {{ tagsMap | items2dict }}"
+        msg: "Converting list to Map {{ tagslist | items2dict }}"
