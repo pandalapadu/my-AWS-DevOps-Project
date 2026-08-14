@@ -1,0 +1,7 @@
+- name: checking idempotency creating user
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: create expense user
+      user:
+        name: expense 
