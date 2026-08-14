@@ -15,5 +15,5 @@
       debug:
         msg: "Hi {{ GREETINGS | default('Good Morning') }}"
     - name: Convert Map to list
-      debugger:
+      debug:
         msg: "Converting Map to list {{ tagsMap | dict2item }}"
