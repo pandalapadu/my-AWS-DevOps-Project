@@ -10,4 +10,4 @@
       debug:
         msg: " {{ user_output }}"
     - name: list files in command line
-      command: pwd
+      command: ls -ltr > /tmp/files.txt
