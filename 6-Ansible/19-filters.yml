@@ -2,8 +2,11 @@
   hosts: frontend
   become: yes
   vars:
-    topics: Linux and shell and Ansible and Terraofrm
+    topics: Linux , shell , Ansible , Terraofrm
   tasks:
     - name: Convert String to list
       debug:
-        msg: "Topics are: {{ topics | split('and') }} "
+        msg: "Topics are: {{ topics | split(',') }} "
+    - name: set default values
+      debug:
+        msg: "Hi {{ GREETINGS | default('Good Morning') }}"
