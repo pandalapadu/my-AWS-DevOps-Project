@@ -4,3 +4,8 @@
   tasks:
     - name: checking roboshop user exist or not
       command: id roboshop
+      register: roboshop_user_output
+      ignore_errors: true
+    - name: print user output
+      debug:
+        msg: " {{ roboshop_user_output }}"
