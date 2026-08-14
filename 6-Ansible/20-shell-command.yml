@@ -9,3 +9,5 @@
     - name: printing user output values
       debug:
         msg: " {{ user_output }}"
+    - name: list files in command line
+      command: pwd
