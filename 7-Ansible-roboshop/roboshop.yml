@@ -4,6 +4,7 @@
   vars:
     instances: ["mongodb", "redis", "mysql", "rabbitmq"]
     ami_id: ami-0220d79f3f480ecf5
+    domain_name: azdevopsvenkat.site
   tasks:
     - name: creating EC2 instances
       amazon.aws.ec2_instance:
@@ -19,7 +20,27 @@
     #   debug: 
     #     msg: "{{ ec2_output }}"
 
+    # - name: create Route53 record for ec2 instances
+    #   debug:
+    #     msg: "Instance name: {{ item.item }} PrivateIP: {{ item.instances[0].private_ip_address }}"  ## pick only item object in that EC2 list files
+    #   loop: "{{ ec2_output.results }}"
     - name: create Route53 record for ec2 instances
-      debug:
-        msg: "Instance name: {{ item.item }} PrivateIP: {{ item.instances[0].private_ip_address }}"  ## pick only item object in that EC2 list files
+      amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "{{ item.item }}.{{ domain_name }}" ## mongodb.azdevopsvenkat.site
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].private_ip_address }}"
       loop: "{{ ec2_output.results }}"
+
+    - name: create Route53 record for frontend instances
+      amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "{{ item.item }}.{{ domain_name }}" ## azdevopsvenkat.site
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].public_ip_address }}"
+      loop: "{{ ec2_output.results }}"
+      when: item.item != "frontend"
