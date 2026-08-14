@@ -1,0 +1,6 @@
+- name: Discussion on Error handling in Ansible
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: checking roboshop user exist or not
+      command: id roboshop
