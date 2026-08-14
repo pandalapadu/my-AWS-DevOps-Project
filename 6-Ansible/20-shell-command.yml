@@ -8,4 +8,4 @@
       register: user_output
     - name: printing user output values
       debug:
-        msg: "users output is: {{ user_output }}"
+        msg: " {{ user_output }}"
