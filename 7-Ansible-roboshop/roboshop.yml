@@ -1,4 +1,4 @@
-- name: roboshop instances management
+- name: roboshop instances creation via Ansible 
   hosts: local
   connection: local
   vars:
