@@ -15,6 +15,10 @@
           - "roboshop-common"
       loop: "{{ instances }}"
       register: ec2_output
+    # - name: print ec2-out values
+    #   debug: 
+    #     msg: "{{ ec2_output }}"
+
     - name: create Route53 record for ec2 instances
       debug:
         msg: "Instance name: {{ item.item }} PrivateIP: {{ item.instances[0].private_ip_address }}"  ## pick only item object in that EC2 list files
