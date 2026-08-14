@@ -1,0 +1,7 @@
+#!/bin/bash
+- name: Working on Shell module vs Command module in ansible
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: command module testing
+      command: cat /etc/passwd | grep root
