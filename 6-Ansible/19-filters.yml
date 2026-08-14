@@ -10,6 +10,7 @@
     tagslist:
       [{'key': 'name', 'value': 'Ansible'}, {'key': 'project', 'value': 'Roboshop'}, {'key': 'environment', 'value': 'Dev'}]
     first_name: venkatreddy
+    ipaddress: 1000.235.2563.5835
   tasks:
     - name: Convert String to list
       debug:
@@ -26,3 +27,6 @@
     - name: Name conver to UPPERcase
       debug:
         msg: "Conver name to upper: {{ first_name | upper }}"
+    - name: checking Valid IP ipv4 or not
+      debug:
+        msg: "checking valid IP: {{ ipaddress | ansible.utils.ipv4 }}"
