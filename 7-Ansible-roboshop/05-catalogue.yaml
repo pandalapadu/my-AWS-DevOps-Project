@@ -56,3 +56,9 @@
       register: catalogue_output
       tags:
         - mongodb
+    - name: print catalogue_output
+      debug:
+        msg: "{{ catalogue_output }}"
+      tags:
+        - mongodb
+        
