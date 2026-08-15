@@ -47,3 +47,12 @@
       copy:
         src: mongo.repo
         dest: /etc/yum.repos.d/mongo.repo
+    - name: install mongodb client
+      package:
+        name: mongodb-mongosh
+        state: present
+    - name: check catalogue schema exist ot not
+      shell: mongosh --host "{{ MONGODB_HOST }}" --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+      register: catalogue_output
+      tags:
+        - mongodb
