@@ -7,3 +7,5 @@ CATALOGUE_HOST: catalogue.azdevopsvenkat.site
 CART_HOST: cart.azdevopsvenkat.site
 USER_HOST: user.azdevopsvenkat.site
 RABBITMQ_HOST: rabbitmq.azdevopsvenkat.site
+SHIPPING_HOST: shipping.azdevopsvenkat.site
+PAYMENT_HOST: payment.azdevopsvenkat.site
