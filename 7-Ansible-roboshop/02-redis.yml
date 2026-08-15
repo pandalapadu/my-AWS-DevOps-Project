@@ -5,7 +5,7 @@
     - name: Enable Redis 7 module
       command: dnf module enable redis:7 -y
     - name: Install Redis 7 
-      dnf:
+      package:
         name: redis
         state: present
     - name: allowing remote connection
