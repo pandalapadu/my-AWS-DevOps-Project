@@ -1,0 +1,6 @@
+## ansible-playbook roboshop.yml -e "component=mongodb"
+- name: configure "{{ component }}" server
+  hosts: "{{ component }}"
+  become: yes
+  roles:
+    - "{{ component }}"
