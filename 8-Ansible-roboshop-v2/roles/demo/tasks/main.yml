@@ -4,4 +4,4 @@
 - name: Import common role from demo tasks
   import_role: 
     name: common
-    task_from: hello.yml
+    tasks_from: hello.yml
