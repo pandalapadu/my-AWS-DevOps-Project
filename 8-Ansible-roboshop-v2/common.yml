@@ -1,4 +1,4 @@
 - name: Demo on Common role
   hosts: catalogue
   roles:
-  - catalogue
+  - demo
