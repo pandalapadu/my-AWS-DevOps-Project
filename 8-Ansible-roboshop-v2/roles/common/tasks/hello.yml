@@ -1,0 +1,3 @@
+- name: this is common Hello Common task
+  debug:
+    msg: "hello file from common tasks folder"
