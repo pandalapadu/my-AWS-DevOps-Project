@@ -1,0 +1,11 @@
+ansible_user: ec2-user
+ansible_password: DevOps321
+MONGODB_HOST: mongodb.azdevopsvenkat.site
+REDIS_HOST: redis.azdevopsvenkat.site
+MYSQL_HOST: mysql.azdevopsvenkat.site
+CATALOGUE_HOST: catalogue.azdevopsvenkat.site
+CART_HOST: cart.azdevopsvenkat.site
+USER_HOST: user.azdevopsvenkat.site
+RABBITMQ_HOST: rabbitmq.azdevopsvenkat.site
+SHIPPING_HOST: shipping.azdevopsvenkat.site
+PAYMENT_HOST: payment.azdevopsvenkat.site
