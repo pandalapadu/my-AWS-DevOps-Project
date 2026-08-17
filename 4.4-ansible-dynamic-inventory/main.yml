@@ -1,6 +1,7 @@
 - name: Configure Froneend Server
   hosts: frontend
   become: yes
+  serial: 2
   tasks:
     - name: ping module
       ping:
