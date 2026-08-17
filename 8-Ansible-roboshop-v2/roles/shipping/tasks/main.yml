@@ -1,0 +1,42 @@
+- name: app setup
+  import_role:
+    name: common
+    tasks_from: app-setup
+
+- name: java setup
+  import_role:
+    name: common
+    tasks_from: java
+
+- name: systemd setup
+  import_role:
+    name: common
+    tasks_from: systemd-setup
+  
+- name: install mysql
+  package:
+    name: mysql
+    state: present
+
+- name: install python dependencies
+  pip:
+    name: PyMySQL
+    executable: pip3.9
+
+- name: load mysql data
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    login_user: "{{ mysql_login_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ MYSQL_HOST }}"
+    target: "{{ item }}"
+  loop:
+  - /app/db/schema.sql
+  - /app/db/app-user.sql 
+  - /app/db/master-data.sql
+
+- name: restart
+  import_role:
+    name: common
+    tasks_from: restart
