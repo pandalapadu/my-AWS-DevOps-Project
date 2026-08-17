@@ -5,3 +5,7 @@
   tasks:
     - name: ping module
       ping:
+    - name: install nginx server
+      package:
+        name: nginx
+        state: present
