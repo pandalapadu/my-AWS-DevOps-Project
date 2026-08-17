@@ -14,6 +14,10 @@
   debug:
     msg: "Hi, I am common role msg-4"
 
+- name: "chnage the fact"
+  set_fact:
+    OS: "Debian"
+
 - name: call Role-2
   #import_role:
   include_role:
