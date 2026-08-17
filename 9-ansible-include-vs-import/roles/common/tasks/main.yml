@@ -1,24 +1,25 @@
-- name: Common role message-1
+- name: common role msg-1
   debug:
-    msg: "Hi, I am common role msg-1"
+    msg: "HI, I am from common role MSG-1"
 
-- name: Common role message-2
+- name: common role msg-2
   debug:
-    msg: "Hi, I am common role msg-2"
+    msg: "HI, I am from common role MSG-2 {{ item }}"
 
-- name: Common role message-3
+
+- name: common role msg-3
   debug:
-    msg: "Hi, I am common role msg-3"
+    msg: "HI, I am from common role MSG-3"
 
-- name: Common role message-4
-  debug:
-    msg: "Hi, I am common role msg-4"
-
-- name: "chnage the fact"
+- name: change the fact
   set_fact:
-    OS: "Debian"
+    os: "Debian" #overriding the previous loaded variable
 
-- name: call Role-2
-  #import_role:
-  include_role:
-    name: role-2
+- name: common role msg-4
+  debug:
+    msg: "HI, I am from common role MSG-4"
+
+# - name: call role-2
+#   #import_role:
+#   include_role:
+#     name: role-3
