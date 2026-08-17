@@ -1,0 +1,6 @@
+- name: Configure Froneend Server
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: ping module
+      ping:
