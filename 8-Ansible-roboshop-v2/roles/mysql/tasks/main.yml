@@ -8,5 +8,6 @@
     enabled: yes
     name: mysqld
 - name: setup root password
-  #command: mysql_secure_installation --set-root-pass "{{ MYSQL_ROOT_PASSWORD }}"
-  command: mysql_secure_installation --set-root-pass "{{ root_password.MYSQL_ROOT_PASSWORD }}"
+  command: mysql_secure_installation --set-root-pass "{{ MYSQL_ROOT_PASSWORD }}"
+  #command: mysql_secure_installation --set-root-pass "{{ root_password.MYSQL_ROOT_PASSWORD }}" ##used for
+  ### AWS secret manger to call this 
