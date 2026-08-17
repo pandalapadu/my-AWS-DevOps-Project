@@ -15,5 +15,6 @@
     msg: "Hi, I am common role msg-4"
 
 - name: call Role-2
-  import_role:
+  #import_role:
+  include_role:
     name: role-2
