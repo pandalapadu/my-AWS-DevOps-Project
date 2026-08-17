@@ -4,3 +4,4 @@
     name: common
   tags:
   - hi
+  when: OS is "RedHat"
