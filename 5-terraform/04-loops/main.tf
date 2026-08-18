@@ -1,10 +1,11 @@
 resource "aws_instance" "terraform_demo" {
-  count                  = 10
+  count                  = 4
   ami                    = var.ami_id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_terrafom.id] #list
-
-  tags = var.ec2_tags
+  tags = {
+    Name = var.instances[count.index]
+  }
 }
 
 resource "aws_security_group" "allow_terrafom" {
@@ -18,5 +19,5 @@ resource "aws_security_group" "allow_terrafom" {
     cidr_blocks = var.cidr
   }
 
-  tags = var.ec2_tags
+  tags = { Name = var.instances[count.index] }
 }

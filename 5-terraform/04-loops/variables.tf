@@ -39,3 +39,7 @@ variable "cidr" {
   type    = list(string)
   default = ["0.0.0.0/0"]
 }
+
+variable "instances" {
+  default = ["mongodb", "redis", "rabbitmq", "mysql"]
+}
