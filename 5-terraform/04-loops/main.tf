@@ -1,11 +1,11 @@
 resource "aws_instance" "roboshop" {
-  count                  = 4
-  ami                    = var.ami_id
-  instance_type          = var.instance_type
+  count         = 4
+  ami           = var.ami_id
+  instance_type = var.instance_type
   vpc_security_group_ids = [
     aws_security_group.allow_terrafom[count.index].id,
     aws_security_group.common.id
-    ] #list
+  ] #list
   tags = {
     Name = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
   }
