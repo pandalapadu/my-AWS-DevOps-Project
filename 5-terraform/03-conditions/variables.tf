@@ -4,8 +4,11 @@ variable "ami_id" {
   description = "RHEL-9 Customized OS image"
 }
 
-variable "instance_type" {
+variable "environment" {
+  default = "dev"
+}
 
+variable "instance_type" {
   type    = string
   default = "t3.micro"
 
