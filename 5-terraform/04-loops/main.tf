@@ -2,14 +2,15 @@ resource "aws_instance" "terraform_demo" {
   count                  = 4
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  vpc_security_group_ids = [aws_security_group.allow_terrafom.id] #list
+  vpc_security_group_ids = [aws_security_group.allow_terrafom[count.index].id] #list
   tags = {
-    Name = var.instances[count.index]
+    Name = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
   }
 }
 
 resource "aws_security_group" "allow_terrafom" {
-  name        = var.sg_name
+  count       = 4
+  name        = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
   description = "Security group for Terraform EC2"
 
   egress {
@@ -19,5 +20,7 @@ resource "aws_security_group" "allow_terrafom" {
     cidr_blocks = var.cidr
   }
 
-  tags = { Name = var.instances[count.index] }
+  tags = {
+    Name = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
+  }
 }

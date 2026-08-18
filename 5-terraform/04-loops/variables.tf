@@ -7,6 +7,9 @@ variable "ami_id" {
 variable "environment" {
   default = "dev"
 }
+variable "project" {
+  default = "roboshop"
+}
 
 variable "instance_type" {
   type    = string
