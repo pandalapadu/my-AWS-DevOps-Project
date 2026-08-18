@@ -1,0 +1,44 @@
+- name: application setup
+  import_role:
+    name: common
+    tasks_from: app-setup
+
+- name: nodejs setup
+  import_role:
+    name: common
+    tasks_from: nodejs
+
+- name: systemd setup
+  import_role:
+    name: common
+    tasks_from: systemd-setup
+
+- name: copy mongodb repo
+  copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+- name: install mongodb client
+  package:
+    name: mongodb-mongosh
+    state: present
+- name: check catalogue schema exist ot not
+  shell: mongosh --host "{{ MONGODB_HOST }}" --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  register: catalogue_output
+  tags:
+  - mongodb
+# - name: print catalogue_output
+#   debug: 
+#     msg: "{{ catalogue_output }}"
+#   tags:
+#   - mongodb
+- name: load products
+  shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
+  when: catalogue_output.stdout | int < 0
+  tags:
+  - mongodb
+
+- name: enable and start catalogue
+  service:
+    name: catalogue
+    state: restarted
+    enabled: yes
