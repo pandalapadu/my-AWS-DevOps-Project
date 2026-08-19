@@ -1,21 +1,22 @@
 resource "aws_instance" "terraform_demo" {
-  ami                    = var.ami_id
-  instance_type          = var.instance_type
+  ami                    = data.aws_ami.venkat.id
+  instance_type          = "${local.instance_type}"
   vpc_security_group_ids = [aws_security_group.allow_terrafom.id] #list
+  tags = {
+    Name = local.name
+  }
 
-  tags = var.ec2_tags
 }
 
 resource "aws_security_group" "allow_terrafom" {
-  name        = var.sg_name
+  name        = "${local.name}-common"
   description = "Security group for Terraform EC2"
 
   egress {
-    from_port   = var.port
-    to_port     = var.port
+    from_port   = 22
+    to_port     = 22
     protocol    = "-1"
-    cidr_blocks = var.cidr
+    cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = var.ec2_tags
+  tags = local.name
 }
