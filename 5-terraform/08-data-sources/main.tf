@@ -1,0 +1,29 @@
+resource "aws_instance" "terraform_demo" {
+  ami                    = data.aws_ami.venkat.id
+  instance_type          = "t3.micro"
+  vpc_security_group_ids = [aws_security_group.allow_terrafom.id] #list
+
+  tags = {
+    Name        = "terraform-demo"
+    Project     = "roboshop"
+    Environment = "dev"
+  }
+}
+
+resource "aws_security_group" "allow_terrafom" {
+  name        = "Allow-terraform"
+  description = "Security group for Terraform EC2"
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name        = "terraform-SG"
+    Project     = "roboshop"
+    Environment = "dev"
+  }
+}
