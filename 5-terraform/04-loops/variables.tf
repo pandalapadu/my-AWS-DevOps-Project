@@ -44,5 +44,13 @@ variable "cidr" {
 }
 
 variable "instances" {
-  default = ["mongodb", "redis", "rabbitmq", "mysql", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
+  default = ["mongodb", "redis"]
+  #["mongodb", "redis", "rabbitmq", "mysql", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
+}
+#########Route 53 Records Variables ###
+variable "zone_id" {
+  default = "Z0580926234LLG39XOC6H"
+}
+variable "domain_name" {
+  default = "azdevopsvenkat.site"
 }
