@@ -5,7 +5,3 @@ variable "project" {
 variable "environment" {
   default = "dev"
 }
-
-# variable "name" {
-#   default = "${var.project}-${var.environment}"
-# }
