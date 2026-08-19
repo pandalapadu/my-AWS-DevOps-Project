@@ -1,5 +1,6 @@
 resource "aws_instance" "roboshop" {
-  count         = 2
+  #count         = 2
+  count         = length(var.instances)
   ami           = var.ami_id
   instance_type = var.instance_type
   vpc_security_group_ids = [
@@ -12,7 +13,7 @@ resource "aws_instance" "roboshop" {
 }
 
 resource "aws_security_group" "roboshop" {
-  count       = 2
+  count       = length(var.instances)
   name        = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
   description = "Security group for Terraform EC2"
 

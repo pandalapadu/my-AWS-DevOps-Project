@@ -44,7 +44,7 @@ variable "cidr" {
 }
 
 variable "instances" {
-  default = ["mongodb", "redis"]
+  default = ["mongodb", "redis", "frontend"]
   #["mongodb", "redis", "rabbitmq", "mysql", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
 }
 #########Route 53 Records Variables ###

@@ -1,6 +1,6 @@
 # Create the A record
 resource "aws_route53_record" "roboshop" {
-  count   = 2
+  count   = length(var.instances)
   zone_id = var.zone_id
   name    = "${var.instances[count.index]}-${var.environment}.${var.domain_name}" ##mongodb-dev.azdevopsvenkat.site
   type    = "A"
