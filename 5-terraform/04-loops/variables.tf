@@ -44,5 +44,5 @@ variable "cidr" {
 }
 
 variable "instances" {
-  default = ["mongodb", "redis", "rabbitmq", "mysql"]
+  default = ["mongodb", "redis", "rabbitmq", "mysql", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
 }

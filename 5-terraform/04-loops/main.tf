@@ -1,9 +1,9 @@
 resource "aws_instance" "roboshop" {
-  count         = 4
+  count         = 10
   ami           = var.ami_id
   instance_type = var.instance_type
   vpc_security_group_ids = [
-    aws_security_group.roboshop [count.index].id,
+    aws_security_group.roboshop[count.index].id,
     aws_security_group.common.id
   ] #list
   tags = {
@@ -12,7 +12,7 @@ resource "aws_instance" "roboshop" {
 }
 
 resource "aws_security_group" "roboshop" {
-  count       = 4
+  count       = 10
   name        = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
   description = "Security group for Terraform EC2"
 
