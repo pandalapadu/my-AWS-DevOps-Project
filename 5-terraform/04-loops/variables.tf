@@ -44,8 +44,7 @@ variable "cidr" {
 }
 
 variable "instances" {
-  default = ["mongodb", "redis", "frontend"]
-  #["mongodb", "redis", "rabbitmq", "mysql", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
+  default = ["mongodb", "redis", "rabbitmq", "mysql", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
 }
 #########Route 53 Records Variables ###
 variable "zone_id" {
