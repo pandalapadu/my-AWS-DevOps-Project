@@ -27,6 +27,10 @@ resource "aws_security_group" "roboshop" {
   tags = {
     Name = "${var.project}-${var.environment}-${var.instances[count.index]}" #interpolation
   }
+  ## first it create SG and modify instance SG
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group" "common" {
@@ -42,5 +46,9 @@ resource "aws_security_group" "common" {
 
   tags = {
     Name = "${var.project}-${var.environment}-common" #interpolation
+  }
+  ## first it create SG and modify instance SG
+  lifecycle {
+    create_before_destroy = true
   }
 }
