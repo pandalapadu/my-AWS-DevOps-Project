@@ -14,25 +14,25 @@ resource "aws_instance" "terraform_demo" {
   provisioner "local-exec" {
     command = "echo instance created "
   }
-    provisioner "local-exec" {
-      when = destroy
+  provisioner "local-exec" {
+    when    = destroy
     command = "echo instance going to be destroyed "
   }
-    provisioner "local-exec" {
-      when = destroy
+  provisioner "local-exec" {
+    when    = destroy
     command = "echo > inventory.ini "
   }
   connection {
-    type = "ssh"
-    user = "ec2-user"
+    type     = "ssh"
+    user     = "ec2-user"
     password = "DevOps321"
-    host = self.public_ip
+    host     = self.public_ip
   }
   provisioner "remote-exec" {
-    inline = [ 
+    inline = [
       "sudo dnf install nginx -y",
       "sudo systemctl start nginx"
-     ]
+    ]
   }
 }
 
