@@ -28,11 +28,21 @@ resource "aws_instance" "terraform_demo" {
     password = "DevOps321"
     host     = self.public_ip
   }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo dnf install nginx -y",
-      "sudo systemctl start nginx"
-    ]
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo dnf install nginx -y",
+  #     "sudo systemctl start nginx"
+  #   ]
+  # }
+  #   provisioner "remote-exec" {
+  #     when = destroy
+  #   inline = [
+  #     "sudo systemctl stop nginx"
+  #   ]
+  # }
+  provisioner "file" {
+    source = "script.sh"
+    destination = "/tmp/script.sh"
   }
 }
 
@@ -41,6 +51,12 @@ resource "aws_security_group" "allow_terrafom" {
   description = "Security group for Terraform EC2"
 
   egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
