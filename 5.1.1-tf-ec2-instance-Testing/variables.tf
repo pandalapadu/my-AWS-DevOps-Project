@@ -11,5 +11,15 @@ variable "component_name" {
 }
 
 variable "instance_type" {
-  default = "t3.small"
+  default = "t3.micro"
+}
+
+variable "sg_ids" {
+  default = ["sg-0953383669051eb35"]
+}
+
+variable "ec2_tags" {
+  default = {
+    Purpose = "module-demo"
+  }
 }
