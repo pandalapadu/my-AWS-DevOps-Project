@@ -1,4 +1,4 @@
-resource "aws_instance" "terraform_demo" {
+resource "aws_instance" "main" {
   ami                    = local.ami_id
   instance_type          = var.instance_type
   vpc_security_group_ids = var.sg_ids
