@@ -57,3 +57,13 @@ variable "database_route_table_tags" {
   type = map
   default = {}
 }
+###Elastic IP ###
+variable "eip_tags" {
+  type = map
+  default = {}
+}
+###NAT Gateway tags ###
+variable "nat_gateway_tags" {
+  type = map
+  default = {}
+}

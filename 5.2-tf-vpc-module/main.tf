@@ -99,17 +99,44 @@ resource "aws_route_table" "database" {
 resource "aws_route_table_association" "public" {
   count = length(var.public_subnet_cidrs)
   subnet_id = aws_subnet.public[count.index].id
-  route_table_id = aws_route_table.public
+  route_table_id = aws_route_table.public.id
 }
 #Private
 resource "aws_route_table_association" "private" {
   count = length(var.private_subnet_cidrs)
   subnet_id = aws_subnet.private[count.index].id
-  route_table_id = aws_route_table.private
+  route_table_id = aws_route_table.private.id
 }
 #Database
 resource "aws_route_table_association" "database" {
   count = length(var.database_subnet_cidrs)
   subnet_id = aws_subnet.database[count.index].id
-  route_table_id = aws_route_table.database
+  route_table_id = aws_route_table.database.id
+}
+#######Elastic/Public IP creation for NAT attachement
+resource "aws_eip" "nat" {
+  domain = "vpc"
+  tags = merge(
+    var.eip_tags,
+    local.common_tags,
+    {
+      Name = "${local.common_name}-nat"
+    }
+  )
+}
+### AWS NAT Gateway Creation ###
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.nat.id
+  subnet_id = aws_subnet.public[0].id
+  depends_on = [ aws_internet_gateway.main ]
+  tags = merge(
+    var.nat_gateway_tags,
+    local.common_tags
+  )
+}
+### AWS NAT Gateway Route Attached resource Creation ###
+resource "aws_route" "public" {
+  route_table_id = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.main.id
 }
