@@ -176,10 +176,33 @@ resource "aws_vpc_peering_connection" "default" {
   )
 }
 #### AWS Peering Connection b/w roboshop VPC and default VPC gateway Routes added under Route table
-##public GateWay_Route
+##public GateWay_Route roboshop VPC Side
 resource "aws_route" "public_peering" {
   count                     = var.is_peering_required ? 1 : 0
   route_table_id            = aws_route_table.public.id
   destination_cidr_block    = data.aws_vpc.default.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id
+}
+##private GateWay_Route roboshop VPC Side
+resource "aws_route" "private_peering" {
+  count                     = var.is_peering_required ? 1 : 0
+  route_table_id            = aws_route_table.private.id
+  destination_cidr_block    = data.aws_vpc.default.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id
+}
+
+##Database GateWay_Route roboshop VPC Side
+resource "aws_route" "database_peering" {
+  count                     = var.is_peering_required ? 1 : 0
+  route_table_id            = aws_route_table.database.id
+  destination_cidr_block    = data.aws_vpc.default.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id
+}
+
+##Default Gateway Route 
+resource "aws_route" "default" {
+  count                     = var.is_peering_required ? 1 : 0
+  route_table_id            = data.aws_route_table.default.id
+  destination_cidr_block    = var.vpc_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id
 }
