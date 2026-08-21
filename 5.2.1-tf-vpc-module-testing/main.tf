@@ -1,5 +1,5 @@
 module "vpc" {
   source      = "../5.2-tf-vpc-module"
-  project     = "roboshop"
-  environment = "Dev"
+  project     = var.project
+  environment = var.environment
 }
