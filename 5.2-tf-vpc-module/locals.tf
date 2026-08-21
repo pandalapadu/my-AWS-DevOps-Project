@@ -6,4 +6,5 @@ locals {
     Name        = local.common_name
   }
   common_name = "${var.project}-${var.environment}" #roboshop-dev
+  az_names = slice(data.aws_availability_zones.available.names, 0, 2) #total list pick first 1,2 only
 }
