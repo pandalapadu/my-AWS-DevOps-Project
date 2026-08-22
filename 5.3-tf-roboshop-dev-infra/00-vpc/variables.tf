@@ -6,6 +6,6 @@ variable "environment" {
   default = "dev"
 }
 variable "is_peering_required" {
-  type = bool
+  type    = bool
   default = false
 }
