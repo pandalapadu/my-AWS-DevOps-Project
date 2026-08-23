@@ -2,8 +2,8 @@ data "aws_ssm_parameter" "bastion_sg_id" {
   name = "/${var.project}/${var.environment}/bastion_sg_id"
 }
 ## Subnet ID 
-data "aws_ssm_parameter" "public_sunet_ids" {
-  name = "/${var.project}/${var.environment}/public_sunet_ids"
+data "aws_ssm_parameter" "public_subnet_ids" {
+  name = "/${var.project}/${var.environment}/public_subnet_ids"
 }
 ## AMI ID 
 data "aws_ami" "venkat" {
