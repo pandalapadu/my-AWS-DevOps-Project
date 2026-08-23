@@ -266,3 +266,13 @@ resource "aws_security_group_rule" "frontend_alb_http" {
   cidr_blocks = [ "0.0.0.0/0" ]
   security_group_id = local.frontend_alb_sg_id
 }
+
+#Bastion
+resource "aws_security_group_rule" "bastion_my_public_ip" {
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = [ "${trimspace(data.http.my_public_ip.response_body)}/32" ]
+  security_group_id = local.bastion_sg_id
+}

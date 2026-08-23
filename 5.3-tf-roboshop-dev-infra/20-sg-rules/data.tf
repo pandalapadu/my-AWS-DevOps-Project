@@ -50,3 +50,7 @@ data "aws_ssm_parameter" "frontend_alb_sg_id" {
 data "aws_ssm_parameter" "bastion_alb_sg_id" {
   name = "/${var.project}/${var.environment}/bastion_alb_sg_id"
 }
+###############getting my laptop Public IP
+data "http" "my_public_ip" {
+    url = "https://ipv4.icanhazip.com"
+}
