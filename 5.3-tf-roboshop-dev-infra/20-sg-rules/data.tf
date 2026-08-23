@@ -46,11 +46,12 @@ data "aws_ssm_parameter" "frontend_sg_id" {
 data "aws_ssm_parameter" "frontend_alb_sg_id" {
   name = "/${var.project}/${var.environment}/frontend_alb_sg_id"
 }
-###bastion_alb_sg_id pulling from parameter store 
-data "aws_ssm_parameter" "bastion_alb_sg_id" {
-  name = "/${var.project}/${var.environment}/bastion_alb_sg_id"
+
+###bastio ID
+data "aws_ssm_parameter" "bastion_sg_id" {
+  name = "/${var.project}/${var.environment}/bastion_sg_id"
 }
 ###############getting my laptop Public IP
 data "http" "my_public_ip" {
-    url = "https://ipv4.icanhazip.com"
+  url = "https://ipv4.icanhazip.com"
 }
