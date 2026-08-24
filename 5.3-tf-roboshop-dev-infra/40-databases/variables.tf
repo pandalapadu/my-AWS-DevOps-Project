@@ -11,5 +11,5 @@ variable "domain_name" {
   default = "azdevopsvenkat.site"
 }
 variable "mysql_root_password" {
-    type = string
+  type = string
 }

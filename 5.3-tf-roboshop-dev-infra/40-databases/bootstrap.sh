@@ -11,4 +11,5 @@ touch /var/log/roboshop/ansible.log
 cd /home/ec2-user
 git clone https://github.com/pandalapadu/my-AWS-DevOps-Project.git
 cd my-AWS-DevOps-Project/4.2.1-Ansible-roboshop-v3
+
 git pull origin main
