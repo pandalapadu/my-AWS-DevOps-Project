@@ -1,3 +1,4 @@
+## Installing MongoDB Server
 resource "aws_instance" "mongodb" {
   ami                    = data.aws_ami.venkat.id
   instance_type          = "t3.micro"
