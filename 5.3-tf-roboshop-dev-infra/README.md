@@ -1,5 +1,6 @@
 # RoboShop Dev Infrastructure (Terraform)
 ![alt text](image.png)
+
 This repository builds the **complete AWS infrastructure** for the RoboShop
 application in the `dev` environment using Terraform.
 
