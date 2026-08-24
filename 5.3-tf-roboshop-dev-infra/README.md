@@ -38,7 +38,7 @@ Naming convention for every parameter: `/<project>/<environment>/<key>`, e.g.
 
 ## Remote state
 
-Every folder stores its state in the S3 bucket `remote-state-90s-dev` with a
+Every folder stores its state in the S3 bucket `azdevopsvenkat.site-dev` with a
 **unique key** (see each `provider.tf`), and uses native S3 lock files. This
 means each layer has its own isolated state file:
 
@@ -86,14 +86,14 @@ replace these two things with your own**, or your deployment will fail (or worse
 try to touch resources you don't own):
 
 ### 1. S3 remote-state bucket
-The current bucket `remote-state-90s-dev` is hardcoded in **every**
+The current bucket `azdevopsvenkat.site-dev` is hardcoded in **every**
 `provider.tf`. S3 bucket names are **globally unique**, so you cannot reuse it —
 create your own bucket and put its name in all 10 `provider.tf` files.
 
 ```hcl
 # in every <folder>/provider.tf
 backend "s3" {
-  bucket       = "remote-state-90s-dev"   # <-- change to YOUR bucket name
+  bucket       = "azdevopsvenkat.site-dev"   # <-- change to YOUR bucket name
   key          = "roboshop-vpc.tfstate"   # leave the key as-is (unique per folder)
   region       = "us-east-1"
   encrypt      = true
@@ -104,8 +104,8 @@ backend "s3" {
 Quick way to change all of them at once (run from the repo root):
 ```bash
 # replace with your bucket name
-grep -rl "remote-state-90s-dev" . --include=provider.tf \
-  | xargs sed -i 's/remote-state-90s-dev/YOUR-BUCKET-NAME/g'
+grep -rl "azdevopsvenkat.site-dev" . --include=provider.tf \
+  | xargs sed -i 's/azdevopsvenkat.site-dev/YOUR-BUCKET-NAME/g'
 ```
 
 ### 2. Domain name + Route53 hosted zone
