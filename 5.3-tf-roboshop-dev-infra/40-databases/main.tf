@@ -77,44 +77,44 @@ resource "terraform_data" "redis" {
   }
 }
 
-# resource "aws_instance" "rabbitmq" {
-#   ami                    = data.aws_ami.venkat.id
-#   instance_type          = "t3.micro"
-#   vpc_security_group_ids = [local.rabbitmq_sg_id]
-#   subnet_id              = local.database_subnet_id
+resource "aws_instance" "rabbitmq" {
+  ami                    = data.aws_ami.venkat.id
+  instance_type          = "t3.micro"
+  vpc_security_group_ids = [local.rabbitmq_sg_id]
+  subnet_id              = local.database_subnet_id
 
-#   tags = merge(
-#     {
-#       Name = "${local.common_name}-rabbitmq"
-#     },
-#     local.common_tags
-#   )
-# }
+  tags = merge(
+    {
+      Name = "${local.common_name}-rabbitmq"
+    },
+    local.common_tags
+  )
+}
 
-# resource "terraform_data" "rabbitmq" {
-#   triggers_replace = [
-#     aws_instance.rabbitmq.id
-#   ]
+resource "terraform_data" "rabbitmq" {
+  triggers_replace = [
+    aws_instance.rabbitmq.id
+  ]
 
-#   connection {
-#     type     = "ssh"
-#     user     = "ec2-user"
-#     password = "DevOps321"
-#     host     = aws_instance.rabbitmq.private_ip
-#   }
+  connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = aws_instance.rabbitmq.private_ip
+  }
 
-#   provisioner "file" {
-#     source      = "bootstrap.sh"
-#     destination = "/tmp/bootstrap.sh"
-#   }
+  provisioner "file" {
+    source      = "bootstrap.sh"
+    destination = "/tmp/bootstrap.sh"
+  }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "chmod +x /tmp/bootstrap.sh",
-#       "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
-#     ]
-#   }
-# }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
+    ]
+  }
+}
 
 # resource "aws_instance" "mysql" {
 #   ami                    = data.aws_ami.venkat.id
