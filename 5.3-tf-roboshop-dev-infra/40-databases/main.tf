@@ -116,42 +116,42 @@ resource "terraform_data" "rabbitmq" {
   }
 }
 
-# resource "aws_instance" "mysql" {
-#   ami                    = data.aws_ami.venkat.id
-#   instance_type          = "t3.micro"
-#   vpc_security_group_ids = [local.mysql_sg_id]
-#   subnet_id              = local.database_subnet_id
-#   iam_instance_profile   = aws_iam_instance_profile.mysql.name
+resource "aws_instance" "mysql" {
+  ami                    = data.aws_ami.venkat.id
+  instance_type          = "t3.micro"
+  vpc_security_group_ids = [local.mysql_sg_id]
+  subnet_id              = local.database_subnet_id
+  iam_instance_profile   = aws_iam_instance_profile.mysql.name
 
-#   tags = merge(
-#     {
-#       Name = "${local.common_name}-mysql"
-#     },
-#     local.common_tags
-#   )
-# }
+  tags = merge(
+    {
+      Name = "${local.common_name}-mysql"
+    },
+    local.common_tags
+  )
+}
 
-# resource "terraform_data" "mysql" {
-#   triggers_replace = [
-#     aws_instance.mysql.id
-#   ]
+resource "terraform_data" "mysql" {
+  triggers_replace = [
+    aws_instance.mysql.id
+  ]
 
-#   connection {
-#     type     = "ssh"
-#     user     = "ec2-user"
-#     password = "DevOps321"
-#     host     = aws_instance.mysql.private_ip
-#   }
+  connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = aws_instance.mysql.private_ip
+  }
 
-#   provisioner "file" {
-#     source      = "bootstrap.sh"
-#     destination = "/tmp/bootstrap.sh"
-#   }
+  provisioner "file" {
+    source      = "bootstrap.sh"
+    destination = "/tmp/bootstrap.sh"
+  }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "chmod +x /tmp/bootstrap.sh",
-#       "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
-#     ]
-#   }
-# }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
+    ]
+  }
+}
