@@ -9,6 +9,5 @@ locals {
         Project = "${var.project}"
         Environment = "${var.environment}"
         Terraform = "true"
-        myTest = "true"
     }
 }
