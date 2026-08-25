@@ -31,7 +31,7 @@ resource "aws_alb_listener" "http" {
 ####AWS Route53 record creation for ALB access
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id
-  name = "*.backend-alb-${var.environment}.{var.domain_name}"
+  name = "*.backend-alb-${var.environment}.azdevopsvenkat.site"
   type = "A"
   allow_overwrite = true
   alias {
