@@ -1,17 +1,17 @@
 {
-	"Statement": [
-		{
-			"Action": "ssm:GetParameter",
-			"Effect": "Allow",
-			"Resource": "arn:aws:ssm:us-east-1:160885265516:parameter/roboshop/dev/mysql_root_password",
-			"Sid": "VisualEditor0"
-		},
-		{
-			"Action": "ssm:DescribeParameters",
-			"Effect": "Allow",
-			"Resource": "*",
-			"Sid": "VisualEditor1"
-		}
-	],
-	"Version": "2012-10-17"
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "ssm:GetParameter",
+            "Resource": "arn:aws:ssm:us-east-1:453388807064:parameter/roboshop/dev/mysql_root_password"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "ssm:DescribeParameters",
+            "Resource": "*"
+        }
+    ]
 }
