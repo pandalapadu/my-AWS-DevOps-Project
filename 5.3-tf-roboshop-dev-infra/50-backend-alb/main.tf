@@ -20,7 +20,7 @@ resource "aws_alb_listener" "http" {
   port = "80"
   protocol = "HTTP"
   default_action {
-    type = "fixed-responce"
+    type = "fixed-response"
     fixed_response {
       content_type = "text/html"
       message_body = "<h1>Hi, HTTP backend ALB Configuration </h1>"
@@ -33,7 +33,6 @@ resource "aws_route53_record" "www" {
   zone_id = var.zone_id
   name = "*.backend-alb-${var.environment}.{var.domain_name}"
   type = "A"
-  ttl = 1
   allow_overwrite = true
   alias {
     name = aws_lb.backend_alb.dns_name
