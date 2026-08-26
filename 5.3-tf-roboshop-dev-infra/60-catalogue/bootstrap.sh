@@ -2,6 +2,7 @@
 
 component=$1
 environment=$2
+app_version=$3
 
 dnf install ansible git -y
 
@@ -25,4 +26,5 @@ cd /home/ec2-user/my-AWS-DevOps-Project/4.2.1-Ansible-roboshop-v3
 ansible-playbook \
   -e component="$component" \
   -e env="$environment" \
+  -e app_version=$app_version \
   roboshop.yaml
