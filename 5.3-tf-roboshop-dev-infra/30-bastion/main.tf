@@ -29,3 +29,7 @@ resource "aws_instance" "bastion" {
 
   )
 }
+
+output "bastio_public_ip" {
+  value = aws_instance.bastion.public_ip
+}
