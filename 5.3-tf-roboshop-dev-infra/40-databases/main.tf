@@ -155,3 +155,16 @@ resource "terraform_data" "mysql" {
     ]
   }
 }
+############ OUTPUT of all Private IPS ######
+output "Mongo-DB" {
+  value = aws_instance.mongodb.private_ip
+}
+output "Redis-DB" {
+  value = aws_instance.redis.private_ip
+}
+output "RabbitMQ-DB" {
+  value = aws_instance.rabbitmq.private_ip
+}
+output "mysql-DB" {
+  value = aws_instance.mysql.private_ip
+}
