@@ -35,3 +35,7 @@ resource "terraform_data" "catalogue" {
     ]
   }
 }
+###output 
+output "catalogue-PrivateIP" {
+  value = aws_instance.catalogue.private_ip
+}
