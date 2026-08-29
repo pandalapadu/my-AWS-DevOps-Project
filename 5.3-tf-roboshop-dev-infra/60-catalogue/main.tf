@@ -11,6 +11,7 @@ resource "aws_instance" "catalogue" {
     local.common_tags
   )
 }
+
 resource "terraform_data" "catalogue" {
   triggers_replace = [
     aws_instance.catalogue.id
