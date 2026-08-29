@@ -34,7 +34,7 @@ resource "aws_lb_listener" "http" {
 # Create the Alias Record pointing to the ALB
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id # Your Route 53 Hosted Zone ID
-  name    = "*.backend-alb-${var.environment}-azdevopsvenkat.site"
+  name    = "*.backend-alb-${var.environment}.azdevopsvenkat.site" #venkat.backend-alb-dev.azdevopsvenkat.site
   type    = "A"
 
   alias {
