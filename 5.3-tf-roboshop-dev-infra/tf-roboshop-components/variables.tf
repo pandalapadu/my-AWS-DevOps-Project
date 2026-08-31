@@ -17,3 +17,9 @@ variable "zone_id" {
 variable "domain_name" {
     default = "azdevopsvenkat.site"
 }
+variable "component" {
+    type = string
+}
+variable "rule_priority" {
+    #type = string
+}
