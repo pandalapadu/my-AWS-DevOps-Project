@@ -70,3 +70,7 @@ resource "aws_security_group" "allow_docker" {
     Environment = "dev"
   }
 }
+
+output "Public_ip" {
+  value = aws_instance.terraform_demo.public_ip
+}
