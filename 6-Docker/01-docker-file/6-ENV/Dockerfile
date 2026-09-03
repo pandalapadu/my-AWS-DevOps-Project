@@ -3,3 +3,4 @@ ENV course=docker \
     trainer=venkat \
     environment=dev \
     duration=100hr
+CMD [ "sleep", "1000" ]
