@@ -1,2 +1,3 @@
 FROM almalinux
-CMD [ "ping", "yahoo.com" ]
+#CMD [ "ping", "yahoo.com" ]
+ENTRYPOINT [ "ping", "yahoo.com" ]
