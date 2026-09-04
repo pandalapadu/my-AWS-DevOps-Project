@@ -18,6 +18,7 @@ services:
       - "80:80"
     depends_on:
       - catalogue
+      - user
   user:
     build: ./4-user
     image: pandalapadu/user:v1
