@@ -1,0 +1,102 @@
+name: roboshop
+services:
+  mongodb:
+    build: ./1-MongoDB
+    image: pandalapadu/mongodb:4.0.0 # docker build -t pandalapadu/mongodb:4.0.0
+    container_name: mongodb # docker run -d --network roboshop pandalapadu/mongodb:4.0.0
+
+  catalogue:
+    build: ./2-catalogue
+    image: pandalapadu/catalogue:4.0.0
+    container_name: catalogue
+    depends_on:
+    - mongodb
+  frontend:
+    build: ./3-frontend
+    image: pandalapadu/frontend:4.0.0
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+    - user
+    - cart
+    - shipping
+    - payment
+  user:
+    build: ./4-user
+    image: pandalapadu/user:4.0.0
+    container_name: user
+    environment:
+      MONGO: true
+      REDIS_URL: 'redis://redis:6379'
+      MONGO_URL: "mongodb://mongodb:27017/users"
+    depends_on:
+    - redis
+    - mongodb
+  cart:
+    build: ./5-cart
+    image: pandalapadu/cart:4.0.0
+    container_name: cart
+    environment:
+      REDIS_HOST: redis
+      CATALOGUE_HOST: catalogue
+      CATALOGUE_PORT: 8080
+    depends_on:
+    - redis
+    - catalogue
+  shipping:
+    build: ./7-shipping
+    image: pandalapadu/shipping:4.0.0
+    container_name: shipping
+    environment:
+      CART_ENDPOINT: "cart:8080"
+      DB_HOST: mysql
+    depends_on:
+    - mysql
+    - cart
+  payment:
+    build: ./8-payment
+    image: pandalapadu/payment:4.0.0
+    container_name: payment
+    environment:
+      CART_HOST: "cart"
+      CART_PORT: 8080
+      USER_HOST: user
+      USER_PORT: 8080
+      AMQP_HOST: rabbitmq
+      AMQP_USER: roboshop
+      AMQP_PASS: roboshop123
+    depends_on:
+    - cart
+    - user
+    - rabbitmq
+  redis:
+    image: redis:7
+    container_name: redis # docker run -d --name redis --network roboshop redis:7
+
+  mysql:
+    build: ./6-mysql
+    image: pandalapadu/mysql:4.0.0
+    container_name: mysql
+    command: --innodb-lock_wait_timeout=120
+    environment:
+      MYSQL_ROOT_PASSWORD: "RoboShop@1"
+
+  rabbitmq:
+    image: rabbitmq:3
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
+
+networks:
+  default: # this means all the services in this file use this network
+    name: roboshop
+    driver: bridge
+    external: false # if true it should be created manually, if false docker creates this network
+# volumes:
+#   mongodb: # docker volume create mongodb
+#   redis: # docker volume create redis
+#   mysql: # docker volume create mysql
+#   rabbitmq: # docker volume create rabbitmq
