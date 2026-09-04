@@ -62,6 +62,12 @@ services:
     command: --mysql-native-password=ON --innodb-lock_wait_timeout=120
     environment:
       MYSQL_ROOT_PASSWORD: "RoboShop@1"
+  rabbitmq: ###Service-8
+    image: rabbitmq:3
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
 
 networks:
   default: ## by default all files/service use this network 
