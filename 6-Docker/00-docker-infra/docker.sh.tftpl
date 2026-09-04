@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+
+echo ">>> Expanding disk..."
+
 growpart /dev/nvme0n1 ${partition_number}
 lvextend -r -L +${extend_size}G /dev/mapper/RootVG-varVol
 xfs_growfs /var
@@ -9,10 +13,47 @@ xfs_growfs /var
 # lvextend -r -L +30G /dev/mapper/RootVG-varVol
 # xfs_growfs /var
 
-dnf -y install dnf-plugins-core
-dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
-dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+echo ">>> Installing Docker..."
 
-systemctl start docker
-systemctl enable docker
+dnf install -y dnf-plugins-core
+
+dnf config-manager --add-repo \
+  https://download.docker.com/linux/rhel/docker-ce.repo
+
+dnf install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io \
+  docker-buildx-plugin \
+  docker-compose-plugin
+
+echo ">>> Starting Docker..."
+
+systemctl enable --now docker
+
+echo ">>> Adding ec2-user to Docker group..."
+
 usermod -aG docker ec2-user
+
+echo ">>> Verifying installation..."
+
+docker --version
+docker compose version
+systemctl is-active docker
+getent group docker
+ls -l /var/run/docker.sock
+
+echo ""
+echo "=========================================="
+echo " SETUP COMPLETED"
+echo "=========================================="
+echo ""
+echo "Docker is installed and enabled."
+echo "ec2-user has been added to the docker group."
+echo ""
+echo "IMPORTANT: reconnect your SSH session."
+echo "Then run:"
+echo ""
+echo "    docker ps"
+echo ""
+echo "=========================================="
