@@ -45,6 +45,12 @@ services:
   redis:   ###Service-5
     image: redis:7
     container_name: redis
+  mysql: ###Service-7
+    image: pandalapadu/mysql:v1
+    build: ./6-mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "RoboShop@1"
 
 networks:
   default: ## by default all files/service use this network 
