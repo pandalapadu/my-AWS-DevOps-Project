@@ -18,6 +18,21 @@ services:
       - "80:80"
     depends_on:
       - catalogue
+  user:
+    build: ./4-user
+    image: pandalapadu/user:v1
+    container_name: user
+    environment:
+       MONGO: true
+       REDIS_URL: 'redis://redis:6379'
+       MONGO_URL: "mongodb://mongodb:27017/users"
+    depends_on:
+      - redis
+      - mongodb
+  redis:
+    image: redis:7
+    container_name: redis
+
 networks:
   default: ## by default all files/service use this network 
     name: roboshop
