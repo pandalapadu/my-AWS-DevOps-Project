@@ -19,6 +19,7 @@ services:
     depends_on:
       - catalogue
       - user
+      - cart
   user:    ###Service-4
     build: ./4-user
     image: pandalapadu/user:v1
