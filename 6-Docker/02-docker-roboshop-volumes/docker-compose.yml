@@ -4,7 +4,8 @@ services:
     build: ./1-MongoDB
     image: pandalapadu/mongodb:4.0.0 # docker build -t pandalapadu/mongodb:4.0.0
     container_name: mongodb # docker run -d --network roboshop pandalapadu/mongodb:4.0.0
-
+    volumes:
+      - mongodb: /data/db ## mongodb store data in this folder /data/db
   catalogue:
     build: ./2-catalogue
     image: pandalapadu/catalogue:4.0.0
@@ -74,6 +75,8 @@ services:
   redis:
     image: redis:7
     container_name: redis # docker run -d --name redis --network roboshop redis:7
+    volumes:
+      - redis: /data
 
   mysql:
     build: ./6-mysql
@@ -82,6 +85,8 @@ services:
     command: --innodb-lock_wait_timeout=120
     environment:
       MYSQL_ROOT_PASSWORD: "RoboShop@1"
+    volumes:
+      - mysql: /var/lib/mysql
 
   rabbitmq:
     image: rabbitmq:3
@@ -89,6 +94,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
+    volumes:
+      - rabbitmq: /var/lib/rabbitmq
 
 networks:
   default: # this means all the services in this file use this network
