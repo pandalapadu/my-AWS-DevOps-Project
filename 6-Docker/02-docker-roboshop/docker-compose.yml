@@ -1,16 +1,16 @@
 name: roboshop
 services:
-  mongodb:
+  mongodb:  ###Service-1
     build: ./1-MongoDB
     image: pandalapadu/mongodb:v1 #docker build -t pandalapadu/mongodb:v1
     container_name: mongodb #docker run -d --network roboshop pandalapadu/mongodb:v1
-  catalogue:
+  catalogue:   ###Service-2
     build: ./2-catalogue
     image: pandalapadu/catalogue:v1 #docker build -t pandalapadu/catalogue:v1
     container_name: catalogue
     depends_on:
       - mongodb
-  frontend:
+  frontend:  ###Service-3
     build: ./3-frontend
     image: pandalapadu/frontend:v1
     container_name: frontend
@@ -19,7 +19,7 @@ services:
     depends_on:
       - catalogue
       - user
-  user:
+  user:    ###Service-4
     build: ./4-user
     image: pandalapadu/user:v1
     container_name: user
@@ -30,7 +30,18 @@ services:
     depends_on:
       - redis
       - mongodb
-  redis:
+  cart:    ###Service-6
+    build: ./5-cart
+    image: pandalapadu/cart:v1
+    container_name: cart
+    environment:
+       REDIS_HOST: redis
+       CATALOGUE_HOST: catalogue
+       CATALOGUE_PORT: 8080
+    depends_on:
+      - redis
+      - catalogue
+  redis:   ###Service-5
     image: redis:7
     container_name: redis
 
