@@ -1,0 +1,25 @@
+name: roboshop
+services:
+  mongodb:
+    build: ./1-MongoDB
+    image: pandalapadu/mongodb:v1 #docker build -t pandalapadu/mongodb:v1
+    container_name: mongodb #docker run -d --network roboshop pandalapadu/mongodb:v1
+  catalogue:
+    build: ./2-catalogue
+    image: pandalapadu/catalogue:v1 #docker build -t pandalapadu/catalogue:v1
+    container_name: catalogue
+    depends_on:
+      - mongodb
+  frontend:
+    build: ./3-frontend
+    image: pandalapadu/frontend:v1
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - catalogue
+networks:
+  default: ## by default all files/service use this network 
+    name: roboshop
+    driver: bridge
+    external: false  # if True it created manuvally --> if FALSE docker automatically created this network
