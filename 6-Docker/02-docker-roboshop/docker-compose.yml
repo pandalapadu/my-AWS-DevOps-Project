@@ -49,6 +49,7 @@ services:
     image: pandalapadu/mysql:v1
     build: ./6-mysql
     container_name: mysql
+    command: --mysql-native-password=ON
     environment:
       MYSQL_ROOT_PASSWORD: "RoboShop@1"
 
