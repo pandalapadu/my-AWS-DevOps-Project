@@ -52,6 +52,22 @@ services:
     depends_on:
       - mysql
       - cart
+  payment:    ##Service -9
+    build: ./8-payment
+    image: pandalapadu/payment:4.0.0
+    container_name: payment
+    environment:
+      CART_HOST: "cart"
+      CART_PORT: 8080
+      USER_HOST: user
+      USER_PORT: 8080
+      AMQP_HOST: rabbitmq
+      AMQP_USER: roboshop
+      AMQP_PASS: roboshop123
+    depends_on:
+      - cart
+      - user
+      - rabbitmq
   redis:   ###Service-5
     image: redis:7
     container_name: redis
@@ -62,7 +78,7 @@ services:
     command: --mysql-native-password=ON --innodb-lock_wait_timeout=120
     environment:
       MYSQL_ROOT_PASSWORD: "RoboShop@1"
-  rabbitmq: ###Service-8
+  rabbitmq: ###Service-9
     image: rabbitmq:3
     container_name: rabbitmq
     environment:
