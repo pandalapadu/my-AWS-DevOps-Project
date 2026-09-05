@@ -9,12 +9,8 @@ autoModeConfig:
 managedNodeGroups:
   - name: managed
     instanceTypes:
-      - c5.large
-      - c5a.large
-      - c5d.large
-      - c5n.large
-      - c4.large
+      - t3.small
     desiredCapacity: 2
     minSize: 2
-    maxSize: 3
+    maxSize: 2
     spot: true
