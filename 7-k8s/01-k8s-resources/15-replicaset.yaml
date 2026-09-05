@@ -1,0 +1,27 @@
+apiversion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+  labels:
+    project: roboshop
+    component: frontend
+    tier: frontend
+spec:
+  replicas: 3
+  selector:   # replicaset uses the below labels to select the pods
+    matchLabels:
+      project: roboshop
+      tier: frontend
+      component: frontend
+  template:   # pod definition 
+    metadata:
+      labels:
+        project: roboshop
+        component: frontend
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
