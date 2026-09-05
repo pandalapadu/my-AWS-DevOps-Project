@@ -22,3 +22,5 @@ sudo chmod +x ./kubectl
 sudo cp kubectl /usr/local/bin/kubectl
 
 ##for checkingversion # kubectl version --client
+
+###by default we have AWS CLI configure installed in all VM's
