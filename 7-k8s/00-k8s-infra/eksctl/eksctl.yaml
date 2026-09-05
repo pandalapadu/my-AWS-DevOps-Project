@@ -30,5 +30,5 @@ managedNodeGroups:
 #for creation of cluster --> eksctl create cluster -f eksctl.yaml
 #2.Configure kubectl --> aws eks update-kubeconfig --region us-east-1 --name roboshop
 #3.Verify everything -> aws eks describe-cluster --region us-east-1 --name roboshop --query 'cluster.status'
-# Then --> eksctl get nodegroup --cluster roboshop --region us-east-1
-# kubectl get nodes
+#4.Then --> eksctl get nodegroup --cluster roboshop --region us-east-1
+#5. kubectl get nodes
