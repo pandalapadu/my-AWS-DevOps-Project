@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
-metadata: 
-  name: nginx ## Pod name
-  lables:
+metadata:
+  name: nginx   ## Pod name
+  labels:
     project: roboshop
     environment: dev
     purpose: poc
 spec:
   containers:
-    - name: nginx  ## Container name 
-      image: nginx
+    - name: nginx  ## Container name
+      image: nginx   
