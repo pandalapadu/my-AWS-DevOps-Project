@@ -9,4 +9,4 @@ spec:
   - name: nginx
     image: nginx
   - name: almalinux
-    image: almalinux:9
+    image: almalinu:9
