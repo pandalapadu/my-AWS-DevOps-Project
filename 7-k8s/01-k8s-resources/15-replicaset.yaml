@@ -1,27 +1,28 @@
-apiversion: apps/v1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: nginx-replicaset
+  name: frontend
   labels:
     project: roboshop
-    component: frontend
     tier: frontend
+    component: frontend
 spec:
-  replicas: 3
-  selector:   # replicaset uses the below labels to select the pods
+  # modify replicas according to your case
+  replicas: 10
+  # replicaset uses these labels to match pods
+  selector:
     matchLabels:
       project: roboshop
       tier: frontend
       component: frontend
-  template:   # pod definition 
+  # pod definition
+  template:
     metadata:
       labels:
         project: roboshop
-        component: frontend
         tier: frontend
+        component: frontend
     spec:
       containers:
       - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
+        image: nginx:trixie-otel
