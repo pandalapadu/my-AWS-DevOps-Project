@@ -4,8 +4,17 @@ kind: ClusterConfig
 metadata:
   name: roboshop
   region: us-east-1
+autoModeConfig:
+  enabled: false
 managedNodeGroups:
   - name: managed
-    instanceTypes: ["c3.large","c4.large","c5.large","c5d.large","c5n.large","c5a.large"]
+    instanceTypes:
+      - c5.large
+      - c5a.large
+      - c5d.large
+      - c5n.large
+      - c4.large
     desiredCapacity: 2
+    minSize: 2
+    maxSize: 3
     spot: true
