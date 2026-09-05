@@ -1,20 +1,46 @@
+# ============================================================
+# Stage 1: Build dependencies
+# ============================================================
+
 FROM python:3.9.25-alpine3.22 AS builder
+
 WORKDIR /app
+
 COPY requirements.txt .
-# COPY payment.ini .
-# COPY *.py .
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev linux-headers python3-dev \
-    && pip3 install --prefix=/install -r requirements.txt \
-    && apk del .build-deps
+
+RUN apk add --no-cache --virtual .build-deps \
+        gcc \
+        musl-dev \
+        linux-headers \
+        python3-dev \
+    && pip install --no-cache-dir \
+        --prefix=/install \
+        -r requirements.txt
+
+
+# ============================================================
+# Stage 2: Runtime
+# ============================================================
 
 FROM python:3.9.25-alpine3.22
+
 WORKDIR /app
+
 EXPOSE 8080
-RUN addgroup -S roboshop && adduser -S -G roboshop roboshop && \
-    chown -R roboshop:roboshop /app
-COPY  --from=builder /install /usr/local
-COPY --chown=roboshop:roboshop payment.ini *.py requirements.txt .
+
+# Create non-root user
+RUN addgroup -S roboshop \
+    && adduser -S -G roboshop roboshop
+
+# Copy Python dependencies from builder
+COPY --from=builder /install /usr/local
+
+# Copy application files
+COPY --chown=roboshop:roboshop payment.ini *.py requirements.txt ./
+
+# Run application as non-root user
 USER roboshop
+
 CMD ["uwsgi", "--ini", "payment.ini"]
 
 
