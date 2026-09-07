@@ -1,0 +1,259 @@
+#!/bin/bash
+
+set -e
+
+exec > >(tee /var/log/workstation-setup.log | logger -t workstation-setup -s 2>/dev/console) 2>&1
+
+echo "========================================="
+echo " Roboshop EKS Workstation Setup"
+echo "========================================="
+
+
+# --------------------------------------------------
+# 1. Update system
+# --------------------------------------------------
+
+#dnf update -y
+
+
+# --------------------------------------------------
+# 2. Install required packages
+# --------------------------------------------------
+
+dnf install -y \
+  git \
+  curl \
+  wget \
+  unzip \
+  tar \
+  gzip \
+  jq \
+  vim \
+  bash-completion \
+  ca-certificates \
+  dnf-plugins-core
+
+
+# --------------------------------------------------
+# 3. Expand /var
+# --------------------------------------------------
+
+echo "Expanding /var filesystem..."
+
+if command -v growpart >/dev/null 2>&1; then
+  growpart /dev/nvme0n1 4 || true
+fi
+
+lvextend -r -L +30G /dev/RootVG/varVol || true
+
+xfs_growfs /var || true
+
+df -h /var
+
+
+# --------------------------------------------------
+# 4. Install Docker
+# --------------------------------------------------
+
+echo "Installing Docker..."
+
+dnf config-manager --add-repo \
+  https://download.docker.com/linux/rhel/docker-ce.repo
+
+dnf install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io \
+  docker-buildx-plugin \
+  docker-compose-plugin
+
+systemctl enable --now docker
+
+usermod -aG docker ec2-user
+
+echo "Docker:"
+docker --version
+
+echo "Docker Compose:"
+docker compose version
+
+
+# --------------------------------------------------
+# 5. Install AWS CLI v2
+# --------------------------------------------------
+
+echo "Installing AWS CLI..."
+
+if ! command -v aws >/dev/null 2>&1; then
+
+  cd /tmp
+
+  curl -fsSL \
+    https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
+    -o awscliv2.zip
+
+  unzip -q awscliv2.zip
+
+  ./aws/install
+
+  rm -rf aws awscliv2.zip
+
+fi
+
+echo "AWS CLI:"
+aws --version
+
+
+# --------------------------------------------------
+# 6. Install kubectl
+# --------------------------------------------------
+
+echo "Installing kubectl..."
+
+KUBECTL_VERSION=$(curl -L -s https://dl.k8s.io/release/stable.txt)
+
+curl -LO \
+  "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
+
+install -m 0755 kubectl /usr/local/bin/kubectl
+
+rm -f kubectl
+
+echo "kubectl:"
+kubectl version --client
+
+
+# --------------------------------------------------
+# 7. Install eksctl
+# --------------------------------------------------
+
+echo "Installing eksctl..."
+
+ARCH=amd64
+PLATFORM=$(uname -s)_${ARCH}
+
+cd /tmp
+
+curl -sLO \
+  "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_${PLATFORM}.tar.gz"
+
+tar -xzf "eksctl_${PLATFORM}.tar.gz"
+
+install -m 0755 eksctl /usr/local/bin/eksctl
+
+rm -f eksctl "eksctl_${PLATFORM}.tar.gz"
+
+echo "eksctl:"
+eksctl version
+
+
+# --------------------------------------------------
+# 8. Install kubectx and kubens
+# --------------------------------------------------
+
+echo "Installing kubectx and kubens..."
+
+cd /tmp
+
+git clone \
+  https://github.com/ahmetb/kubectx.git \
+  kubectx
+
+install -m 0755 kubectx/kubectx /usr/local/bin/kubectx
+install -m 0755 kubectx/kubens /usr/local/bin/kubens
+
+rm -rf kubectx
+
+
+# --------------------------------------------------
+# 9. Install k9s
+# --------------------------------------------------
+
+echo "Installing k9s..."
+
+cd /tmp
+
+K9S_VERSION=$(curl -s \
+  https://api.github.com/repos/derailed/k9s/releases/latest \
+  | jq -r '.tag_name')
+
+curl -LO \
+  "https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz"
+
+tar -xzf k9s_Linux_amd64.tar.gz
+
+install -m 0755 k9s /usr/local/bin/k9s
+
+rm -f k9s k9s_Linux_amd64.tar.gz
+
+
+# --------------------------------------------------
+# 10. kubectl completion
+# --------------------------------------------------
+
+kubectl completion bash \
+  > /etc/bash_completion.d/kubectl
+
+
+# --------------------------------------------------
+# 11. ec2-user aliases
+# --------------------------------------------------
+
+cat >> /home/ec2-user/.bashrc <<'EOF'
+
+alias k=kubectl
+alias kgp='kubectl get pods'
+alias kgn='kubectl get nodes'
+alias kgs='kubectl get svc'
+alias kga='kubectl get all'
+
+source <(kubectl completion bash)
+
+complete -o default -F __start_kubectl k
+
+EOF
+
+chown ec2-user:ec2-user /home/ec2-user/.bashrc
+
+
+# --------------------------------------------------
+# 12. Verify IAM role authentication
+# --------------------------------------------------
+
+echo "========================================="
+echo " AWS Identity"
+echo "========================================="
+
+aws sts get-caller-identity || true
+
+
+# --------------------------------------------------
+# 13. Final message
+# --------------------------------------------------
+
+echo ""
+echo "========================================="
+echo " Workstation Setup Completed"
+echo "========================================="
+
+echo "Docker:"
+docker --version
+
+echo "Docker Compose:"
+docker compose version
+
+echo "AWS CLI:"
+aws --version
+
+echo "kubectl:"
+kubectl version --client
+
+echo "eksctl:"
+eksctl version
+
+echo ""
+echo "Reconnect SSH before using Docker."
+echo ""
+echo "EKS cluster creation is NOT performed"
+echo "automatically by this script."
+echo "========================================="
