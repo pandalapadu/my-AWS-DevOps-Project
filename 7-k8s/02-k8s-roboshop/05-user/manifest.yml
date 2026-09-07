@@ -3,10 +3,6 @@ kind: ConfigMap
 metadata:
   name: user
   namespace: roboshop
-  labels:
-    project: roboshop
-    tier: user
-    component: user
 data:
   MONGO: "true"
   REDIS_URL: 'redis://redis:6379'
@@ -19,20 +15,21 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    tier: user
+    tier: backend
     component: user
 spec:
   replicas: 1
   selector:
     matchLabels:
       project: roboshop
-      tier: user
+      tier: backend
       component: user
+  # Pod
   template:
     metadata:
       labels:
         project: roboshop
-        tier: user
+        tier: backend
         component: user
     spec:
       containers:
@@ -49,14 +46,14 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    tier: user
+    tier: backend
     component: user
 spec:
   selector:
     project: roboshop
-    tier: user
+    tier: backend
     component: user
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8080 # service port
+      targetPort: 8080 # container port
