@@ -56,3 +56,7 @@ spec:
     project: roboshop
     tier: user
     component: user
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
