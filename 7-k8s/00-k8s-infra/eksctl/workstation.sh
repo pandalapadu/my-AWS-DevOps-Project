@@ -28,5 +28,5 @@ sudo cp kubectl /usr/local/bin/kubectl
 ###################################### Kube NS ##########
 ### for switching between namespaces in kubectl, install kubens (from kubectx project, pure bash version)
 # kubens (from kubectx project, pure bash version)
-curl -sLo /tmp/kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
-install -m 0755 /tmp/kubens /usr/local/bin/kubens && rm /tmp/kubens
+sudo curl -sLo /tmp/kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
+sudo install -m 0755 /tmp/kubens /usr/local/bin/kubens && rm /tmp/kubens
