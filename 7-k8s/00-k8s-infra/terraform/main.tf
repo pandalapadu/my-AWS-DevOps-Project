@@ -78,3 +78,7 @@ resource "terraform_data" "cluster_destroy" {
     }
   }
 }
+
+output "workstation_public_ip" {
+  value = aws_instance.workstation.public_ip
+}
