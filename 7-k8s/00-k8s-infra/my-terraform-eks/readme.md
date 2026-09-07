@@ -1,38 +1,59 @@
-                         Terraform
-                            │
-             ┌──────────────┴──────────────┐
-             │                             │
-             ▼                             ▼
-       Workstation EC2                  IAM Role
-          t3.micro                         │
-             │                             │
-             │                             │
-             └─────────────┬───────────────┘
-                           │
-                     Temporary AWS
-                     credentials
-                           │
-                           ▼
-                        eksctl
-                           │
-                           ▼
-                    EKS roboshop
-                           │
-                 ┌─────────┴─────────┐
-                 │                   │
-                 ▼                   ▼
-          Control Plane         Node Group
-             ACTIVE               managed
-                                   │
-                              ┌────┴────┐
-                              ▼         ▼
-                          t3.small   t3.small
-                              │         │
-                              └────┬────┘
-                                   │
-                              Kubernetes
-                                Ready
 
+
+
+################### Desired Archecture ###########
+Terraform
+   │
+   ├── IAM Role
+   │      └── Instance Profile
+   │
+   ├── Security Group
+   │
+   └── EC2 Workstation (t3.micro)
+           │
+           ├── AWS CLI
+           ├── kubectl
+           ├── eksctl
+           ├── Docker
+           ├── k9s
+           └── kubectx/kubens
+                    │
+                    └── eksctl
+                          │
+                          └── EKS Cluster
+                               └── 2 × t3.small Spot
+###########################################################
+                     AWS
+                      │
+          ┌───────────┴───────────┐
+          │                       │
+      IAM Role              Security Group
+          │                       │
+          │                       │
+          └───────────┬───────────┘
+                      │
+                EC2 Workstation
+                   t3.micro
+                      │
+          ┌───────────┼────────────┐
+          │           │            │
+       AWS CLI     kubectl       Docker
+          │
+       eksctl
+          │
+          ▼
+    ┌─────────────────┐
+    │ EKS roboshop    │
+    │ us-east-1       │
+    └────────┬────────┘
+             │
+       managed nodegroup
+             │
+       ┌─────┴─────┐
+       │           │
+   t3.small     t3.small
+     Spot         Spot
+#####################################Terraform Flow ###########
 terraform apply
        ↓
 Workstation created
