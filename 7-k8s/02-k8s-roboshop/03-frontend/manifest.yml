@@ -68,3 +68,64 @@ data:
     }
 
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: roboshop
+  labels:
+    project: roboshop
+    tier: frontend
+    component: frontend
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      project: roboshop
+      tier: frontend
+      component: frontend
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        tier: frontend
+        component: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: pandalapadu/frontend:4.0.0
+        ports:
+        - containerPort: 80
+        volumeMounts:    # attach the volume to the container level 
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+      ## this is pod level volume, so it is defined under spec and not under container
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx
+          items:
+          - key: nginx.conf
+            value: nginx.conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: roboshop
+  labels:
+    project: roboshop
+    tier: frontend
+    component: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    project: roboshop
+    tier: frontend
+    component: frontend
+  ports: 
+    - port: 80  # Service port
+      targetPort: 80  #Target port of the container
+      protocol: TCP
