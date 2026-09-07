@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: redis
   namespace: roboshop
+  # labels related to deployment resource
   labels:
     project: roboshop
     tier: db
@@ -14,6 +15,7 @@ spec:
       project: roboshop
       tier: db
       component: redis
+  # Pod
   template:
     metadata:
       labels:
@@ -35,13 +37,11 @@ metadata:
     tier: db
     component: redis
 spec:
-  type: ClusterIP
   selector:
     project: roboshop
     tier: db
     component: redis
   ports:
-  - name: redis
-    port: 6379
-    targetPort: 6379
-    protocol: TCP
+    - protocol: TCP
+      port: 6379 # service port
+      targetPort: 6379 # container port
