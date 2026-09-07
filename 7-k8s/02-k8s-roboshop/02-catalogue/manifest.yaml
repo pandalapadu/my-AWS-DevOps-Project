@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: joindevops/catalogue:4.0.0
+        image: pandalapadu/catalogue:4.0.0
         envFrom:
         - configMapRef:
             name: catalogue
