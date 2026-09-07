@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: configMap
 metadata:
   name: nginx
+  namespace: roboshop
 data:
   nginx.conf: |
     user nginx;
