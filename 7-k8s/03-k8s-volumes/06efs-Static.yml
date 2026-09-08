@@ -1,3 +1,18 @@
 ##EFS - Drivers need to be installed in the cluster before using EFS. The EFS CSI driver is available as a Helm chart, which can be installed using the following command:
 ## kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-3.4" 
 # we have to efs-csi permission to the IAM role of the worker node. The IAM policy can be found in the following link:
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-static
+spec:
+  capacity:
+    storage: 5Gi # Required by spec, but EFS automatically scales and ignores this value
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany # Allows multiple pods to read/write concurrently
+  persistentVolumeReclaimPolicy: Retain # Retains data when PVC is deleted
+  storageClassName: "" # Must be an empty string for static provisioning
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0123456789abcdef0 # ⚠️ Replace with your actual EFS File System ID
