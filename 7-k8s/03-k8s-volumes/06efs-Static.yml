@@ -1,2 +1,2 @@
-##EFS -Drivers need to be installed in the cluster before using EFS. The EFS CSI driver is available as a Helm chart, which can be installed using the following command:
+##EFS - Drivers need to be installed in the cluster before using EFS. The EFS CSI driver is available as a Helm chart, which can be installed using the following command:
 ## kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-3.4" 
