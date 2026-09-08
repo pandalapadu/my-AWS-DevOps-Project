@@ -4,6 +4,7 @@ metadata:
   name: roboshop-ebs
 provisioner: ebs.csi.aws.com # Tells K8s to use the AWS EBS CSI driver
 volumeBindingMode: WaitForFirstConsumer # CRITICAL: Delays EBS volume creation until the Pod is scheduled, ensuring it is created in the exact same Availability Zone (AZ) as the worker node.
+reclaimPolicy: Retain # if we put Deletee, When the PVC is deleted, the EBS volume will also be deleted
 allowVolumeExpansion: true # Allows you to scale up the volume size later without deleting the resource
 parameters:
   type: gp3
