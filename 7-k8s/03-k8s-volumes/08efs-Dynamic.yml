@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany # Allows shared concurrent access by multiple pods
+  storageClassName: efs-dynamic-sc # Targets the dynamic StorageClass
+  resources:
+    requests:
+      storage: 10Gi # Required by K8s syntax, but EFS auto-scales infinitely
