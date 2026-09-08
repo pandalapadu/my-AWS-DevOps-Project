@@ -20,7 +20,7 @@ spec:
       image: nginx
       volumeMounts:
         - name: persistent-storage
-          mountPath: /usr/share/nginx/html
+          mountPath: /data # Mounts the dynamically provisioned EFS directory to this path inside the container
   volumes:
     - name: persistent-storage
       persistentVolumeClaim:
