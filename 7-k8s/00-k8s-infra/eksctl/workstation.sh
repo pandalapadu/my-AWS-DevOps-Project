@@ -30,3 +30,5 @@ sudo cp kubectl /usr/local/bin/kubectl
 # kubens (from kubectx project, pure bash version)
 sudo curl -sLo /tmp/kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens
 sudo install -m 0755 /tmp/kubens /usr/local/bin/kubens && rm /tmp/kubens
+### to list all namespaces: kubens
+#### to switch to a namespace: kubens <namespace> eg: kubens roboshop
