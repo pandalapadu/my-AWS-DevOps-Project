@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-headless
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: redis
+    tier: db
+spec:
+  ports:
+    - port: 6379  #Service port
+      name: redis-port
+      protocol: TCP
+      targetPort: 6379 #target port of the pod
+  clusterIP: None # 👈 Crucial: Makes the service headless
+  selector:
+    project: roboshop
+    component: redis
+    tier: db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: redis
+    tier: db
+spec:
+  ports:
+    - port: 6379 #Service port
+      name: redis-port
+      protocol: TCP
+      targetPort: 6379 #target port of the pod
+  selector:
+    project: roboshop
+    component: redis
+    tier: db
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: redis
+    tier: db
+spec:
+  serviceName: "redis-headless" # 👈 Must perfectly match your Headless Service name
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop # 👈 Must perfectly match your Pod template labels
+      component: redis
+      tier: db
+  template:
+    metadata:
+      labels:
+        project: roboshop  #👈 Must perfectly match your StatefulSet selector
+        component: redis
+        tier: db
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+          ports:
+            - containerPort: 6379
+              name: redis
+          volumeMounts:
+            - name: www
+              mountPath: /data # Path inside the container
+  # Automatically provisions a separate persistent volume for each pod ordinal
+  volumeClaimTemplates:  # without pvc written in the pod spec, the statefulset will create a pvc for each pod
+    - metadata:
+        name: www
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "roboshop-ebs" # ⚠️ Replace with your active storage class (e.g., efs-dynamic-sc)
+        resources:
+          requests:
+            storage: 1Gi
