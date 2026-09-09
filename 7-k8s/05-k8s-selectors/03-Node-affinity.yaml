@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-affinity-pod
+  labels:
+    project: roboshop
+    component: node-affinity
+spec:
+  containers:
+    - name: node-affinity-container
+      image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution: 
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: project
+                operator: In
+                values:
+                  - roboshop
