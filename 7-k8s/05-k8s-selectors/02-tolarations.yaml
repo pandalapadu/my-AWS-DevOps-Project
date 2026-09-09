@@ -14,3 +14,5 @@ spec:
       operator: "Equal"
       value: "gpu"
       effect: "NoExecute" #NoExecute means that if the node is tainted , the pod will not be scheduled on that node.
+  nodeSelector:  
+        project: roboshop 
