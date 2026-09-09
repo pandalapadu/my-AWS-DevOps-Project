@@ -34,12 +34,12 @@ spec:
             - containerPort: 80
               name: web
           volumeMounts:
-            - name: www-data
+            - name: www
               mountPath: /usr/share/nginx/html # Path inside the container
   # Automatically provisions a separate persistent volume for each pod ordinal
   volumeClaimTemplates:  # without pvc written in the pod spec, the statefulset will create a pvc for each pod
     - metadata:
-        name: www-data
+        name: www
       spec:
         accessModes: [ "ReadWriteOnce" ]
         storageClassName: "roboshop-ebs" # ⚠️ Replace with your active storage class (e.g., efs-dynamic-sc)
