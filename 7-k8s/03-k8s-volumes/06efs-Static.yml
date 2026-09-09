@@ -15,7 +15,7 @@ spec:
   storageClassName: "" # Must be an empty string for static provisioning
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-0123456789abcdef0 # ⚠️ Replace with your actual EFS File System ID
+    volumeHandle: fs-00c17addc49ae6e09 # ⚠️ Replace with your actual EFS File System ID
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
