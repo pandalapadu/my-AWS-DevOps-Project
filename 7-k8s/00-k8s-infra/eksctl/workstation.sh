@@ -32,3 +32,9 @@ sudo curl -sLo /tmp/kubens https://raw.githubusercontent.com/ahmetb/kubectx/mast
 sudo install -m 0755 /tmp/kubens /usr/local/bin/kubens && rm /tmp/kubens
 ### to list all namespaces: kubens
 #### to switch to a namespace: kubens <namespace> eg: kubens roboshop
+###########kubernets 9s k9s installation ########
+# k9s
+curl -sLO https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.tar.gz
+tar -xzf k9s_Linux_amd64.tar.gz -C /tmp k9s && rm k9s_Linux_amd64.tar.gz
+install -m 0755 /tmp/k9s /usr/local/bin/k9s && rm /tmp/k9s
+## for accessing k9s, run the command: k9s
