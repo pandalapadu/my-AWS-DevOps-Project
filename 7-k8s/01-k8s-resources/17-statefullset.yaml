@@ -1,15 +1,48 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service
-  namespace: default
+  name: nginx-service
   labels:
-    app: mysql
+    app: nginx
 spec:
   ports:
-    - port: 3306
-      name: mysql
+    - port: 80
+      name: web
   clusterIP: None # 👈 Crucial: Makes the service headless
   selector:
-    app: mysql
+    app: nginx
 ---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: "nginx-service" # 👈 Must perfectly match your Headless Service name
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx # 👈 Must perfectly match your Pod template labels
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - name: www-data
+              mountPath: /usr/share/nginx/html # Path inside the container
+  # Automatically provisions a separate persistent volume for each pod ordinal
+  volumeClaimTemplates:  # without pvc written in the pod spec, the statefulset will create a pvc for each pod
+    - metadata:
+        name: www-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "roboshop-ebs" # ⚠️ Replace with your active storage class (e.g., efs-dynamic-sc)
+        resources:
+          requests:
+            storage: 1Gi
