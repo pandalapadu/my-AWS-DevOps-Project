@@ -30,6 +30,6 @@ spec:
           preference:
             matchExpressions:
               - key: tier
-                operator: NotIn
+                operator: NotIn #the pod will not be scheduled on that node. If not, it will be scheduled on any other node.
                 values:
                   - db
