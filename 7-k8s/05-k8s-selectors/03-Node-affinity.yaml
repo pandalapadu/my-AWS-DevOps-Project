@@ -10,7 +10,7 @@ spec:
     - name: node-affinity-container
       image: nginx
   affinity:
-    nodeAffinity:
+    nodeAffinity: #this is Hard rule must be satisfied for the pod to be scheduled on the node.
       requiredDuringSchedulingIgnoredDuringExecution: 
         nodeSelectorTerms:
           - matchExpressions:
@@ -18,3 +18,11 @@ spec:
                 operator: In
                 values:
                   - roboshop
+      preferredDuringSchedulingIgnoredDuringExecution: #this is Soft rule, if the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: component
+                operator: In
+                values:
+                  - node-affinity
