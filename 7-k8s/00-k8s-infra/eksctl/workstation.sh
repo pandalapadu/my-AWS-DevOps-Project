@@ -38,3 +38,5 @@ curl -sLO https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd
 tar -xzf k9s_Linux_amd64.tar.gz -C /tmp k9s && rm k9s_Linux_amd64.tar.gz
 install -m 0755 /tmp/k9s /usr/local/bin/k9s && rm /tmp/k9s
 ## for accessing k9s, run the command: k9s
+# for changing the namespace in k9s, press `:`, then type `ns <namespace>` and hit enter. 
+# For example, to switch to the "roboshop" namespace, you would type `:ns roboshop` and press enter.
