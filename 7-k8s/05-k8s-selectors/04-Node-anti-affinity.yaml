@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-affinity-pod
+  labels:
+    project: roboshop
+    component: node-affinity
+spec:
+  containers:
+    - name: node-affinity-container
+      image: nginx
+  affinity:
+    nodeAffinity: #this is Hard rule must be satisfied for the pod to be scheduled on the node.
+      requiredDuringSchedulingIgnoredDuringExecution: 
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: project
+                operator: In
+                values:
+                  - roboshop
+      preferredDuringSchedulingIgnoredDuringExecution: #this is Soft rule, if the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: component
+                operator: In
+                values:
+                  - node-affinity
+        - weight: 2  #this is weight preference, higher weight means higher preference. If the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
+          preference:
+            matchExpressions:
+              - key: tier
+                operator: NotIn
+                values:
+                  - db
