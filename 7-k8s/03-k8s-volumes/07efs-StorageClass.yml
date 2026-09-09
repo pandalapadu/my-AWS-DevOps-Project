@@ -5,7 +5,7 @@ metadata:
 provisioner: efs.csi.aws.com # Connects to the AWS EFS CSI Driver
 parameters:
   provisioningMode: efs-ap   # Essential: Instructs the driver to provision using EFS Access Points
-  fileSystemId: fs-0123456789abcdef0 # ⚠️ Replace with your pre-created EFS ID
+  fileSystemId: fs-00c17addc49ae6e09 # ⚠️ Replace with your pre-created EFS ID
   directoryPerms: "700"      # POSIX permissions for the dynamically created directory
   
   # Optional advanced configurations:
