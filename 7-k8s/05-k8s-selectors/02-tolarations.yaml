@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-toleration-pod
+  labels:
+    project: roboshop
+    component: node-toleration
+spec:
+  containers:
+    - name: node-toleration-container
+      image: nginx
+  tolerations:
+    - key: "hardware"
+      operator: "Equal"
+      value: "gpu"
+      effect: "NoExecute" #NoExecute means that if the node is tainted , the pod will not be scheduled on that node.
