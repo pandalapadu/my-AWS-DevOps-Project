@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongodb-headless
+  namespace: roboshop
   labels:
     project: roboshop
     component: mongodb
@@ -22,6 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongodb
+  namespace: roboshop
   labels:
     project: roboshop
     component: mongodb
@@ -41,6 +43,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mongodb
+  namespace: roboshop
   labels:
     project: roboshop
     component: mongodb
