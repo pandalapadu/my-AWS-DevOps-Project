@@ -10,4 +10,4 @@ spec:
     - name: node-selector-container
       image: nginx
   nodeSelector:
-    project: roboshopp
+    project: roboshop
