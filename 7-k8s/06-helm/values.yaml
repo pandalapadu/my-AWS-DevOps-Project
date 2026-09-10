@@ -1,6 +1,6 @@
 deployment:
   replicas: 4
-  imageVersion: 1.31.3-trixie
+  imageVersion: 1.31.3-alpine
   port: 80
 service:
   type: ClusterIP
