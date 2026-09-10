@@ -7,4 +7,7 @@ Chart.yaml (always capital C only starting if not Helm will not recognise )
 --> Chart metadata — name, version, apiVersion, description, appVersion 
 execute helm charts --> helm install nginx . ###helm install <helmchartname> . ( helm working directory )
 to list deployed -----> helm list 
+to see history -------> helm history nginx   <nginx is helm chart name>
 update helm ----------> helm upgrade venkat . <venkat is chart name here>
+cmd line upgrade --> helm upgrade nginx --set deployment.replicas=5 .
+to delete helm ---> helm uninstall venkat --namespace default
