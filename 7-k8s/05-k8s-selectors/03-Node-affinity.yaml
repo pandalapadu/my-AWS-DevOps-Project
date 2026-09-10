@@ -18,18 +18,18 @@ spec:
                 operator: In
                 values:
                   - roboshop
-      preferredDuringSchedulingIgnoredDuringExecution: #this is Soft rule, if the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
-        - weight: 1
-          preference:
-            matchExpressions:
-              - key: component
-                operator: In
-                values:
-                  - node-affinity
-        - weight: 2  #this is weight preference, higher weight means higher preference. If the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
-          preference:
-            matchExpressions:
-              - key: tier
-                operator: In
-                values:
-                  - db
+      # preferredDuringSchedulingIgnoredDuringExecution: #this is Soft rule, if the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
+      #   - weight: 1
+      #     preference:
+      #       matchExpressions:
+      #         - key: component
+      #           operator: In
+      #           values:
+      #             - node-affinity
+      #   - weight: 2  #this is weight preference, higher weight means higher preference. If the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
+      #     preference:
+      #       matchExpressions:
+      #         - key: tier
+      #           operator: In
+      #           values:
+      #             - db
