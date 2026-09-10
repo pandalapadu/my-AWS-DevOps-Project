@@ -24,7 +24,7 @@ spec:
           preference:
             matchExpressions:
               - key: topology.kubernetes.io/zone
-                operator: notIn #this is Anti-affinity rule, if the node has this label, the pod will not be scheduled on that node. If not, it will be scheduled on any other node.
+                operator: NotIn #this is Anti-affinity rule, if the node has this label, the pod will not be scheduled on that node. If not, it will be scheduled on any other node.
                 values:
                   - us-east-1c
         - weight: 1  #this is weight preference, higher weight means higher preference. If the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
