@@ -84,10 +84,6 @@ output "workstation_public_ip" {
 }
 ##########
 # Resource to execute the validation commands sequentially after cluster infrastructure is ready
-output "workstation_public_ip" {
-  value = aws_instance.workstation.public_ip
-}
-
 output "deployment_complete" {
   value = <<-EOT
 ======================================================================
