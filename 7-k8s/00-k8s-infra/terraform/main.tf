@@ -94,9 +94,6 @@ output "deployment_complete" {
                     CLUSTER DEPLOYMENT COMPLETE
 ======================================================================
 
-Your workstation public IP:
-  ${aws_instance.workstation.public_ip}
-
 Your cluster context has been updated automatically.
 
 If your nodes are still initializing, run:
