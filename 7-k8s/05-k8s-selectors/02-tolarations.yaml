@@ -10,9 +10,9 @@ spec:
     - name: node-toleration-container
       image: nginx
   tolerations:
-    - key: "hardware"
+    - key: "project"
       operator: "Equal"
-      value: "gpu"
+      value: "roboshop"
       effect: "NoExecute" #NoExecute means that if the node is tainted , the pod will not be scheduled on that node.
   nodeSelector:  #this is gurrenty that tolration will be applied to the node with this label. If the node does not have this label, the pod will not be scheduled on that node.
         project: roboshop 
