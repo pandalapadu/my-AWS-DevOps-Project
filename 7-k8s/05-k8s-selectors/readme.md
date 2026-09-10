@@ -5,7 +5,6 @@ for Deletion of tag --> kubectl label node ip-192-168-19-57.ec2.internal project
 1C-> ip-192-168-38-70.ec2.internal   192.168.38.70    <none>   7m1s   v1.34.10-eks-cb19647
 
 here is the Labels are attached for each Node : by executing command as : kubectl get nodes --show-labels
-
     alpha.eksctl.io/cluster-name=roboshop,
     alpha.eksctl.io/nodegroup-name=managed,
     beta.kubernetes.io/arch=amd64,
