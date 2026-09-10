@@ -30,25 +30,3 @@ spec:
         image: nginx:{{ .Values.deployment.imageVersion }}
         ports:
         - containerPort: {{ .Values.deployment.port }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-  # servicer labels
-  labels:
-    project: roboshop
-    tier: frontend
-    component: frontend
-    purpose: deployment
-spec:
-  # Service uses the below labels to select the pods
-  selector:
-    project: roboshop
-    tier: frontend
-    component: frontend
-    purpose: deployment
-  ports:
-    - protocol: TCP
-      port: {{ .Values.deployment.port }} # service port
-      targetPort: {{ .Values.deployment.port }} # container port
