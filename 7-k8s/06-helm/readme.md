@@ -5,4 +5,4 @@ for helm installing ->
 for checking Helm version --> helm version
 Chart.yaml (always capital C only starting if not Helm will not recognise )
 --> Chart metadata — name, version, apiVersion, description, appVersion 
-to run helm --> helm install nginx . ###helm install <helmchartname> . ( helm working directory )
+execute helm charts --> helm install nginx . ###helm install <helmchartname> . ( helm working directory )
