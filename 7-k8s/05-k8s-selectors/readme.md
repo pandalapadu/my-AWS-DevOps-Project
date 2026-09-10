@@ -1,3 +1,5 @@
+Welcome to my DevOps project.
+# Roboshop Project
 for Creation of tags 1A--> kubectl label node ip-192-168-19-57.ec2.internal project=roboshop
 for Deletion of tag --> kubectl label node ip-192-168-19-57.ec2.internal project-
 for Taint nodes if we pass NoSchedule  (No upcomming pods scheduled on this node) 
