@@ -30,4 +30,5 @@ spec:
                 operator: In
                 values:
                   - frontend
-          topologyKey: topology.kubernetes.io/zone # this is the boarder of the node, the pod will be scheduled on the node with this label. If the node does not have this label, the pod will not be scheduled on that node.
+          topologyKey: topology.kubernetes.io/zone # this is the boarder of the node, 
+          #the pod will be scheduled on the node with this label. with in the same zone, the pod will be scheduled on the node with the pod that has the label component=frontend
