@@ -30,5 +30,5 @@ spec:
                 operator: In
                 values:
                   - backend
-          topologyKey: "kubernetes.io/hostname" # this is the boarder of the node, 
+          topologyKey: kubernetes.io/hostname # this is the boarder of the node, 
           #this pod will not be scheduled with in the node , we put on hostname because we want to make sure that the pod is not scheduled on the same node with the pod that has the label component=backend
