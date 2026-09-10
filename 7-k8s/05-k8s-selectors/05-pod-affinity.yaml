@@ -9,13 +9,13 @@ spec:
   containers:
     - name: pod-affinity-container
       image: nginx
-  affinity:
-    podAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: project
-                operator: In
-                values:
-                  - roboshop
-          topologyKey: kubernetes.io/hostname # this is the boarder of the node, the pod will be scheduled on the node with this label. If the node does not have this label, the pod will not be scheduled on that node.
+  # affinity:
+  #   podAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       - labelSelector:
+  #           matchExpressions:
+  #             - key: project
+  #               operator: In
+  #               values:
+  #                 - roboshop
+  #         topologyKey: kubernetes.io/hostname # this is the boarder of the node, the pod will be scheduled on the node with this label. If the node does not have this label, the pod will not be scheduled on that node.
