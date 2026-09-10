@@ -1,5 +1,6 @@
 for Creation of tags 1A--> kubectl label node ip-192-168-19-57.ec2.internal project=roboshop
 for Deletion of tag --> kubectl label node ip-192-168-19-57.ec2.internal project-
+for Taint nodes -> kubectl taint node ip-192-168-38-70.ec2.internal project=roboshop:NoSchedule
 
 1A-> ip-192-168-19-57.ec2.internal   192.168.19.57    <none>   7m1s   v1.34.10-eks-cb19647 
 1C-> ip-192-168-38-70.ec2.internal   192.168.38.70    <none>   7m1s   v1.34.10-eks-cb19647
