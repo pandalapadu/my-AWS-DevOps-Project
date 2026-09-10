@@ -13,3 +13,6 @@ cmd line upgrade --> helm upgrade nginx --set deployment.replicas=5 .
 to delete helm ---> helm uninstall venkat --namespace default
 to rollback helm ----> helm rollback nginx (default only 1 version back)
 rollback to specific version -----> helm rollback nginx 2 {we have to menstion revison number}
+command line argument --> 
+    helm upgrade nginx --set deployment.replicas=10 --set service.type=LoadBalancer --description "upgrading alpine" .
+single command for run ---> helm upgrade --install nginx .
