@@ -17,7 +17,7 @@ spec:
               - key: topology.kubernetes.io/zone
                 operator: In
                 values:
-                  - us-east-1d
+                  - us-east-1a
       preferredDuringSchedulingIgnoredDuringExecution: #this is Soft rule, if the node has this label, the pod will be scheduled on that node. If not, it will be scheduled on any other node.
         - weight: 1
           preference:
