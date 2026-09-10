@@ -1,0 +1,4 @@
+statefulset:
+  replicas: 1
+  imageRepo: pandalapadu/mongodb
+  imageVersion: 4.0.0

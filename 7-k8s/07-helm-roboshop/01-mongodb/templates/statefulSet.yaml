@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: mongodb
+    tier: db
+spec:
+  serviceName: "mongodb-headless" # 👈 Must perfectly match your Headless Service name
+  replicas: {{ .Values.statefulset.replicas }}
+  selector:
+    matchLabels:
+      project: roboshop # 👈 Must perfectly match your Pod template labels
+      component: mongodb
+      tier: db
+  template:
+    metadata:
+      labels:
+        project: roboshop  #👈 Must perfectly match your StatefulSet selector
+        component: mongodb
+        tier: db
+    spec:
+      containers:
+        - name: mongodb
+          image: {{ .Values.statefulset.imageRepo }}: {{ .Values.statefulset.imageVersion }}
+          ports:
+            - containerPort: 27017
+              name: mongodb
+          volumeMounts:
+            - name: www
+              mountPath: /data/db # Path inside the container
+  # Automatically provisions a separate persistent volume for each pod ordinal
+  volumeClaimTemplates:  # without pvc written in the pod spec, the statefulset will create a pvc for each pod
+    - metadata:
+        name: www
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "roboshop-ebs" # ⚠️ Replace with your active storage class (e.g., efs-dynamic-sc)
+        resources:
+          requests:
+            storage: 1Gi
