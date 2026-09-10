@@ -9,11 +9,10 @@ metadata:
     tier: db
 spec:
   ports:
-    - port: 27017  #Service port
-      name: mongodb-port
-      protocol: TCP
-      targetPort: 27017 #target port of the pod
-  clusterIP: None # 👈 Crucial: Makes the service headless
+  - protocol: TCP
+    port: 27017 # service port
+    targetPort: 27017 # container port
+  clusterIP: None # headless service
   selector:
     project: roboshop
     component: mongodb
@@ -30,10 +29,9 @@ metadata:
     tier: db
 spec:
   ports:
-    - port: 27017 #Service port
-      name: mongodb-port
-      protocol: TCP
-      targetPort: 27017 #target port of the pod
+  - protocol: TCP
+    port: 27017 # service port
+    targetPort: 27017 # container port
   selector:
     project: roboshop
     component: mongodb

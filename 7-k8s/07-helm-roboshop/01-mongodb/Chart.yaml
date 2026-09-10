@@ -1,5 +1,5 @@
 apiVersion: v2
 name: mongodb
-version: 0.0.1 #helm chart version
-description: Mongo DB version 4.0.0
-appVersion: 4.0.0 #nginx application version 
+version: 0.1.0 # This is Helm Chart version
+description: mongodb 4.0.0 version
+appVersion: 4.0.0 # application version
