@@ -6,3 +6,5 @@ for checking Helm version --> helm version
 Chart.yaml (always capital C only starting if not Helm will not recognise )
 --> Chart metadata — name, version, apiVersion, description, appVersion 
 execute helm charts --> helm install nginx . ###helm install <helmchartname> . ( helm working directory )
+to list deployed -----> helm list 
+update helm ----------> helm upgrade venkat . <venkat is chart name here>
