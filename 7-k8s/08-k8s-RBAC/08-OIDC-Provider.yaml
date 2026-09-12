@@ -4,3 +4,11 @@ eksctl utils associate-iam-oidc-provider --cluster roboshop --region us-east-1 -
 ```
     aws iam list-open-id-connect-providers
 ```
+output result :
+{
+    "OpenIDConnectProviderList": [
+        {
+            "Arn": "arn:aws:iam::453388807064:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/74A96AF8D9C92FE10E1A2536BD9A1C79"
+        }
+    ]
+}
