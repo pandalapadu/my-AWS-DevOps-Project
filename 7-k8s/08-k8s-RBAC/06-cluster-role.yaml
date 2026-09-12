@@ -1,0 +1,20 @@
+##### here only name space level access will be provided 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: roboshop     # The namespace where this role applies
+  name: devops-tls    # like this this is roboshop admin
+rules:
+- apiGroups: ["*"]         # The core/empty API group for Pods, Services, ConfigMaps, etc.
+  resources: ["*"]
+  verbs: ["*"] # All the access for this role 
+---
+### Cluster Level Access will be provided using below format 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: devops-tls  # Removed the namespace parameter as ClusterRoles are global
+rules:
+- apiGroups: [""]        # Core API group for pods
+  resources: ["nodes"]
+  verbs: ["get", "list", "watch"] # Pod reader access
