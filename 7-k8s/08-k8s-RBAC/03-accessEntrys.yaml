@@ -11,25 +11,12 @@ accessConfig:
   authenticationMode: API_AND_CONFIG_MAP # Migrates seamlessly from aws-auth configmap to EKS Access APIs
   accessEntries:
     # 1. Full Cluster Administrator Access (e.g., DevOps/Admin IAM Role)
-    - principalARN: arn:aws:iam::111122223333:role/RoboshopAdminRole # Replace with your target Admin Role ARN
+    - principalARN: arn:aws:iam::453388807064:user/ram # Replace with your target Admin Role ARN
       type: STANDARD
-      accessPolicies:
-        - policyARN: arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy
-          accessScope:
-            type: cluster
-
+      kubernetesGroups:   ## optional Kubernetes groups
+        - devops-trainees # groups can used to give permissions via RBAC
     # 2. Scoped Access (e.g., Developer IAM User restricted to the 'roboshop' namespace)
-    - principalARN: arn:aws:iam::111122223333:user/venkat-dev # Replace with your target Developer IAM User ARN
+    - principalARN: arn:aws:iam::453388807064:user/raheem # Replace with your target Developer IAM User ARN
       type: STANDARD
-      accessPolicies:
-        - policyARN: arn:aws:eks::aws:cluster-access-policy/AmazonEKSEditPolicy
-          accessScope:
-            type: namespace
-            namespaces:
-              - "roboshop"
-
-# Define your infrastructure node groups below
-managedNodeGroups:
-  - name: roboshop-ng
-    instanceType: t3.micro
-    desiredCapacity: 2
+      kubernetesGroups:   ## optional Kubernetes groups
+        - devops-trainees # groups can used to give permissions via RBAC
