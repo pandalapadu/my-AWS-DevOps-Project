@@ -3,7 +3,7 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: roboshop-access-entries        # Your EKS cluster name
+  name: roboshop    # Your EKS cluster name
   region: us-east-1                    # Target AWS region
 # ACCESS MANAGEMENT CONFIGURATION
 accessConfig:
