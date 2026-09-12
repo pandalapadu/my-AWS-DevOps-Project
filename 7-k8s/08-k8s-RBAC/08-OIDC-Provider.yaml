@@ -1,2 +1,6 @@
 ## via the command line 
 eksctl utils associate-iam-oidc-provider --cluster roboshop --region us-east-1 --approve
+## for verfication we have to use below commands 
+```
+    aws iam list-open-id-connect-providers
+```
