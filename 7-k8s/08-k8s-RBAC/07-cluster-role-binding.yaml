@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devops-tls-rb
+  namespace: roboshop # Must match the namespace of the Role and ServiceAccount
+subjects:
+- kind: Group
+  name: devops-tls # Name of the Group 
+  namespace: roboshop
+roleRef:
+  kind: Role # Must match the kind of role being referenced (Role or ClusterRole)
+  name: devops-tls  # The exact name of the Role you created
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: devops-trainees-crb # No namespace property required here; it's a global resource
+subjects:
+- kind: Group
+  name: devops-tls          # The logical group name from your identity provider
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole         # Must match the kind of your target role
+  name: devops-tls     # The exact name of your global ClusterRole
+  apiGroup: rbac.authorization.k8s.io
