@@ -21,3 +21,7 @@ rules:
 - apiGroups: [""]        # Core API group for pods
   resources: ["persistentvolumes"]
   verbs: ["get", "list", "watch"] # Pod reader access
+- apiGroups: ["storage.k8s.io"]        # Core API group for pods
+  resources: ["storageclasses"]
+  verbs: ["get", "list", "watch"] # Pod reader access
+  ###here nodes. storageclasses, pv can get,list,watch only this resources 
