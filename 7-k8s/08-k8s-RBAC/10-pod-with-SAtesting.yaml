@@ -12,3 +12,5 @@ spec:
   - name: aws-cli # container name
     image: amazon/aws-cli 
     command: ["sleep", "1000"]
+## to fetch secret value
+# aws secretsmanager get-secret-value --secret-id roboshop/dev/mysql_root_password --region us-east-1 --query SecretString --output text
