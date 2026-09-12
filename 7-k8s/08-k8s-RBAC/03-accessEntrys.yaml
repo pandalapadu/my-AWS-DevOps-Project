@@ -1,0 +1,35 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: roboshop-access-entries        # Your EKS cluster name
+  region: us-east-1                    # Target AWS region
+# ACCESS MANAGEMENT CONFIGURATION
+accessConfig:
+  # it means we are using both aws-auth configmap, we are in the process of migrating to access entries.
+  # new users follow API way, old users are following CONFIG_MAP way. priority is API
+  # slowly we move old users to API way
+  authenticationMode: API_AND_CONFIG_MAP # Migrates seamlessly from aws-auth configmap to EKS Access APIs
+  accessEntries:
+    # 1. Full Cluster Administrator Access (e.g., DevOps/Admin IAM Role)
+    - principalARN: arn:aws:iam::111122223333:role/RoboshopAdminRole # Replace with your target Admin Role ARN
+      type: STANDARD
+      accessPolicies:
+        - policyARN: arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy
+          accessScope:
+            type: cluster
+
+    # 2. Scoped Access (e.g., Developer IAM User restricted to the 'roboshop' namespace)
+    - principalARN: arn:aws:iam::111122223333:user/venkat-dev # Replace with your target Developer IAM User ARN
+      type: STANDARD
+      accessPolicies:
+        - policyARN: arn:aws:eks::aws:cluster-access-policy/AmazonEKSEditPolicy
+          accessScope:
+            type: namespace
+            namespaces:
+              - "roboshop"
+
+# Define your infrastructure node groups below
+managedNodeGroups:
+  - name: roboshop-ng
+    instanceType: t3.micro
+    desiredCapacity: 2
