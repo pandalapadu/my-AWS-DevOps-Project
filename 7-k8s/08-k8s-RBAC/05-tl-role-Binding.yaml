@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devops-tls-rb
+  namespace: roboshop # Must match the namespace of the Role and ServiceAccount
+subjects:
+- kind: Group
+  name: devops-tls # Name of the Group 
+  namespace: roboshop
+roleRef:
+  kind: Role # Must match the kind of role being referenced (Role or ClusterRole)
+  name: devops-tls  # The exact name of the Role you created
+  apiGroup: rbac.authorization.k8s.io
