@@ -22,3 +22,8 @@ accessConfig:
       type: STANDARD
       kubernetesGroups:   ## optional Kubernetes groups
         - devops-trainees # groups can used to give permissions via RBAC
+    # 3. Scoped Access (e.g., Developer IAM User restricted to the 'roboshop' namespace)
+    - principalARN: arn:aws:iam::453388807064:user/venkat # Replace with your target Developer IAM User ARN
+      type: STANDARD
+      kubernetesGroups:   ## optional Kubernetes groups
+        - devops-tls # groups can used to give permissions via RBAC
