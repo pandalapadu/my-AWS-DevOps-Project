@@ -9,4 +9,5 @@ metadata:
 spec:
   containers:
   - name: aws-cli # container name
-    image: amazon/aws-cli # by default it will get from docker hub
+    image: amazon/aws-cli 
+    command: ["sleep", "1000"]
