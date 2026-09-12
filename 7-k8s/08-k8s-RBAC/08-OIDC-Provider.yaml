@@ -1,0 +1,2 @@
+## via the command line 
+eksctl utils associate-iam-oidc-provider --cluster roboshop --region us-east-1 --approve
