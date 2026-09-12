@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: devops-trainees
+  name: devops-trainees-rb
   namespace: roboshop # Must match the namespace of the Role and ServiceAccount
 subjects:
 - kind: Group
