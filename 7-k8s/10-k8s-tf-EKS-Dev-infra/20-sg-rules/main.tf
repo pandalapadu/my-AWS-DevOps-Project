@@ -37,7 +37,6 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
   source_security_group_id = local.bastion_sg_id
   security_group_id        = local.rabbitmq_sg_id
 }
-
 #Bastion
 resource "aws_security_group_rule" "bastion_my_public_ip" {
   type              = "ingress"
