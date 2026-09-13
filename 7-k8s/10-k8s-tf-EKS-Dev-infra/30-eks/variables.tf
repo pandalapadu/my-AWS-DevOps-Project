@@ -1,11 +1,11 @@
 variable "project" {
-    default = "roboshop"
+  default = "roboshop"
 }
 
 variable "environment" {
-    default = "dev"
+  default = "dev"
 }
 
 variable "eks_version" {
-    default = "1.36"
+  default = "1.36"
 }
