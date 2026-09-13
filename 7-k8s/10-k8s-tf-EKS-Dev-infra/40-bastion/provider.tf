@@ -8,11 +8,11 @@ terraform {
 
   # remote state storage location
   backend "s3" {
-    bucket         = "azdevopsvenkat.site-dev"
-    key            = "roboshop-bastion-eks.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    use_lockfile   = true # Enables native S3 state locking (Terraform 1.10+)
+    bucket       = "azdevopsvenkat.site-dev"
+    key          = "roboshop-bastion-eks.tfstate"
+    region       = "us-east-1"
+    encrypt      = true
+    use_lockfile = true # Enables native S3 state locking (Terraform 1.10+)
   }
 }
 
