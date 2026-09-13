@@ -1,4 +1,5 @@
-map(object({
+map(object(
+{
     create             = optional(bool)
     kubernetes_version = optional(string)
 
@@ -269,4 +270,5 @@ map(object({
     security_group_tags = optional(map(string))
 
     tags = optional(map(string))
-  }))
+  }
+  ))
