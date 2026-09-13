@@ -30,8 +30,8 @@ module "eks" {
   subnet_ids               = local.private_subnet_ids
   control_plane_subnet_ids = local.private_subnet_ids
 
-  create_node_security_group = false
-  create_security_group = false
+  create_node_security_group = false # default creation of Security group for nodes are make it false
+  create_security_group = false # default creation of Security group for are make it false
 
   node_security_group_id = local.eks_node_sg_id
   security_group_id = local.eks_control_plane_sg_id
