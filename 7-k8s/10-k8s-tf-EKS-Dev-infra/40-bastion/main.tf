@@ -27,3 +27,27 @@ resource "aws_instance" "bastion" {
     local.common_tags
   )
 }
+
+output "workstation_public_ip" {
+  value = aws_instance.workstation.public_ip
+}
+##########
+# Resource to execute the validation commands sequentially after cluster infrastructure is ready
+output "deployment_complete" {
+  value = <<-EOT
+======================================================================
+                    CLUSTER DEPLOYMENT COMPLETE
+======================================================================
+
+Your cluster context has been updated automatically.
+
+If your nodes are still initializing, run:
+
+  1. aws eks update-kubeconfig --region us-east-1 --name roboshop
+  2. aws eks describe-cluster --region us-east-1 --name roboshop --query 'cluster.status'
+  3. eksctl get nodegroup --cluster roboshop --region us-east-1
+  4. kubectl get nodes
+
+======================================================================
+EOT
+}
