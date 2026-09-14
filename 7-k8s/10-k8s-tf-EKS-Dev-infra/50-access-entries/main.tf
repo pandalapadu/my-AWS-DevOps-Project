@@ -14,11 +14,11 @@ resource "aws_eks_access_policy_association" "bastion" {
   }
 }
 
-resource "aws_eks_access_entry" "runner" {
-  cluster_name  = local.eks_cluster_name
-  principal_arn = local.runner_iam_role_arn
-  type          = "STANDARD"
-}
+# resource "aws_eks_access_entry" "runner" {
+#   cluster_name  = local.eks_cluster_name
+#   principal_arn = local.runner_iam_role_arn
+#   type          = "STANDARD"
+# }
 
 # resource "aws_eks_access_policy_association" "runner" {
 #   cluster_name  = local.eks_cluster_name
