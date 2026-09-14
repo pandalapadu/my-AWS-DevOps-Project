@@ -5,7 +5,7 @@ metadata:
   namespace: roboshop
 spec:
   hostnames:
-  - app2.daws90s.shop
+  - app2.azdevopsvenkat.site
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
