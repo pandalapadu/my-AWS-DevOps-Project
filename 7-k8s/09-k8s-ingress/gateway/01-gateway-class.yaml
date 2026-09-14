@@ -7,3 +7,14 @@ spec:
 
 # We are going to use ALB
 # https://aws.amazon.com/blogs/networking-and-content-delivery/streamline-your-amazon-eks-deployments-with-gateway-api-support-for-aws-load-balancer-controller-and-amazon-vpc-lattice/
+#If we get Errors like CRD's are not matched we will install below drivers
+# Step-1:Install the Gateway API CRDs first -> kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
+# Step-2: Then verify: kubectl get crd | grep gateway
+# expected output look like as below 
+# gatewayclasses.gateway.networking.k8s.io
+# gateways.gateway.networking.k8s.io
+# httproutes.gateway.networking.k8s.io
+# referencegrants.gateway.networking.k8s.io
+############################################
+#check whether installed : kubectl api-resources | grep -i gateway
+#then apply YAML file : kubectl apply -f 01-gateway-class.yaml
