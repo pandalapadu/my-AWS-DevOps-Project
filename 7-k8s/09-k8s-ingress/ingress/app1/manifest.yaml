@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: app-1
-        image: pandalapadu/app1
+        image: pandalapadu/app1:1.0
         ports:
         - containerPort: 80
 ---
