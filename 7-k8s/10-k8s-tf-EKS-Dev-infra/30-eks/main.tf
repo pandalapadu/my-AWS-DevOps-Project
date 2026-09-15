@@ -2,8 +2,8 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  #name               = local.common_name
-  name               = var.project
+  name               = local.common_name
+  #name               = var.project
   kubernetes_version = var.eks_version
 
   # Mandatory
@@ -21,8 +21,7 @@ module "eks" {
   }
 
   # Optional
-  endpoint_public_access = false
-
+  endpoint_public_access = false # we are not giveing access to the public so we are making as false
   #By default admin access will be granted for who created it
   enable_cluster_creator_admin_permissions = true
 
