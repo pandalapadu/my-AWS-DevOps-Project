@@ -1,4 +1,4 @@
-Internet
+# Internet
    │
    │ HTTPS :443
    ▼
@@ -26,7 +26,6 @@ Internet
       Pod 1         Pod 2
 =======================
 # Gateway
-
 ```bash
 # Standard Gateway API CRDs (REQUIRED), built against v1.5.0
 kubectl apply --server-side=true -f \
