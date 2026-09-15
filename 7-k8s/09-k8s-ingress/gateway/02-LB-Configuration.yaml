@@ -12,6 +12,4 @@ spec:
     - arn:aws:acm:us-east-1:453388807064:certificate/8ec44b9e-0a18-4ad3-b85b-8afed69ff20f
 
 # We are going to use ALB, Listener
-#1.Install the AWS Gateway-specific CRDs: kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/heads/main/config/crd/gateway/gateway-crds.yaml
-#2.Verify: kubectl get crd | grep -E "loadbalancerconfiguration|targetgroupconfiguration|listenerruleconfiguration"
-#3. Apply again: kubectl apply -f 02-LB-Configuration.yaml
+

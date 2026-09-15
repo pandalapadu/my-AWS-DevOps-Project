@@ -18,3 +18,7 @@ spec:
 ############################################
 #check whether installed : kubectl api-resources | grep -i gateway
 #then apply YAML file : kubectl apply -f 01-gateway-class.yaml
+##################################AWS Gateway-specific CRDs#########
+#1.Install the AWS Gateway-specific CRDs: kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/heads/main/config/crd/gateway/gateway-crds.yaml
+#2.Verify: kubectl get crd | grep -E "loadbalancerconfiguration|targetgroupconfiguration|listenerruleconfiguration"
+#3. Apply again: kubectl apply -f 02-LB-Configuration.yaml
