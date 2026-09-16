@@ -35,7 +35,7 @@ resource "aws_lb_listener" "https" {
 
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id
-  name    = "*azdevopsvenkat.site" # 
+  name    = "*.azdevopsvenkat.site" # 
   type    = "A"
 
   alias {
