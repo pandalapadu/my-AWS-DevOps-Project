@@ -1,5 +1,32 @@
 # AWS Load Balancer Controller — Setup on EKS
-
+                 EKS roboshop-dev
+                       │
+                       ▼
+             OIDC Provider
+                       │
+                       │ IRSA
+                       ▼
+      ┌────────────────────────────┐
+      │ ServiceAccount              │
+      │ aws-load-balancer-controller│
+      └──────────────┬─────────────┘
+                     │
+                     ▼
+               IAM Role
+                     │
+                     ▼
+       AWSLoadBalancerController
+              IAM Policy
+                     │
+                     ▼
+       AWS Load Balancer Controller
+               Pods: 2/2
+                     │
+                     ▼
+          Webhook Service
+                     │
+                     ▼
+              Kubernetes API
 > Prerequisite: EKS cluster `roboshop` is running and `kubectl` / `eksctl` are pointed at it (region `us-east-1`).
 > This is the shared foundation — it's identical whether you expose apps with Ingress or Gateway API.
 
