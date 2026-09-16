@@ -13,7 +13,7 @@ spec:
   # Service uses the below labels to select the pods
   selector:
     app: nginx
-    version: green
+    version: blue
   ports:
     - protocol: TCP
       port: 80 # service port
