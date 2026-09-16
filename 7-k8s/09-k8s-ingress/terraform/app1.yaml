@@ -49,7 +49,7 @@ spec:
   serviceRef:
     name: app-1 # route traffic to the awesome-service
     port: 80
-  targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:160885265516:targetgroup/roboshop-dev-frontend/13ffd560fd8ed9f8
+  targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:453388807064:targetgroup/roboshop-dev-frontend/b7f623a384fb3ee0
   targetType: ip
   ###to get TargetGroup ARN value use below commands 
   # aws elbv2 describe-target-groups \
