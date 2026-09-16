@@ -9,7 +9,7 @@ resource "aws_lb" "public_alb" {
 
   tags = merge(
     {
-      Name = "${local.common_name}-frontend-alb"
+        Name = "${local.common_name}-frontend-alb"
     },
     local.common_tags
   )
@@ -47,22 +47,22 @@ resource "aws_route53_record" "www" {
   allow_overwrite = true
 }
 
-resource "aws_lb_target_group" "frontend" {
-  name                 = "${local.common_name}-frontend"
-  port                 = 80
-  protocol             = "HTTP"
-  vpc_id               = local.vpc_id
+/* resource "aws_lb_target_group" "frontend" {
+  name     = "${local.common_name}-frontend"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = local.vpc_id
   deregistration_delay = 30
-  target_type          = "ip"
+  target_type = "ip"
 
   health_check {
-    healthy_threshold   = 2
-    interval            = 10
-    matcher             = "200-299"
-    path                = "/"
-    port                = 80
-    protocol            = "HTTP"
-    timeout             = 5
+    healthy_threshold = 2
+    interval = 10
+    matcher = "200-299"
+    path = "/"
+    port = 80
+    protocol = "HTTP"
+    timeout = 5
     unhealthy_threshold = 2
   }
 }
@@ -84,21 +84,21 @@ resource "aws_lb_listener_rule" "frontend" {
 }
 
 resource "aws_lb_target_group" "app2" {
-  name                 = "${local.common_name}-app2"
-  port                 = 80
-  protocol             = "HTTP"
-  vpc_id               = local.vpc_id
+  name     = "${local.common_name}-app2"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = local.vpc_id
   deregistration_delay = 30
-  target_type          = "ip"
+  target_type = "ip"
 
   health_check {
-    healthy_threshold   = 2
-    interval            = 10
-    matcher             = "200-299"
-    path                = "/"
-    port                = 80
-    protocol            = "HTTP"
-    timeout             = 5
+    healthy_threshold = 2
+    interval = 10
+    matcher = "200-299"
+    path = "/"
+    port = 80
+    protocol = "HTTP"
+    timeout = 5
     unhealthy_threshold = 2
   }
 }
@@ -117,24 +117,24 @@ resource "aws_lb_listener_rule" "app2" {
       values = ["app2-${var.environment}.${var.domain_name}"] # app2-dev.daws90s.shop
     }
   }
-}
+} */
 
 resource "aws_lb_target_group" "frontend" {
-  name                 = "${local.common_name}-frontend"
-  port                 = 80
-  protocol             = "HTTP"
-  vpc_id               = local.vpc_id
+  name     = "${local.common_name}-frontend"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = local.vpc_id
   deregistration_delay = 30
-  target_type          = "ip"
+  target_type = "ip"
 
   health_check {
-    healthy_threshold   = 2
-    interval            = 10
-    matcher             = "200-299"
-    path                = "/"
-    port                = 80
-    protocol            = "HTTP"
-    timeout             = 5
+    healthy_threshold = 2
+    interval = 10
+    matcher = "200-299"
+    path = "/"
+    port = 80
+    protocol = "HTTP"
+    timeout = 5
     unhealthy_threshold = 2
   }
 }
