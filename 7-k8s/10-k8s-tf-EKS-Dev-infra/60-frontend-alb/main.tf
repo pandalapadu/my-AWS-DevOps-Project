@@ -35,7 +35,7 @@ resource "aws_lb_listener" "https" {
 
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id
-  name    = "*.daws90s.shop" # *.daws90s.shop
+  name    = "*azdevopsvenkat.site" # 
   type    = "A"
 
   alias {
@@ -47,7 +47,7 @@ resource "aws_route53_record" "www" {
   allow_overwrite = true
 }
 
-/* resource "aws_lb_target_group" "frontend" {
+resource "aws_lb_target_group" "frontend" {
   name     = "${local.common_name}-frontend"
   port     = 80
   protocol = "HTTP"
@@ -117,7 +117,7 @@ resource "aws_lb_listener_rule" "app2" {
       values = ["app2-${var.environment}.${var.domain_name}"] # app2-dev.daws90s.shop
     }
   }
-} */
+} 
 
 resource "aws_lb_target_group" "frontend" {
   name     = "${local.common_name}-frontend"
