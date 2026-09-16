@@ -10,11 +10,11 @@ Lets the controller's ServiceAccount assume an IAM role (IRSA).
 ```bash
 eksctl utils associate-iam-oidc-provider \
   --region us-east-1 \
-  --cluster roboshop \
+  --cluster roboshop-dev \
   --approve
 ```
 
-Verify: `aws eks describe-cluster --name roboshop --query "cluster.identity.oidc.issuer" --output text`
+Verify: `aws eks describe-cluster --name roboshop-dev --query "cluster.identity.oidc.issuer" --output text`
 
 ## 2. Download the IAM policy
 
@@ -41,7 +41,7 @@ Binds the `aws-load-balancer-controller` SA to the IAM policy above.
 
 ```bash
 eksctl create iamserviceaccount \
-  --cluster=roboshop \
+  --cluster=roboshop-dev \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --attach-policy-arn=arn:aws:iam::453388807064:policy/AWSLoadBalancerControllerIAMPolicy \
@@ -60,7 +60,7 @@ helm repo update
 
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=roboshop \
+  --set clusterName=roboshop-dev \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller
 ```
