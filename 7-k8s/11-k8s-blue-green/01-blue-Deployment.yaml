@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: pandalapadu/blue-green:0.1.0
+        image: pandalapadu/blue-green:0.3.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
