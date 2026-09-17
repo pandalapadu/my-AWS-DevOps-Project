@@ -7,5 +7,5 @@ variable "environment" {
 }
 
 variable "eks_version" {
-  default = "1.36"
+  default = "1.35"
 }
