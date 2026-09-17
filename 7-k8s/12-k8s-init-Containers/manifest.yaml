@@ -22,7 +22,7 @@ spec:
         tier: db
         component: mysql
     spec:
-      serviceAccountName: roboshop-mysql
+      serviceAccountName: roboshop-mysql-secret
       initContainers:
       - name: secret-reader
         image: amazon/aws-cli
