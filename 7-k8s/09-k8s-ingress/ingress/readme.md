@@ -75,6 +75,14 @@ eksctl create iamserviceaccount \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
+######## with out over ride
+eksctl create iamserviceaccount \
+  --cluster=roboshop-dev \
+  --namespace=roboshop \
+  --name=roboshop-mysql-secret \
+  --attach-policy-arn=arn:aws:iam::453388807064:policy/robshop-mysql-secret \
+  --region=us-east-1 \
+  --approve
 ```
 
 Verify: `kubectl -n kube-system get sa aws-load-balancer-controller -o yaml | grep eks.amazonaws.com/role-arn`
