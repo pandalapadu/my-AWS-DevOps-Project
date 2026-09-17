@@ -40,7 +40,7 @@ spec:
           mountPath: /secrets
       containers:
       - name: mysql
-        image: pandalapadu/mysql:4.0.0
+        image: pandalapadu/mysql:5.0.0
         args: ["--mysql-native-password=ON"]
         volumeMounts:
         - name: mysql-secret
