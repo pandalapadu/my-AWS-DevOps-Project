@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny-ingress
+  name: roboshop-deny-ingress
   namespace: roboshop # Change this to your target namespace
 spec:
   podSelector: {} # An empty selector selects ALL pods in the namespace
