@@ -41,3 +41,12 @@
 
 ```bash
 java -version
+
+## Jenkins input fields
+| Jenkins field  | Value                                                  |
+| -------------- | ------------------------------------------------------ |
+| Definition     | Pipeline script from SCM                               |
+| SCM            | Git                                                    |
+| Repository URL | `git@github.com:pandalapadu/my-AWS-DevOps-Project.git` |
+| Branch         | `*/main`                                               |
+| Script Path    | `8-Jenkins/Jenkinsfile`                                |
