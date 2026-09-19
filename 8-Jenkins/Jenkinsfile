@@ -2,6 +2,10 @@ pipeline {
     agent {
         node { label 'ROBOSHOP' } //## Agent Lable we will provide here
     }
+    //environment variables
+    environment {
+        COURSE = "Jenkins Learning"
+    }
     //Build Section
     stages {
         stage('Build') {
@@ -9,6 +13,7 @@ pipeline {
                 script {
                     sh """
                         echo "Building Stage"
+                        echo "Today we are learning: ${COURSE}"
                     """
                 }
             }
