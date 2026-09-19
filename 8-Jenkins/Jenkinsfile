@@ -2,6 +2,7 @@ pipeline {
     agent {
         node { label 'ROBOSHOP' } //## Agent Lable we will provide here
     }
+    //Build Section
     stages {
         stage('Build') {
             steps {
@@ -31,6 +32,18 @@ pipeline {
                     """
                 }
             }
+        }
+    }
+    //Post Build 
+    post {
+        always {
+            echo "it will run always"
+        }
+        success {
+            echo "I will run only success"
+        }
+        failure {
+            echo "I will run if build failed "
         }
     }
 
