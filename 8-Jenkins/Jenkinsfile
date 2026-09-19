@@ -6,6 +6,9 @@ pipeline {
     environment {
         COURSE = "Jenkins Learning"
     }
+    options {
+        disableConcurrentBuilds ()
+    }
     //Build Section
     stages {
         stage('Build') {
