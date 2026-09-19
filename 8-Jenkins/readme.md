@@ -50,3 +50,19 @@ java -version
 | Repository URL | `git@github.com:pandalapadu/my-AWS-DevOps-Project.git` |
 | Branch         | `*/main`                                               |
 | Script Path    | `8-Jenkins/Jenkinsfile`                                |
+
+## increse volume size 
+step 1: sudo growpart /dev/nvme0n1 4
+    this means Expand partition 4 to use the remaining available space on the 50G disk.
+Step 2: sudo lvextend -r -L +10G /dev/RootVG/varVol
+        sudo lvextend -r -L +10G /dev/mapper/RootVG-homeVol
+        sudo lvextend -r -L +10G /dev/mapper/RootVG-rootVol
+    What it does
+    lvextend → increases the logical volume size
+    -r → automatically resizes the filesystem too
+    -L +10G → adds 10 GB to the existing size
+    /dev/RootVG/VarVol → your /var logical volume
+Step 3 :
+    sudo xfs_growfs /var
+    sudo xfs_growfs /home
+    sudo xfs_growfs /
