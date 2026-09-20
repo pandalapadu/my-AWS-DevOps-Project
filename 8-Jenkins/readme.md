@@ -89,3 +89,12 @@ Which events would you like to trigger this webhook: just select the Push the ev
     sudo systemctl enable docker
     sudo usermod -aG docker ec2-user
 after docker installation in to vm we have to disconnect from jenkins and reconnect it .
+
+#### Credentials for Jenkins 
+1. ssh key based for authenticating our VM 
+2. AWS acces key and secret key for Authenticateing AWS by downloding plugins
+
+## Plugins we downloaded
+1. Pipeline Stage View Plugin. ---> to view the multiple stages in pipeline
+2. Pipeline Utility Steps ---> to read file content
+3. AWS Credentials   --> for storing AWS credentials 
