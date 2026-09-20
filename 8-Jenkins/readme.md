@@ -22,7 +22,7 @@
 | 4 | Verify Java binary location | `which java` |
 | 5 | Download Jenkins LTS repository | `sudo curl -o /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/rpm-stable/jenkins.repo` |
 | 6 | Import Jenkins repository signing key | `sudo rpm --import https://pkg.jenkins.io/rpm-stable/jenkins.io-2026.key` |
-| 7 | Verify Jenkins repository | `dnf repolist \| grep -i jenkins` |
+| 7 | Verify Jenkins repository | `dnf repolist | grep -i jenkins` |
 | 8 | Install Jenkins | `sudo dnf install -y jenkins` |
 | 9 | Reload systemd configuration | `sudo systemctl daemon-reload` |
 | 10 | Enable Jenkins at boot | `sudo systemctl enable jenkins` |
