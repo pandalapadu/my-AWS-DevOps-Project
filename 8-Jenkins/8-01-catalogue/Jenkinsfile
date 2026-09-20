@@ -5,11 +5,11 @@ pipeline {
         }
     }
     environment {
-        acc_id = "453388807064"
-        project = "roboshop"
+        acc_id    = "453388807064"
+        project   = "roboshop"
         component = "catalogue"
+        region    = "us-east-1"
     }
-
 
     options {
         disableConcurrentBuilds()
@@ -46,7 +46,6 @@ pipeline {
             steps {
                 dir('8-Jenkins/8-01-catalogue') {
                     sh "docker build -t ${env.APP_NAME}:${env.APP_VERSION} ."
-                    // sh 'npm test' // Uncomment if test scripts exist in package.json
                 }
             }
         }
@@ -54,11 +53,21 @@ pipeline {
         stage('ECR Image push') {
             steps {
                 script {
-                    // in this block we get aws authentication
-                    withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${acc_id}.dkr.ecr.us-east-1.amazonaws.com
-                        docker build -t  ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion} .
-                        docker push ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
+                    withAWS(credentials: 'aws-credentials', region: "${env.region}") {
+                        def ecrRepo = "${env.acc_id}.dkr.ecr.${env.region}.amazonaws.com/${env.project}/${env.component}"
+
+                        sh """
+                            # 1. Login to Amazon ECR
+                            aws ecr get-login-password --region ${env.region} | docker login --username AWS --password-stdin ${env.acc_id}.dkr.ecr.${env.region}.amazonaws.com
+
+                            # 2. Tag the image built in the previous stage
+                            docker tag ${env.APP_NAME}:${env.APP_VERSION} ${ecrRepo}:${env.APP_VERSION}
+                            docker tag ${env.APP_NAME}:${env.APP_VERSION} ${ecrRepo}:latest
+
+                            # 3. Push to ECR
+                            docker push ${ecrRepo}:${env.APP_VERSION}
+                            docker push ${ecrRepo}:latest
+                        """
                     }
                 }
             }
@@ -68,6 +77,8 @@ pipeline {
     post {
         always {
             echo "it will run always"
+            // Optional: prune untagged/dangling images to save disk space on the agent
+            sh 'docker image prune -f'
         }
         success {
             echo "I will run only success"
