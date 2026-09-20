@@ -102,8 +102,8 @@ after docker installation in to vm we have to disconnect from jenkins and reconn
 
 ## tolls used in jenkins
 # Scans 
-1. static source code analysis  --> following coding standards or not
-2. static application security testing --> if there any security loop holes are there in the code
+1. [sonarscan tool used ]static source code analysis  --> following coding standards or not
+2. [sonarscan tool used ]static application security testing --> if there any security loop holes are there in the code
 3. dependency scanning  -----------> librarery are used correct or not 
 4. docker image scanning ----------. if we are used open source image if we have any vulnaribility 
 5. dynamic application security testing ----> if any 3rd persion attack on live application 
