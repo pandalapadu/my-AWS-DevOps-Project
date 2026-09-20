@@ -5,9 +5,9 @@ pipeline {
         }
     }
 
-    tools {
-        nodejs 'Node-20' // If using the Jenkins NodeJS tool plugin
-    }
+    // tools {
+    //     nodejs 'Node-20' // If using the Jenkins NodeJS tool plugin
+    // }
 
     options {
         disableConcurrentBuilds()
