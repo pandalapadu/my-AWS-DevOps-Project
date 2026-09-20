@@ -98,3 +98,4 @@ after docker installation in to vm we have to disconnect from jenkins and reconn
 1. Pipeline Stage View Plugin. ---> to view the multiple stages in pipeline
 2. Pipeline Utility Steps ---> to read file content
 3. AWS Credentials   --> for storing AWS credentials 
+4. Pipeline: AWS Steps  (1.45)    -----> this will call jenkins to AWS API server 
