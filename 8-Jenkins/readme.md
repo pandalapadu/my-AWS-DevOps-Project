@@ -73,3 +73,11 @@ Payload URL   : http://100.53.185.232:8080/github-webhook/
 Content type :: application/json
 SSL verification : Disabled
 Which events would you like to trigger this webhook: just select the Push the event 
+## Jenkins Agents we have to install following 
+1. Install Java 21 and required dependency | `sudo dnf install -y fontconfig java-21-openjdk` |
+2. Node Js 
+     sudo dnf module disable nodejs -y    # disabled default version
+     sudo dnf module enable nodejs:20 -y   # enable 20 version
+     sudo dnf install nodejs -y          # installing NodeJs version 
+3. NPM installation 
+    sudo dnf install npm -y

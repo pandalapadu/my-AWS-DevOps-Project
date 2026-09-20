@@ -1,13 +1,14 @@
 pipeline {
-
     agent {
         node {
             label 'ROBOSHOP'
         }
     }
-    environment {
-        def appVersion = ""
+
+    tools {
+        nodejs 'Node-20' // If using the Jenkins NodeJS tool plugin
     }
+
     options {
         disableConcurrentBuilds()
         timeout(time: 15, unit: 'MINUTES')
@@ -20,7 +21,7 @@ pipeline {
                     def packageJson = readJSON file: '8-Jenkins/8-01-catalogue/package.json'
 
                     def appName    = packageJson.name
-                        appVersion = packageJson.version
+                    def appVersion = packageJson.version
 
                     echo "Application: ${appName}"
                     echo "Version: ${appVersion}"
@@ -30,31 +31,27 @@ pipeline {
                 }
             }
         }
+
         stage('Install Dependencies') {
             steps {
-                sh """
-                npm install 
-                """
+                dir('8-Jenkins/8-01-catalogue') {
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh '''
-                    echo "=============================="
-                    echo "Catalogue Test Stage"
-                    echo "=============================="
-                '''
+                dir('8-Jenkins/8-01-catalogue') {
+                    sh 'echo "Running unit tests for catalogue..."'
+                    // sh 'npm test' // Uncomment if test scripts exist in package.json
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                sh '''
-                    echo "=============================="
-                    echo "Catalogue Deploy Stage"
-                    echo "=============================="
-                '''
+                echo "Deploying ${env.APP_NAME} version ${env.APP_VERSION}..."
             }
         }
     }
@@ -63,11 +60,9 @@ pipeline {
         always {
             echo "it will run always"
         }
-
         success {
             echo "I will run only success"
         }
-
         failure {
             echo "I will run if build failed"
         }
