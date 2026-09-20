@@ -43,7 +43,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir('8-Jenkins/8-01-catalogue') {
-                    sh ' docker build -t catalogue: ${appVersion}'
+                    sh ' docker build -t catalogue: ${appVersion} .'
                     // sh 'npm test' // Uncomment if test scripts exist in package.json
                 }
             }
