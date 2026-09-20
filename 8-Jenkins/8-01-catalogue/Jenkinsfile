@@ -49,9 +49,17 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('ECR Image push') {
             steps {
-                echo "Deploying ${env.APP_NAME} version ${env.APP_VERSION}..."
+                script {
+                    // in this block we get aws authentication
+                    withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                        sh """
+                            // aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${acc_id}.dkr.ecr.us-east-1.amazonaws.com
+                            // docker push ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
+                        """
+                    }
+                }
             }
         }
     }
