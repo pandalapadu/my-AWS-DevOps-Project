@@ -99,3 +99,11 @@ after docker installation in to vm we have to disconnect from jenkins and reconn
 2. Pipeline Utility Steps ---> to read file content
 3. AWS Credentials   --> for storing AWS credentials 
 4. Pipeline: AWS Steps  (1.45)    -----> this will call jenkins to AWS API server 
+
+## tolls used in jenkins
+# Scans 
+1. static source code analysis  --> following coding standards or not
+2. static application security testing --> if there any security loop holes are there in the code
+3. dependency scanning  -----------> librarery are used correct or not 
+4. docker image scanning ----------. if we are used open source image if we have any vulnaribility 
+5. dynamic application security testing ----> if any 3rd persion attack on live application 
