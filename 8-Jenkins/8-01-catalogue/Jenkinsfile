@@ -32,6 +32,13 @@ pipeline {
                 }
             }
         }
+        stage('Build') {
+            steps {
+                scripts """
+                    echo "Building stage"
+                """
+            }
+        }
 
         stage('Test') {
             steps {
