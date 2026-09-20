@@ -62,11 +62,10 @@ pipeline {
 
                             # 2. Tag the image built in the previous stage
                             docker tag ${env.APP_NAME}:${env.APP_VERSION} ${ecrRepo}:${env.APP_VERSION}
-                            docker tag ${env.APP_NAME}:${env.APP_VERSION} ${ecrRepo}:latest
-
+                            
                             # 3. Push to ECR
                             docker push ${ecrRepo}:${env.APP_VERSION}
-                            docker push ${ecrRepo}:latest
+                            
                         """
                     }
                 }
