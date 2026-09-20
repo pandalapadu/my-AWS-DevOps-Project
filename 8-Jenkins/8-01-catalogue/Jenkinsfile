@@ -30,13 +30,10 @@ pipeline {
                 }
             }
         }
-
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
                 sh """
-                    echo "=============================="
-                    echo "Building version ${env.APP_VERSION}..."
-                    echo "=============================="
+                npm install 
                 """
             }
         }
