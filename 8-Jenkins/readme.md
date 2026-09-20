@@ -81,3 +81,11 @@ Which events would you like to trigger this webhook: just select the Push the ev
      sudo dnf install nodejs -y          # installing NodeJs version 
 3. NPM installation 
     sudo dnf install npm -y
+4. Docker Installation 
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+    sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+    sudo systemctl start docker
+    sudo systemctl enable docker
+    sudo usermod -aG docker ec2-user
+after docker installation in to vm we have to disconnect from jenkins and reconnect it .
