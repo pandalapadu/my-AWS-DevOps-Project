@@ -34,8 +34,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                scripts """
-                    echo "Building stage"
+                script """
+                    echo "Building version ${env.APP_VERSION}..."
                 """
             }
         }
