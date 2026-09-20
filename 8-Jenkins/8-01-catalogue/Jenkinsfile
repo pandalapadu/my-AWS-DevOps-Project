@@ -10,16 +10,26 @@ pipeline {
         disableConcurrentBuilds()
         timeout(time: 15, unit: 'MINUTES')
     }
-
+// Build Stage 
     stages {
-
-        stage('Build') {
+        stage('Read Version') {
             steps {
-                sh '''
-                    echo "=============================="
-                    echo "Catalogue Build Stage"
-                    echo "=============================="
-                '''
+                script {
+                    // If in a subfolder, use: file: 'frontend/package.json'
+                    // // Read directly using the relative repository path
+                    def packageJson = readJSON file: '8-Jenkins/8-01-catalogue/package.json'
+
+                    // Access any field directly
+                    def appName    = packageJson.name
+                    def appVersion = packageJson.version
+
+                    echo "Application: ${appName}"
+                    echo "Version: ${appVersion}"
+
+                    // Export to an environment variable for downstream stages
+                    env.APP_NAME    = appName
+                    env.APP_VERSION = appVersion
+                }
             }
         }
 
