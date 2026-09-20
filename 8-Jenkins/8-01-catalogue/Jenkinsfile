@@ -4,10 +4,12 @@ pipeline {
             label 'ROBOSHOP'
         }
     }
+    environment {
+        acc_id = "453388807064"
+        project = "roboshop"
+        component = "catalogue"
+    }
 
-    // tools {
-    //     nodejs 'Node-20' // If using the Jenkins NodeJS tool plugin
-    // }
 
     options {
         disableConcurrentBuilds()
@@ -54,10 +56,9 @@ pipeline {
                 script {
                     // in this block we get aws authentication
                     withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                        sh """
-                            // aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${acc_id}.dkr.ecr.us-east-1.amazonaws.com
-                            // docker push ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
-                        """
+                        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${acc_id}.dkr.ecr.us-east-1.amazonaws.com
+                        docker build -t  ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion} .
+                        docker push ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
                     }
                 }
             }
