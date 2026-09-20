@@ -23,13 +23,13 @@ pipeline {
             steps {
                 script {
                     sh """
-                        echo "Building Stage"
-                        echo "Today we are learning: ${COURSE}"
-                        echo "Hello ${params.PERSON}"
-                        echo "Biography: ${params.BIOGRAPHY}"
-                        echo "Toggle: ${params.TOGGLE}"
-                        echo "Choice: ${params.CHOICE}"
-                        echo "Password: ${params.PASSWORD}"
+                        // echo "Building Stage"
+                        // echo "Today we are learning: ${COURSE}"
+                        // echo "Hello ${params.PERSON}"
+                        // echo "Biography: ${params.BIOGRAPHY}"
+                        // echo "Toggle: ${params.TOGGLE}"
+                        // echo "Choice: ${params.CHOICE}"
+                        // echo "Password: ${params.PASSWORD}"
                     """
                 }
             }
