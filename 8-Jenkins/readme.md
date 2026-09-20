@@ -66,3 +66,10 @@ Step 3 :
     sudo xfs_growfs /var
     sudo xfs_growfs /home
     sudo xfs_growfs /
+
+## Jenkins Webhook URL access
+Webhooks -> we have to pass Jenkins server Public URL end with github-webhook/ Must and should
+Payload URL   : http://100.53.185.232:8080/github-webhook/ 
+Content type :: application/json
+SSL verification : Disabled
+Which events would you like to trigger this webhook: just select the Push the event 
