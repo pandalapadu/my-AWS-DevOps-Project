@@ -99,6 +99,7 @@ after docker installation in to vm we have to disconnect from jenkins and reconn
 2. Pipeline Utility Steps ---> to read file content
 3. AWS Credentials   --> for storing AWS credentials 
 4. Pipeline: AWS Steps  (1.45)    -----> this will call jenkins to AWS API server 
+5. sonarqube scanner (2.18.3)  --> plugin to push to server
 
 ## tolls used in jenkins
 # Scans 
@@ -107,3 +108,9 @@ after docker installation in to vm we have to disconnect from jenkins and reconn
 3. dependency scanning  -----------> librarery are used correct or not 
 4. docker image scanning ----------. if we are used open source image if we have any vulnaribility 
 5. dynamic application security testing ----> if any 3rd persion attack on live application 
+
+# sonarqube server installation is tough process so we are using existing sonar AMI from MARKET places
+under AWS market place AMI Select this --> SonarQube CE on AWS - Tuned, CloudWatch & SSM Ready 
+                    Ver SonarQube:26.6.0.123539, Ubuntu:24.04, Build:20260612 (Select this)
+Image ID : ami-0f31bd7e406ed0351  (for this AMi)
+Name : SolveDevOps-SonarQube-Server-Ubuntu24.04-20260612-938693e4-e3336ad7-93a2-4e7c-8ed8-227cfbf25da4
