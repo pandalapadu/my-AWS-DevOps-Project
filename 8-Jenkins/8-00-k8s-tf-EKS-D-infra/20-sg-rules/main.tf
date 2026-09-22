@@ -95,7 +95,8 @@ resource "aws_security_group_rule" "jenkins_public" {
   from_port         = 8080
   to_port           = 8080
   protocol          = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  #cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["${trimspace(data.http.my_public_ip.response_body)}/32"]
   #["${chomp(data.http.my_public_ip.response_body)}/32"]
   security_group_id = local.jenkins_sg_id
 }
@@ -132,7 +133,10 @@ resource "aws_security_group_rule" "sonar_web" {
   from_port         = 9000
   to_port           = 9000
   protocol          = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  #cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = [
+    "${trimspace(data.http.my_public_ip.response_body)}/32"
+  ]
   security_group_id = local.sonar_sg_id
 }
 
