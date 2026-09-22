@@ -117,3 +117,13 @@ we will configure multipe Sonar qube version as per the project requirement
     version: SonarQube Scanner 8.1.0.6389 (this project will use 8 version )
     name: sonar-7
     version: SonarQube Scanner 7.3.0.5189 (this project will use 7 version )
+## we have to inform jenkins to SonarScanner server as well
+Jenkins -> system -> SonarQube servers (Add Sonar Quber server)->here we will add our configured server 
+Name: sonar-server
+ServerUrl: http://3.95.25.162:9000/ (Public IP of Sonar Server)
+Server authentication token: goto sonarserver->top left->Adminstrater->Security->Generate Tokens
+name: jenkins
+type: Global Analysis Token
+Expires in: No Expiration 
+finally Generate Token --> take this token -> go back to jenkins->Add Credentials-> Secret Text 
+## we have to add code to pipeline 
