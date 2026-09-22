@@ -114,6 +114,52 @@ pipeline {
                 }
             }
         }
+        stage('Trivy Scan') {
+            steps {
+                dir('8-Jenkins/8-01-catalogue') {
+                    script {
+                        echo "Running Trivy Dockerfile scan..."
+                        sh "trivy config --exit-code 0 --severity HIGH,CRITICAL --format table ./Dockerfile"
+
+                        echo "Running Trivy container image scan..."
+                        def imageScan = sh(
+                            script: "trivy image --scanners vuln --pkg-types os --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed --format table ${env.APP_NAME}:${env.APP_VERSION}",
+                            returnStatus: true
+                        )
+
+                        // Warn if OS vulnerabilities exist, but allow the pipeline to proceed to ECR push
+                        if (imageScan != 0) {
+                            unstable(message: "Trivy discovered unpatched HIGH/CRITICAL CVEs in base image.")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('ECR Image push') {
+            steps {
+                script {
+                    withAWS(credentials: 'aws-credentials', region: "${env.region}") {
+                        def ecrRegistry = "${env.acc_id}.dkr.ecr.${env.region}.amazonaws.com"
+                        def ecrRepo     = "${ecrRegistry}/${env.project}/${env.component}"
+
+                        sh """
+                            # 1. Login to Amazon ECR
+                            aws ecr get-login-password --region ${env.region} | docker login --username AWS --password-stdin ${ecrRegistry}
+
+                            # 2. Tag image with version and latest
+                            docker tag ${env.APP_NAME}:${env.APP_VERSION} ${ecrRepo}:${env.APP_VERSION}
+                           
+                            
+                            # 3. Push to ECR
+                            docker push ${ecrRepo}:${env.APP_VERSION}
+                            
+                        """
+                    }
+                }
+            }
+        }
+    }
        
     post {
         always {
