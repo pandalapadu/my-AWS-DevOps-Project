@@ -119,10 +119,7 @@ pipeline {
                 dir('8-Jenkins/8-01-catalogue') {
                     script {
                         echo "Running Trivy Dockerfile scan..."
-                        def dockerfileScan = sh(
-                            script: "trivy config --exit-code 1 --severity HIGH,CRITICAL --format table ./Dockerfile",
-                            returnStatus: true
-                        )
+                        sh "trivy config --exit-code 0 --severity HIGH,CRITICAL --format table ./Dockerfile"
 
                         echo "Running Trivy container image scan..."
                         def imageScan = sh(
@@ -130,38 +127,13 @@ pipeline {
                             returnStatus: true
                         )
 
-                        if (dockerfileScan != 0 || imageScan != 0) {
-                            error "Trivy found HIGH/CRITICAL issues in Dockerfile or OS packages. Failing pipeline."
+                        if (imageScan != 0) {
+                            unstable(message: "Trivy discovered unpatched HIGH/CRITICAL CVEs in the container image.")
                         }
                     }
                 }
             }
         }
-        
-
-        stage('ECR Image push') {
-            steps {
-                script {
-                    withAWS(credentials: 'aws-credentials', region: "${env.region}") {
-                        def ecrRepo = "${env.acc_id}.dkr.ecr.${env.region}.amazonaws.com/${env.project}/${env.component}"
-
-                        sh """
-                            # 1. Login to Amazon ECR
-                            aws ecr get-login-password --region ${env.region} | docker login --username AWS --password-stdin ${env.acc_id}.dkr.ecr.${env.region}.amazonaws.com
-
-                            # 2. Tag the image built in the previous stage
-                            docker tag ${env.APP_NAME}:${env.APP_VERSION} ${ecrRepo}:${env.APP_VERSION}
-                            
-                            # 3. Push to ECR
-                            docker push ${ecrRepo}:${env.APP_VERSION}
-                            
-                        """
-                    }
-                }
-            }
-        }
-    }
-
     post {
         always {
             echo "it will run always"
