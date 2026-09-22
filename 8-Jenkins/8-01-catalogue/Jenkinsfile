@@ -41,6 +41,7 @@ pipeline {
                 }
             }
         }
+        // this command gives coverage report and test case report , sonar access this report 
         stage('Unit Tests') {
             steps {
                 dir('8-Jenkins/8-01-catalogue') {
