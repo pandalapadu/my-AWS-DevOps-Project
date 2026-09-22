@@ -144,7 +144,7 @@ pipeline {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
                         sh """
                             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${acc_id}.dkr.ecr.us-east-1.amazonaws.com
-                            docker push ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
+                           
                         """
                     }
                 }
@@ -178,6 +178,7 @@ pipeline {
         always {
             echo "it will run always"
             // Optional: prune untagged/dangling images to save disk space on the agent
+            //  docker push ${acc_id}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
             sh 'docker image prune -f'
         }
         success {
