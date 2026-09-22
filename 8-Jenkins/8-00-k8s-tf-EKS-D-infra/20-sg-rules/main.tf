@@ -120,17 +120,21 @@ resource "aws_security_group_rule" "jenkins_agent_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks = ["${trimspace(data.http.my_public_ip.response_body)}/32"]
+
+  cidr_blocks = [
+    "${trimspace(data.http.my_public_ip.response_body)}/32"
+  ]
+
   security_group_id = local.jenkins_agent_sg_id
 }
 
 resource "aws_security_group_rule" "jenkins_agent_jenkins" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
   source_security_group_id = local.jenkins_sg_id
-  security_group_id = local.jenkins_agent_sg_id
+  security_group_id        = local.jenkins_agent_sg_id
 }
 
 resource "aws_security_group_rule" "sonar_web" {
@@ -138,10 +142,11 @@ resource "aws_security_group_rule" "sonar_web" {
   from_port         = 9000
   to_port           = 9000
   protocol          = "tcp"
-  #cidr_blocks = ["0.0.0.0/0"]
+
   cidr_blocks = [
     "${trimspace(data.http.my_public_ip.response_body)}/32"
   ]
+
   security_group_id = local.sonar_sg_id
 }
 
@@ -150,7 +155,11 @@ resource "aws_security_group_rule" "sonar_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks = ["${trimspace(data.http.my_public_ip.response_body)}/32"]
+
+  cidr_blocks = [
+    "${trimspace(data.http.my_public_ip.response_body)}/32"
+  ]
+
   security_group_id = local.sonar_sg_id
 }
 
