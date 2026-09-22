@@ -66,11 +66,12 @@ pipeline {
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
                     script {
+                        // Automatically fails the build if the Quality Gate status is not 'OK'
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
-                            // Marks build UNSTABLE instead of aborting
+                            // Marks the build UNSTABLE so Docker Build & ECR Push can proceed
                             unstable(message: "Quality Gate failed with status: ${qg.status}")
-                        }
+                    }
                 }
             }
         }
