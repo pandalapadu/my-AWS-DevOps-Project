@@ -109,8 +109,11 @@ after docker installation in to vm we have to disconnect from jenkins and reconn
 4. docker image scanning ----------. if we are used open source image if we have any vulnaribility 
 5. dynamic application security testing ----> if any 3rd persion attack on live application 
 
-# sonarqube server installation is tough process so we are using existing sonar AMI from MARKET places
-under AWS market place AMI Select this --> SonarQube CE on AWS - Tuned, CloudWatch & SSM Ready 
-                    Ver SonarQube:26.6.0.123539, Ubuntu:24.04, Build:20260612 (Select this)
-Image ID : ami-0f31bd7e406ed0351  (for this AMi)
-Name : SolveDevOps-SonarQube-Server-Ubuntu24.04-20260612-938693e4-e3336ad7-93a2-4e7c-8ed8-227cfbf25da4
+# sonarqube server installation is manuvally taken refer: sonarqube.md file
+Sonar Configuration 
+jenkins->tools-> SonarQube Scanner installations (this tab will apear only after sonar instaaltion)
+we will configure multipe Sonar qube version as per the project requirement 
+    name : sonar-8 
+    version: SonarQube Scanner 8.1.0.6389 (this project will use 8 version )
+    name: sonar-7
+    version: SonarQube Scanner 7.3.0.5189 (this project will use 7 version )
