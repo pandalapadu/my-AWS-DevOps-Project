@@ -41,6 +41,13 @@ pipeline {
                 }
             }
         }
+        stage('Unit Tests') {
+            steps {
+                dir('8-Jenkins/8-01-catalogue') {
+                    sh 'npm test'
+                }
+            }
+        }
         stage('SonarQube Analysis') {
             steps {
                 dir('8-Jenkins/8-01-catalogue') {
