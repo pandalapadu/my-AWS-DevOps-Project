@@ -1,4 +1,4 @@
-data "aws_ami" "joindevops" {
+data "aws_ami" "venkat" {
   most_recent      = true
   owners           = ["973714476881"]
 
@@ -18,25 +18,6 @@ data "aws_ami" "joindevops" {
   }
 }
 
-data "aws_ami" "sonarqube" {
-  most_recent = true
-  owners      = ["679593333241"] # Solve DevOps
-
-  filter {
-    name   = "name"
-    values = ["SolveDevOps-SonarQube-Server-Ubuntu24.04-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-}
 
 data "aws_ssm_parameter" "public_subnet_ids" {
     name = "/${var.project}/${var.environment}/public_subnet_ids"
@@ -54,12 +35,10 @@ data "aws_ssm_parameter" "sonar_sg_id" {
     name = "/${var.project}/${var.environment}/sonar_sg_id"
 }
 
-data "aws_ssm_parameter" "runner_sg_id" {
-    name = "/${var.project}/${var.environment}/runner_sg_id"
-}
+# data "aws_ssm_parameter" "runner_sg_id" {
+#     name = "/${var.project}/${var.environment}/runner_sg_id"
+# }
 /* 
 data "aws_ssm_parameter" "eks_cluster_name" {
     name = "/${var.project}/${var.environment}/eks_cluster_name"
 } */
-
-data "aws_caller_identity" "current" {}

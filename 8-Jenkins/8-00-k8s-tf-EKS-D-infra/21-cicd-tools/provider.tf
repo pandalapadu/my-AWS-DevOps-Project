@@ -8,8 +8,8 @@ terraform {
 
   # remote state storage location
   backend "s3" {
-    bucket         = "remote-state-90s-dev"
-    key            = "roboshop-eks-cicd.tfstate"
+    bucket         = "azdevopsvenkat.site-dev"
+    key            = "roboshop-jenkins-cicd.tfstate"
     region         = "us-east-1"
     encrypt        = true
     use_lockfile   = true # Enables native S3 state locking (Terraform 1.10+)
