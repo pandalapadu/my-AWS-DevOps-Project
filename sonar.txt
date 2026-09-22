@@ -1,0 +1,71 @@
+RHEL 9
+ │
+ ├── Java
+ │
+ ├── PostgreSQL
+ │     └── sonarqube database
+ │
+ ├── Linux kernel settings
+ │
+ ├── sonarqube user
+ │
+ ├── /opt/sonarqube
+ │
+ ├── SonarQube
+ │
+ └── systemd service
+ │       └── :9000
+ │
+ └── Jenkins integration
+#############
+Step 1 — Install Java 17 ---> sudo dnf install -y java-17-openjdk java-17-openjdk-devel
+	for verification ---> java -version
+Step 2 — Check PostgreSQL packages available
+		sudo dnf list --available 'postgresql*'
+		sudo dnf module list postgresql
+		sudo dnf module reset postgresql -y
+		sudo dnf module enable postgresql:16 -y
+		sudo dnf module list postgresql
+3. Install PostgreSQL
+		sudo dnf install -y postgresql-server postgresql-contrib
+		psql --version
+4. Initialize PostgreSQL
+		sudo postgresql-setup --initdb
+		sudo systemctl enable --now postgresql
+       check -> sudo systemctl status postgresql
+======================================================
+Step 1 — Create SonarQube database and user
+	First switch to the PostgreSQL administrator: sudo -u postgres psql
+you will get : postgres=#
+Run these commands inside PostgreSQL: CREATE USER sonarqube WITH PASSWORD 'ChangeMe_StrongPassword_2026!';
+Create the database: CREATE DATABASE sonarqube OWNER sonarqube;
+Grant privileges: GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonarqube;
+Then exit:  \q
+Step 2 — Test the new database user
+RUN the command :   psql -h 127.0.0.1 -U sonarqube -d sonarqube
+	if we get this error --> FATAL: Ident authentication failed for user "sonarqube"
+1. Find the PostgreSQL authentication configuration
+	sudo grep -v '^#' /var/lib/pgsql/data/pg_hba.conf | grep -v '^$'
+2. Change localhost authentication to SCRAM
+	sudo vi /var/lib/pgsql/data/pg_hba.conf
+Find the line:host    all    all    127.0.0.1/32    ident
+Change it to:host    all    all    127.0.0.1/32    scram-sha-256
+find the line: host    all    all    ::1/128    ident
+Change it to: host    all    all    ::1/128    scram-sha-256
+3. Reload PostgreSQL
+	sudo systemctl reload postgresql
+	sudo systemctl status postgresql --no-pager
+4. Test the SonarQube database again
+	psql -h 127.0.0.1 -U sonarqube -d sonarqube
+verify user ::  SELECT current_database(), current_user;
+exit : \q
+=====================================================
+3. Prepare Linux kernel settings (SonarQube requires Elasticsearch-related Linux settings.)
+sudo tee /etc/sysctl.d/99-sonarqube.conf > /dev/null <<'EOF'
+vm.max_map_count=524288
+fs.file-max=131072
+EOF
+Apply them:	sudo sysctl --system
+Verify:	
+	sysctl vm.max_map_count
+	sysctl fs.file-max
