@@ -1,14 +1,15 @@
 @Library('roboshop-shared-library') _
-// Pre-populated map (keys default to strings automatically)
+
 def configMap = [
     component : 'catalogue',
     project   : 'roboshop',
     port      : 8080,
     isActive  : true
 ]
-if (env.BRANCH_NAME.string1.equalsIgnoreCase('main')) {
+
+// Check if current branch is 'main' (ignoring case)
+if (env.BRANCH_NAME?.equalsIgnoreCase('main')) {
     echo "we will build it later"
-}
-else {
+} else {
     nodejsEKSpipeline(configMap)
 }
