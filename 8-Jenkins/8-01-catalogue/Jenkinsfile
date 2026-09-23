@@ -1,5 +1,3 @@
 @Library('roboshop-shared-library') _
 
-testpipeline(
-    component: 'catalogue'
-)
+testpipeline()
