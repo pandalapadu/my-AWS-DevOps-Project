@@ -1,3 +1,9 @@
 @Library('roboshop-shared-library') _
-
-testpipeline()
+// Pre-populated map (keys default to strings automatically)
+def configMap = [
+    component : 'catalogue',
+    project   : 'roboshop',
+    port      : 8080,
+    isActive  : true
+]
+testpipeline(configMap)
