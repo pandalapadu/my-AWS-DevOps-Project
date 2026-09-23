@@ -123,3 +123,11 @@ shared librarery URL : https://github.com/pandalapadu/roboshop-shared-library.gi
 Retrieval method: Select Modern SCM --> Git 
 Project Repository: https://github.com/pandalapadu/roboshop-shared-library.git
   apply and Save 
+
+## Multi Brach Pipeline Configuration 
+Name: Catalogue 
+Select: Multi Branch Pipeline (Click on OK)
+=====
+Branch Source: Git 
+main Project URL : https://github.com/pandalapadu/my-AWS-DevOps-Project
+Path : 8-Jenkins/8-01-catalogue/Jenkinsfile
