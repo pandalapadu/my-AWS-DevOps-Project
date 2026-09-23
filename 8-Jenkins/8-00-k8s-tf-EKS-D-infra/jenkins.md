@@ -1,5 +1,3 @@
-
-
 ### Jenkins master
 * Access: `http://jenkins.<your-domain>:8080`
 * Initial admin password:
