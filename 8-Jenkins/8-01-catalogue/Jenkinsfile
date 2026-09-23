@@ -1,6 +1,5 @@
 @Library('roboshop-shared-library') _
-def configMap = [
-    project = "roboshop"
-    component = "catalogue"
-]
-testpipeline(configMap)
+
+testpipeline(
+    component: 'catalogue'
+)

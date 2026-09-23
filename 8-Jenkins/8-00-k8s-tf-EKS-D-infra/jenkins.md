@@ -65,7 +65,7 @@ passing.
 | id | type | used for |
 |---|---|---|
 | `ssh-creds` | Username with password | SSH into the Jenkins agent — user `ec2-user`, password `DevOps321` (the course AMI's default login) |
-| `aws-creds` | AWS Credentials | pipeline steps that call AWS (ECR push, EKS deploy, etc.) — access key / secret key |
+| `aws-credentials` | AWS Credentials | pipeline steps that call AWS (ECR push, EKS deploy, etc.) — access key / secret key |
 | sonar-creds | Secret text | SonarQube Scanner authentication, generated above |
 | `github-token` | Secret text | GitHub fine-grained PAT for querying Dependabot alerts, generated below |
 
@@ -108,3 +108,18 @@ and `exit 1` if any returned alert's severity is `high` or `critical`.
 | Jenkins agent | `jenkins-agent.<your-domain>` (private, SSH only) |
 | Jenkins admin password | `sudo cat /var/lib/jenkins/secrets/initialAdminPassword` |
 | SonarQube default login | `/opt/default-sonar-login.txt` on the sonar box |
+##################
+## first pipeline set up 
+main Project URL : https://github.com/pandalapadu/my-AWS-DevOps-Project
+Path : 8-Jenkins/8-01-catalogue/Jenkinsfile
+
+shared librarery URL : https://github.com/pandalapadu/roboshop-shared-library.git
+## Library Configuration  
+ Manage Jenkins → system → Global Trusted Pipeline Libraries → click on add 
+ we have to put all common written librarerys in this location only 
+ Name: roboshop-shared-library (this is the name used in @Library)
+ default version: main (points to the subtree branch)
+(click on) Load implicitly -- we have to implicity Load the librarery all the times every run .
+Retrieval method: Select Modern SCM --> Git 
+Project Repository: https://github.com/pandalapadu/roboshop-shared-library.git
+  apply and Save 
