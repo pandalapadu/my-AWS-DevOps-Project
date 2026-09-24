@@ -14,6 +14,7 @@
 ### Jenkins agent node
 * Manage Jenkins → Nodes → New Node → Permanent Agent
   * Remote root directory: `/home/ec2-user/jenkins-agent`
+  * Lables: ROBOSHOP
   * Launch method: **Launch agents via SSH**
   * Host: `jenkins-agent.<your-domain>` (private DNS — master and agent sit in
     the same VPC)
