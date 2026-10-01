@@ -11,7 +11,7 @@
 
   Argo CD Namespace                   `argocd`
 
-  Git Repository                      `https://github.com/pandalapadu/my-AWS-DevOps-Project.git`
+  Git Repository                      `https://github.com/pandalapadu/argocd.git`
   ------------------------------------------------------------------------------------------------
 
 ## 2. Configure kubectl
@@ -47,7 +47,7 @@ kubectl get svc -n argocd
 ## 4. Access Argo CD UI
 For initial testing:
 ``` bash
-Install Argo CD to LoadBalancer: 
+Install Argo CD to Clasic LoadBalancer for accessing : 
 kubectl patch svc argocd-server -n argocd -p '{"spec":{"type":"LoadBalancer"}}'
 ```
 get the Loadbalancer and access by browser : https: <Loadbalancer URL>
