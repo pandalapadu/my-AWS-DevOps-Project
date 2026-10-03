@@ -89,3 +89,30 @@ resource "aws_instance" "sonarqube" {
     }
   )
 }
+resource "aws_instance" "runner" {
+  count = var.runner ? 1 : 0
+  ami           = local.ami_id
+  instance_type = "t3.micro"
+  subnet_id = local.public_subnet_id
+  vpc_security_group_ids = [ local.runner_sg_id ]
+  iam_instance_profile = aws_iam_instance_profile.runner[0].name
+  user_data = file("runner.sh")
+
+  root_block_device {
+    volume_size = 50
+    volume_type = "gp3"
+    tags = merge(
+      {
+          Name = "${var.project}-${var.environment}-runner"
+      },
+    local.common_tags
+    )
+  }
+
+  tags = merge(
+    {
+        Name = "${var.project}-${var.environment}-runner"
+    },
+    local.common_tags
+  )
+}

@@ -24,3 +24,6 @@ variable "jenkins" {
 variable "jenkins_agent" {
   default = true
 }
+variable "runner" {
+    default = true
+}
