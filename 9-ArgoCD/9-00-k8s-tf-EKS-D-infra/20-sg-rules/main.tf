@@ -180,3 +180,13 @@ resource "aws_security_group_rule" "eks_node_vpc" {
   cidr_blocks = ["10.0.0.0/16"]
   security_group_id = local.eks_node_sg_id
 }
+
+resource "aws_security_group_rule" "runner_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  # Where traffic is coming from
+  cidr_blocks = ["${chomp(data.http.my_public_ip.response_body)}/32"]
+  security_group_id = local.runner_sg_id
+}
