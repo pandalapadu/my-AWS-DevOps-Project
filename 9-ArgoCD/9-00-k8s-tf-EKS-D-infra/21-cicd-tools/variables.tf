@@ -19,10 +19,10 @@ variable "sonar" {
 }
 
 variable "jenkins" {
-    default = true
+    default = false
 }
 variable "jenkins_agent" {
-  default = true
+  default = false
 }
 variable "runner" {
     default = true
